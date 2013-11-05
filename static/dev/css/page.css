@@ -7,58 +7,63 @@
  */
 
 .rp-come {
-	background-image: url(http://static.redbeanpie.com/images/profile_bg_02.jpg);
-	background-position: center;
-background-repeat: no-repeat;
-background-size: cover;
+	background: #f5e9d7 url('http://static.redbeanpie.com/images/paperbg.png') top center;
 }
 .come-container {
 	text-align: center;
 }
 
-#form-wrapper
-{
+.comingsoon {
+	display: block;
+	font-weight: 100;
+	font-size: 22px;
+	color: #544f44;
+	text-shadow: 0 1px #FFF;
+	margin-top: 15px;
+}
+
+
+#form-wrapper {
     width: 700px;
     height: 400px;
     margin: 0 auto;
     padding: 20px;    
     position: relative;
     border: 1px solid #ddd;
-    
     background-color: #fff;
     background-image: -moz-repeating-linear-gradient(135deg,#844049,#844049,
                                                             #fff 50px, #fff 150px,
                                                             #3e4996 100px, #3e4996,
                                                             #fff 200px, #fff 300px);
 
-	background-image: -webkit-gradient(linear, left top, right bottom,
-										color-stop(5%, #fff), color-stop(5%, #fff),										
-										color-stop(15%, #844049), color-stop(15%, #fff),
-										color-stop(25%, #fff), color-stop(25%, #fff),										
-										color-stop(35%, #3E4996), color-stop(35%, #fff ),
-										color-stop(45%, #fff), color-stop(45%, #fff),										
-										color-stop(55%, #844049), color-stop(55%, #fff),
-										color-stop(65%, #fff), color-stop(65%, #fff),										
-										color-stop(75%, #3E4996), color-stop(75%, #fff ),
-										color-stop(85%, #fff), color-stop(85%, #fff),
-										color-stop(95%, #844049), color-stop(95%, #fff)								
-									   );															
+    background-image: -webkit-gradient(linear, left top, right bottom,
+    									color-stop(5%, #fff), color-stop(5%, #fff),										
+    									color-stop(15%, #844049), color-stop(15%, #fff),
+    									color-stop(25%, #fff), color-stop(25%, #fff),										
+    									color-stop(35%, #3E4996), color-stop(35%, #fff ),
+    									color-stop(45%, #fff), color-stop(45%, #fff),										
+    									color-stop(55%, #844049), color-stop(55%, #fff),
+    									color-stop(65%, #fff), color-stop(65%, #fff),										
+    									color-stop(75%, #3E4996), color-stop(75%, #fff ),
+    									color-stop(85%, #fff), color-stop(85%, #fff),
+    									color-stop(95%, #844049), color-stop(95%, #fff)								
+    								   );															
 
     background-image: -webkit-repeating-linear-gradient(135deg,#844049,#844049,
                                                             #fff 50px, #fff 150px,
                                                             #3e4996 100px, #3e4996,
                                                             #fff 200px, #fff 300px);   
- 
+
     background-image: -o-repeating-linear-gradient(135deg,#844049,#844049,
                                                             #fff 50px, #fff 150px,
                                                             #3e4996 100px, #3e4996,
                                                             #fff 200px, #fff 300px); 
-    
+
     background-image: -ms-repeating-linear-gradient(135deg,#844049,#844049,
                                                             #fff 50px, #fff 150px,
                                                             #3e4996 100px, #3e4996,
                                                             #fff 200px, #fff 300px);
-    
+
     background-image: repeating-linear-gradient(135deg,#844049,#844049,
                                                             #fff 50px, #fff 150px,
                                                             #3e4996 100px, #3e4996,
