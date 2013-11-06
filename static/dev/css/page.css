@@ -10,15 +10,17 @@
 	background: #f5e9d7 url('http://static.redbeanpie.com/images/paperbg.png') top center;
 }
 .come-container {
-	padding-top: 100px;
+	padding-top: 50px;
 }
 .come-container .title-row {
     text-align: center;
 }
 .form-wrap {
-    max-width: 550px;
+    max-width: 604px;
     margin: 0 auto;
     margin-top: 50px;
+    background: url('http://static.redbeanpie.com/images/formbg.png') no-repeat;
+    padding: 30px;
 }
 
 .comingsoon {
