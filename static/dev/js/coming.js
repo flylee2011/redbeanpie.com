@@ -5,7 +5,11 @@
  */
 
 var formNode = $('#bookForm');
+var submitBtn = $('#submitBtn');
 formNode.Validform({
+	tiptype : 2
+});
+submitBtn.on('click', function() {
 	
 });
 
