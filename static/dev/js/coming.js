@@ -4,4 +4,8 @@
  * @date    2013-11-10 11:17:43
  */
 
+var formNode = $('#bookForm');
+formNode.Validform({
+	
+});
 
