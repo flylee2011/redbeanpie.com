@@ -25,7 +25,7 @@
 			<div class="col-md-12">
 				<div class="des-wrap">
 					<p>RedBeanPie初期主要向以下企业开放，现在就报名成为首批会员！</p>
-					<select class="com-select form-control">
+					<select id="comselect" class="com-select form-control">
 						<!-- 读取企业信息 -->
 						<?php foreach ($com_email_arr as $email): ?>
 							<option value="<?=$email['id'] ?>"><?=$email['company_name'] ?></option>
@@ -53,17 +53,17 @@
 						<div class="form-group">
 							<label for="comemail" class="col-sm-2 control-label">企业邮箱</label>
 							<div class="col-sm-5">
-								<input type="password" class="form-control" id="comemail" placeholder="企业邮箱">
+								<input type="text" class="form-control" id="comemail" placeholder="企业邮箱">
 							</div>
 							<div class="col-sm-5">
 								<!-- 第一家企业的邮箱后缀 -->
-								<span>@<?=$com_email_arr[0]['email_suffix'] ?></span>
+								<span id="comemailSuffix">@<?=$com_email_arr[0]['email_suffix'] ?></span>
 							</div>
 						</div>
 						
 						<div class="form-group submit-group">
 							<div class="col-sm-offset-5 col-sm-10">
-								<button id="submitbtn" type="submit" class="btn btn-default">现在预订</button>
+								<button id="submitBtn" type="submit" class="btn btn-default">现在预订</button>
 							</div>
 						</div>
 					</form>

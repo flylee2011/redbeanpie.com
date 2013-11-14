@@ -23,7 +23,22 @@ class apiController extends appController {
 	* @return user array
 	*/
 	public function user_presign() {
-		
+		$params = array();
+		$params['username'] = v('username');
+		$params['nickname'] = v('nickname');
+		$params['email'] = v('email');
+		$params['com_email_suffix'] = v('com_email_suffix');
+		$params['com_email_prefix'] = v('com_email_prefix');
+		$params['com_email_id'] = intval(v('com_email_id'));
+
+
+		$obj = array();
+		$obj[ 'code' ] = '0';
+		$obj[ 'msg' ] = 'success';
+		$obj[ 'data' ] = '';
+
+		// echo json_encode(array('dataList'=>$obj));
+		echo json_encode($obj);
 	}
 
 }
