@@ -7,72 +7,85 @@
 <meta name="description" content="">
 <meta name="keywords" content="">
 <link rel="stylesheet" type="text/css" href="/static/dev/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/static/dev/js/fancybox/jquery.fancybox.css">
 <link rel="stylesheet" type="text/css" href="/static/dev/css/page.css">
 </head>
 
 <body class="rp-come">
 	<div class="container come-container">
 		<div class="row">
-			<div class="col-md-12">
-				<div class="title-wrap">
-					<h1>红豆派</h1>
-					<h2>RedBeanPie.com</h2>
-					<h3>Coming Soon!</h3>
+			<div class="col-md-6 col-md-offset-3">
+				<div class="main">
+					<h1>红豆派 Pie</h1>
+					<h3>现在预订送红豆派一盒！</h3>
+					<a id="applyBtn" href="#bookFormLayer">
+						<button type="button" class="btn btn-primary btn-lg">我要申请</button>
+					</a>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="side">
+					<img src="/static/dev/images/weixin.png" class="img-thumbnail">
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<div class="des-wrap">
-					<p>RedBeanPie初期主要向以下企业开放，现在就报名成为首批会员！</p>
-					<select id="comselect" class="com-select form-control">
-						<!-- 读取企业信息 -->
-						<?php foreach ($com_email_arr as $email): ?>
-							<option value="<?=$email['id'] ?>"><?=$email['company_name'] ?></option>
-						<?php endforeach; ?>
-					</select>
+	</div>
+
+	<div style="display:none;" id="bookFormLayer">
+		<div class="form-wrap">
+			<form id="bookForm" class="form-horizontal">
+				<div class="form-group">
+					<label for="comselect" class="col-sm-2 control-label">企业名称</label>
+					<div class="col-sm-10">
+						<select id="comselect" class="com-select form-control">
+							<!-- 读取企业信息 -->
+							<?php foreach ($com_email_arr as $email): ?>
+								<option value="<?=$email['id'] ?>"><?=$email['company_name'] ?></option>
+							<?php endforeach; ?>
+						</select>
+					</div>
 				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<div class="form-wrap">
-					<form id="bookForm" class="form-horizontal">
-						<div class="form-group">
-							<label for="nickname" class="col-sm-2 control-label">昵称</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="nickname" placeholder="昵称">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="useremail" class="col-sm-2 control-label">个人邮箱</label>
-							<div class="col-sm-10">
-								<input type="email" class="form-control" id="useremail" placeholder="个人邮箱">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="comemail" class="col-sm-2 control-label">企业邮箱</label>
-							<div class="col-sm-5">
-								<input type="text" class="form-control" id="comemail" placeholder="企业邮箱">
-							</div>
-							<div class="col-sm-5">
-								<!-- 第一家企业的邮箱后缀 -->
-								<span id="comemailSuffix">@<?=$com_email_arr[0]['email_suffix'] ?></span>
-							</div>
-						</div>
-						
-						<div class="form-group submit-group">
-							<div class="col-sm-offset-5 col-sm-10">
-								<button id="submitBtn" type="submit" class="btn btn-default">现在预订</button>
-							</div>
-						</div>
-					</form>
+				<div class="form-group">
+					<label for="nickname" class="col-sm-2 control-label">昵称</label>
+					<div class="col-sm-5">
+						<input datatype="*" nullmsg="还没填呢" errormsg="还没填呢" type="text" class="form-control" id="nickname" placeholder="昵称">
+					</div>
+					<div class="col-sm-5 col-tip">
+						<p class="Validform_checktip"></p>
+					</div>
 				</div>
-			</div>
+				<div class="form-group">
+					<label for="useremail" class="col-sm-2 control-label">个人邮箱</label>
+					<div class="col-sm-5">
+						<input datatype="e" nullmsg="还没填呢" errormsg="邮箱格式错误" type="email" class="form-control" id="useremail" placeholder="个人邮箱">
+					</div>
+					<div class="col-sm-5 col-tip">
+						<p class="Validform_checktip"></p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="comemail" class="col-sm-2 control-label">企业邮箱</label>
+					<div class="col-sm-5">
+						<input datatype="*" nullmsg="还没填呢" errormsg="还没填呢" type="text" class="form-control" id="comemail" placeholder="企业邮箱">
+						<!-- 第一家企业的邮箱后缀 -->
+						<span id="comemailSuffix">@<?=$com_email_arr[0]['email_suffix'] ?></span>
+					</div>
+					<div class="col-sm-5 col-tip">
+						<p class="Validform_checktip"></p>
+					</div>
+				</div>
+				
+				<div class="form-group submit-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button id="submitBtn" type="submit" class="btn btn-default">现在预订</button>
+					</div>
+				</div>
+			</form>
 		</div>
 	</div>
 </body>
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 <script type="text/javascript" src="/static/dev/js/validform.min.js"></script>
+<script type="text/javascript" src="/static/dev/js/fancybox/jquery.fancybox.pack.js"></script>
 <script type="text/javascript" src="/static/dev/js/coming.js"></script>
 </html>
