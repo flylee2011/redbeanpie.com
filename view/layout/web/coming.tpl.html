@@ -57,7 +57,7 @@
 				<div class="form-group">
 					<label for="useremail" class="col-sm-2 control-label">个人邮箱</label>
 					<div class="col-sm-5">
-						<input datatype="e" nullmsg="还没填呢" errormsg="邮箱格式错误" type="email" class="form-control" id="useremail" placeholder="个人邮箱">
+						<input name="useremail" ajaxurl="?c=api&a=check_presign" datatype="e" nullmsg="还没填呢" errormsg="邮箱格式错误" type="email" class="form-control" id="useremail" placeholder="个人邮箱">
 					</div>
 					<div class="col-sm-5 col-tip">
 						<p class="Validform_checktip"></p>
@@ -66,7 +66,7 @@
 				<div class="form-group">
 					<label for="comemail" class="col-sm-2 control-label">企业邮箱</label>
 					<div class="col-sm-5">
-						<input datatype="*" nullmsg="还没填呢" errormsg="还没填呢" type="text" class="form-control" id="comemail" placeholder="企业邮箱">
+						<input name="comemail" ajaxurl="?c=api&a=check_presign&com_email_suffix=<?=$com_email_arr[0]['email_suffix'] ?>" datatype="*" nullmsg="还没填呢" errormsg="还没填呢" type="text" class="form-control" id="comemail" placeholder="企业邮箱">
 						<!-- 第一家企业的邮箱后缀 -->
 						<span id="comemailSuffix">@<?=$com_email_arr[0]['email_suffix'] ?></span>
 					</div>

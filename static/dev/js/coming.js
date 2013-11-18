@@ -8,7 +8,7 @@ var formNode = $('#bookForm');
 var submitBtn = $('#submitBtn');
 var applyBtn = $('#applyBtn');
 
-formNode.Validform({
+var bookForm = formNode.Validform({
 	tiptype:function(msg,o,cssctl){
 		var objtip = o.obj.parent().siblings().children('.Validform_checktip');
 		cssctl(objtip,o.type);
@@ -30,22 +30,22 @@ formNode.Validform({
 			com_email_prefix : com_email_prefix,
 			com_email_id : com_email_id
 		};
-		console.log(reqData);
 
-		// $.ajax({
-		// 	type: "POST",
-		// 	url: "?c=api&a=user_presign",
-		// 	data: reqData,
-		// 	dataType: 'json',
-		// 	success: function(res) {
-		// 		var code = res.code;
-		// 		if(code === '0') {
-		// 			alert('success');
-		// 		}
-		// 	},
-		// 	complete: function(res) {
-		// 	}
-		// });
+		$.ajax({
+			type: "POST",
+			url: "?c=api&a=user_presign",
+			data: reqData,
+			dataType: 'json',
+			success: function(res) {
+				var code = res.code;
+				if(code === '0') {
+					alert('预定成功！');
+					bookForm.resetForm();
+				}
+			},
+			complete: function(res) {
+			}
+		});
 		
 		return false;
 	}

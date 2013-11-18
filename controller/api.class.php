@@ -17,28 +17,76 @@ class apiController extends appController {
 	/**
 	* 用户预订注册
 	*
-	* @param string name
+	* @param string nickname
 	* @param string email
-	* @param string password
-	* @return user array
+	* @param string com_email_suffix
+	* @param string com_email_prefix
+	* @param string com_email_id
+	* @return resobj json
 	*/
 	public function user_presign() {
 		$params = array();
-		$params['username'] = v('username');
+		$params['username'] = v('email');
 		$params['nickname'] = v('nickname');
 		$params['email'] = v('email');
 		$params['com_email_suffix'] = v('com_email_suffix');
 		$params['com_email_prefix'] = v('com_email_prefix');
 		$params['com_email_id'] = intval(v('com_email_id'));
 
+		$dsql = array();
+		
+		$dsql[] = "'" . s( $params['username'] ) . "'";
+		$dsql[] = "'" . s( $params['nickname'] ) . "'";
+		$dsql[] = "'" . s( $params['email'] ) . "'";
+		$dsql[] = "'" . s( $params['com_email_suffix'] ) . "'";
+		$dsql[] = "'" . s( $params['com_email_prefix'] ) . "'";
+		$dsql[] = "'" . s( $params['com_email_id'] ) . "'";
 
-		$obj = array();
-		$obj[ 'code' ] = '0';
-		$obj[ 'msg' ] = 'success';
-		$obj[ 'data' ] = '';
+		$sql = "INSERT INTO `rbp_userinfo` ( `username` , `nickname` , `email` , `com_email_suffix` , `com_email_prefix`, `com_email_id` ) VALUES ( " . join( ' , ' , $dsql ) . " )";
 
-		// echo json_encode(array('dataList'=>$obj));
-		echo json_encode($obj);
+		run_sql($sql);
+		
+		$resobj = array();
+		$resobj['code'] = '0';
+		$resobj['msg'] = 'success';
+		$resobj['data'] = '';
+
+		if(db_errno() != 0) {
+			$resobj['code'] = db_errno();
+			$resobj['msg'] = 'failure';
+			echo json_encode($resobj);
+		}else {
+			echo json_encode($resobj);
+		}
+		// echo json_encode(array('dataList'=>$resobj));
+	}
+
+	public function check_presign() {
+		$params = array();
+		$params['name'] = v('name');
+		$params['param'] = v('param');
+		$params['com_email_suffix'] = v('com_email_suffix');
+
+		$resobj = array();
+		$resobj['info'] = '验证通过';
+		$resobj['status'] = 'y';
+
+		
+		if($params['name'] === 'useremail') {
+			$sql = "SELECT COUNT(*) FROM `rbp_userinfo` WHERE `email` = '" . $params['param'] . "'";
+			if(get_var($sql) >= 1) {
+				$resobj['info'] = '该邮箱已预定';
+				$resobj['status'] = 'n';
+			}
+		}else if($params['name'] === 'comemail') {
+			$sql = "SELECT COUNT(*) FROM `rbp_userinfo` WHERE `com_email_suffix` = '" . $params['com_email_suffix'] . "' AND `com_email_prefix` = '" . $params['param'] . "'";
+			if(get_var($sql) >= 1) {
+				$resobj['info'] = '该邮箱已预定';
+				$resobj['status'] = 'n';
+			}
+		}
+
+		echo json_encode($resobj);
 	}
 
 }
