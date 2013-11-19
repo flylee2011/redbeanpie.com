@@ -80,6 +80,7 @@ class apiController extends appController {
 			}
 		}else if($params['name'] === 'comemail') {
 			$sql = "SELECT COUNT(*) FROM `rbp_userinfo` WHERE `com_email_suffix` = '" . $params['com_email_suffix'] . "' AND `com_email_prefix` = '" . $params['param'] . "'";
+			
 			if(get_var($sql) >= 1) {
 				$resobj['info'] = '该邮箱已预定';
 				$resobj['status'] = 'n';

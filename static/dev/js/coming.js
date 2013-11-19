@@ -20,7 +20,7 @@ var bookForm = formNode.Validform({
 		var com_email_prefix = $('#comemail').val();
 		var com_email_id = $('#comselect').val();
 		var com_email_name = $('#comselect').text();
-		var com_email_suffix = $('#comemailSuffix').html();
+		var com_email_suffix = $('#comemailSuffix').html().replace('@', '');
 
 		var reqData = {
 			username : useremail,
