@@ -17,6 +17,7 @@ var bookForm = formNode.Validform({
 	callback : function(data) {
 		var nickname = $('#nickname').val();
 		var useremail = $('#useremail').val();
+		var gender = $('#gender').val();
 		var com_email_prefix = $('#comemail').val();
 		var com_email_id = $('#comselect').val();
 		var com_email_name = $('#comselect').text();
@@ -25,6 +26,7 @@ var bookForm = formNode.Validform({
 		var reqData = {
 			username : useremail,
 			nickname : nickname,
+			gender : gender,
 			email : useremail,
 			com_email_suffix : com_email_suffix,
 			com_email_prefix : com_email_prefix,

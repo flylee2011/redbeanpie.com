@@ -28,6 +28,7 @@ class apiController extends appController {
 		$params = array();
 		$params['username'] = v('email');
 		$params['nickname'] = v('nickname');
+		$params['gender'] = intval(v('gender'));
 		$params['email'] = v('email');
 		$params['com_email_suffix'] = v('com_email_suffix');
 		$params['com_email_prefix'] = v('com_email_prefix');
@@ -37,12 +38,13 @@ class apiController extends appController {
 		
 		$dsql[] = "'" . s( $params['username'] ) . "'";
 		$dsql[] = "'" . s( $params['nickname'] ) . "'";
+		$dsql[] = "'" . s( $params['gender'] ) . "'";
 		$dsql[] = "'" . s( $params['email'] ) . "'";
 		$dsql[] = "'" . s( $params['com_email_suffix'] ) . "'";
 		$dsql[] = "'" . s( $params['com_email_prefix'] ) . "'";
 		$dsql[] = "'" . s( $params['com_email_id'] ) . "'";
 
-		$sql = "INSERT INTO `rbp_userinfo` ( `username` , `nickname` , `email` , `com_email_suffix` , `com_email_prefix`, `com_email_id` ) VALUES ( " . join( ' , ' , $dsql ) . " )";
+		$sql = "INSERT INTO `rbp_userinfo` ( `username` , `nickname` , `gender`, `email` , `com_email_suffix` , `com_email_prefix`, `com_email_id` ) VALUES ( " . join( ' , ' , $dsql ) . " )";
 
 		run_sql($sql);
 		
