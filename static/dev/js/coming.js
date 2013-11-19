@@ -51,6 +51,7 @@ var bookForm = formNode.Validform({
 	}
 });
 applyBtn.fancybox({
-	scrolling : 'hidden'
+	scrolling : 'hidden',
+	padding : [30, 10, 30, 10]
 });
 

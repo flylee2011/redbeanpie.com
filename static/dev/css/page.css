@@ -35,7 +35,7 @@
     width: 200px;
     margin-left: 25px;
 }
-.form-wrap {
+.form-container {
     width: 540px;
 }
 /*.form-wrap {
@@ -46,13 +46,13 @@
     padding: 40px 20px 0 20px;
     height: 215px;
 }*/
-.form-wrap .form-group input, .form-wrap .form-group select {
+.form-container .form-group input, .form-container .form-group select {
     width: 200px;
 }
-.form-wrap .submit-group {
-    margin-top: 20px;
+.form-container .submit-group {
+    margin: 20px 0 0 0;
 }
-.form-wrap .col-tip {
+.form-container .col-tip {
     padding: 5px 0 0 0;
 }
 
