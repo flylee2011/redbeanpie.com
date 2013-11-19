@@ -40,7 +40,7 @@
 						<select id="comselect" class="com-select form-control">
 							<!-- 读取企业信息 -->
 							<?php foreach ($com_email_arr as $email): ?>
-								<option value="<?=$email['id'] ?>"><?=$email['company_name'] ?></option>
+								<option value="<?php echo $email['id'] ?>"><?php echo $email['company_name'] ?></option>
 							<?php endforeach; ?>
 						</select>
 					</div>
@@ -68,7 +68,7 @@
 					<div class="col-sm-5">
 						<input name="comemail" ajaxurl="?c=api&a=check_presign&com_email_suffix=<?=$com_email_arr[0]['email_suffix'] ?>" datatype="*" nullmsg="还没填呢" errormsg="还没填呢" type="text" class="form-control" id="comemail" placeholder="企业邮箱">
 						<!-- 第一家企业的邮箱后缀 -->
-						<span id="comemailSuffix">@<?=$com_email_arr[0]['email_suffix'] ?></span>
+						<span id="comemailSuffix">@<?php echo $com_email_arr[0]['email_suffix'] ?></span>
 					</div>
 					<div class="col-sm-5 col-tip">
 						<p class="Validform_checktip"></p>
