@@ -33,6 +33,7 @@ class apiController extends appController {
 		$params['com_email_suffix'] = v('com_email_suffix');
 		$params['com_email_prefix'] = v('com_email_prefix');
 		$params['com_email_id'] = intval(v('com_email_id'));
+		$params['com_name'] = v('com_name');
 
 		$dsql = array();
 		
@@ -43,8 +44,9 @@ class apiController extends appController {
 		$dsql[] = "'" . s( $params['com_email_suffix'] ) . "'";
 		$dsql[] = "'" . s( $params['com_email_prefix'] ) . "'";
 		$dsql[] = "'" . s( $params['com_email_id'] ) . "'";
+		$dsql[] = "'" . s( $params['com_name'] ) . "'";
 
-		$sql = "INSERT INTO `rbp_userinfo` ( `username` , `nickname` , `gender`, `email` , `com_email_suffix` , `com_email_prefix`, `com_email_id` ) VALUES ( " . join( ' , ' , $dsql ) . " )";
+		$sql = "INSERT INTO `rbp_userinfo` ( `username` , `nickname` , `gender`, `email` , `com_email_suffix` , `com_email_prefix`, `com_email_id`, `com_name` ) VALUES ( " . join( ' , ' , $dsql ) . " )";
 
 		run_sql($sql);
 		
@@ -72,22 +74,42 @@ class apiController extends appController {
 		$resobj = array();
 		$resobj['info'] = '验证通过';
 		$resobj['status'] = 'y';
-
 		
 		if($params['name'] === 'useremail') {
-			$sql = "SELECT COUNT(*) FROM `rbp_userinfo` WHERE `email` = '" . $params['param'] . "'";
-			if(get_var($sql) >= 1) {
-				$resobj['info'] = '该邮箱已预定';
-				$resobj['status'] = 'n';
-			}
-		}else if($params['name'] === 'comemail') {
-			$sql = "SELECT COUNT(*) FROM `rbp_userinfo` WHERE `com_email_suffix` = '" . $params['com_email_suffix'] . "' AND `com_email_prefix` = '" . $params['param'] . "'";
 			
-			if(get_var($sql) >= 1) {
-				$resobj['info'] = '该邮箱已预定';
-				$resobj['status'] = 'n';
-			}
+			$sql = "SELECT COUNT(*) FROM `rbp_userinfo` WHERE `email` = '" . $params['param'] . "'";
+
+		}else if($params['name'] === 'comemail-default') {
+			
+			$sql = "SELECT COUNT(*) FROM `rbp_userinfo` WHERE `com_email_suffix` = '" . $params['com_email_suffix'] . "' AND `com_email_prefix` = '" . $params['param'] . "'";
+
+		}else if($params['name'] === 'comemail-other') {
+			
+			$email_split = explode('@', $params['param']);
+			$sql = "SELECT COUNT(*) FROM `rbp_userinfo` WHERE `com_email_suffix` = '" . $email_split[1] . "' AND `com_email_prefix` = '" . $email_split[0] . "'";
+
 		}
+
+		if(get_var($sql) >= 1) {
+			$resobj['info'] = '该邮箱已预定';
+			$resobj['status'] = 'n';
+		}
+
+		echo json_encode($resobj);
+	}
+
+	public function get_cominfo() {
+		$params = array();
+		$params['comid'] = intval(v('comid'));
+
+		$sql = 'SELECT `email_suffix` FROM `rbp_comemail` WHERE `id` = "'. $params['comid'] .'"';
+
+		$resobj = array();
+		$resobj['code'] = '0';
+		$resobj['msg'] = 'success';
+		$resobj['data'] = '';
+
+		$resobj['data'] = get_line($sql);
 
 		echo json_encode($resobj);
 	}

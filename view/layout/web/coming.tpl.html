@@ -35,14 +35,20 @@
 		<div class="container form-container">
 			<form id="bookForm" class="form-horizontal">
 				<div class="form-group">
-					<label for="comselect" class="col-sm-2 control-label">企业名称</label>
-					<div class="col-sm-10">
+					<label for="comselect" class="col-sm-2 control-label">公司名</label>
+					<div class="col-sm-5">
 						<select id="comselect" class="com-select form-control">
 							<!-- 读取企业信息 -->
 							<?php foreach ($com_email_arr as $email): ?>
-								<option value="<?php echo $email['id'] ?>"><?php echo $email['company_name'] ?></option>
+								<option suffix="<?php echo $email['email_suffix'] ?>" value="<?php echo $email['id'] ?>"><?php echo $email['company_name'] ?></option>
 							<?php endforeach; ?>
+							<option value="0">其他公司</option>
 						</select>
+						<br>
+						<input style="display:none;" id="other-comname" name="other-comname" datatype="*" nullmsg="还没填呢" errormsg="还没填呢" class="form-control">
+					</div>
+					<div class="col-sm-5 col-tip">
+						<p class="Validform_checktip"></p>
 					</div>
 				</div>
 				<div class="form-group">
@@ -75,12 +81,21 @@
 						<p class="Validform_checktip"></p>
 					</div>
 				</div>
-				<div class="form-group">
-					<label for="comemail" class="col-sm-2 control-label">企业邮箱</label>
+				<div id="default-comemail-group" class="form-group">
+					<label for="comemail-default" class="col-sm-2 control-label">企业邮箱</label>
 					<div class="col-sm-5">
-						<input name="comemail" ajaxurl="?c=api&a=check_presign&com_email_suffix=<?php echo $com_email_arr[0]['email_suffix'] ?>" datatype="*" nullmsg="还没填呢" errormsg="还没填呢" type="text" class="form-control" id="comemail" placeholder="企业邮箱">
+						<input name="comemail-default" ajaxurl="?c=api&a=check_presign&com_email_suffix=<?php echo $com_email_arr[0]['email_suffix'] ?>" datatype="*" nullmsg="还没填呢" errormsg="还没填呢" type="text" class="form-control" id="comemail" placeholder="企业邮箱">
 						<!-- 第一家企业的邮箱后缀 -->
 						<span id="comemailSuffix">@<?php echo $com_email_arr[0]['email_suffix'] ?></span>
+					</div>
+					<div class="col-sm-5 col-tip">
+						<p class="Validform_checktip"></p>
+					</div>
+				</div>
+				<div style="display:none;" id="other-comemail-group" class="form-group">
+					<label for="comemail-other" class="col-sm-2 control-label">企业邮箱</label>
+					<div class="col-sm-5">
+						<input name="comemail-other" ajaxurl="?c=api&a=check_presign" datatype="e" nullmsg="还没填呢" errormsg="邮箱格式错误" type="text" class="form-control" id="comemail" placeholder="企业邮箱">
 					</div>
 					<div class="col-sm-5 col-tip">
 						<p class="Validform_checktip"></p>
