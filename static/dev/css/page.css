@@ -47,7 +47,7 @@
     height: 215px;
 }*/
 .form-container .form-group input, .form-container .form-group select {
-    width: 200px;
+    /*width: 200px;*/
 }
 .form-container .submit-group {
     margin: 20px 0 0 0;

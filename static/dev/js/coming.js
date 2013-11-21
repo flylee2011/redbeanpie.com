@@ -7,11 +7,16 @@
 var formNode = $('#bookForm');
 var submitBtn = $('#submitBtn');
 var applyBtn = $('#applyBtn');
-var comselect = $('#comselect');
-var defaultComemail = $('#default-comemail-group');
-var otherComemail = $('#other-comemail-group');
-var comemailSuffix = $('#comemailSuffix');
-var otherComname = $('#other-comname');
+// 公司select
+var elComSelect = $('#comselect');
+// 默认公司group区域
+var elDefaultComEmail = $('#default-comemail-group');
+// 其他公司group区域
+var elOtherComEmail = $('#other-comemail-group');
+// 默认公司后缀
+var elComEmailSuffix = $('#comemailSuffix');
+// 其他公司名input
+var elOtherComName = $('#other-comname-row');
 
 // 预定表单验证
 var bookForm = formNode.Validform({
@@ -24,10 +29,10 @@ var bookForm = formNode.Validform({
 		var nickname = $('#nickname').val();
 		var useremail = $('#useremail').val();
 		var gender = $('#gender').val();
-		var com_email_prefix = $('#comemail').val();
-		var com_email_id = $('#comselect').val();
-		var com_name = $('#comselect').text();
-		var com_email_suffix = $('#comemailSuffix').html().replace('@', '');
+		var com_email_prefix = $('#default-comemail-input').val();
+		var com_email_id = elComSelect.val();
+		var com_name = elComSelect.find('option:selected').text();
+		var com_email_suffix = elComEmailSuffix.html().replace('@', '');
 
 		var reqData = {
 			username : useremail,
@@ -41,12 +46,12 @@ var bookForm = formNode.Validform({
 		};
 		// 其他企业
 		if(com_email_id === '0') {
-			var email_split = com_email_prefix.spilt('@');
+			var email_split = $('#other-comemail-input').val().split('@');
 			reqData.com_email_prefix = email_split[0];
 			reqData.com_email_suffix = email_split[1];
-			reqData.com_name = otherComname.val();
+			reqData.com_name = $('#other-comname').val();
 		}
-
+		console.log(reqData);
 		$.ajax({
 			type: "POST",
 			url: "?c=api&a=user_presign",
@@ -56,7 +61,7 @@ var bookForm = formNode.Validform({
 				var code = res.code;
 				if(code === '0') {
 					alert('预定成功！');
-					bookForm.resetForm();
+					resetBookForm();
 				}
 			},
 			complete: function(res) {
@@ -66,7 +71,7 @@ var bookForm = formNode.Validform({
 		return false;
 	}
 });
-bookForm.ignore('#other-comname,#other-comemail-group input');
+bookForm.ignore('#other-comname,#other-comemail-input');
 
 // 申请按钮弹层
 applyBtn.fancybox({
@@ -74,28 +79,40 @@ applyBtn.fancybox({
 	padding : [30, 10, 30, 10]
 });
 // 公司切换
-comselect.on('change', function(){
+elComSelect.on('change', function(){
 	var comid = $(this).val();
 
 	if(comid !== '0') {
 		var com_email_suffix = $(this).find('option:selected').attr('suffix');
-		comemailSuffix.html('@' + com_email_suffix);
-		defaultComemail.show();
-		otherComemail.hide();
-		otherComname.hide();
+		elComEmailSuffix.html('@' + com_email_suffix);
+		elDefaultComEmail.show();
+		elOtherComEmail.hide();
+		elOtherComName.hide();
 
-		bookForm.unignore('#default-comemail-group input');
-		bookForm.ignore('#other-comname,#other-comemail-group input');
+		bookForm.unignore('#default-comemail-input');
+		bookForm.ignore('#other-comname,#other-comemail-input');
 	}else {
-		defaultComemail.hide();
-		otherComemail.show();
-		otherComname.show();
+		elDefaultComEmail.hide();
+		elOtherComEmail.show();
+		elOtherComName.show();
 
-		bookForm.unignore('#other-comname,#other-comemail-group input');
-		bookForm.ignore('#default-comemail-group input');
+		bookForm.unignore('#other-comname,#other-comemail-input');
+		bookForm.ignore('#default-comemail-input');
 	}
 
 	// bookForm.resetForm();
 
 });
+
+// 重置表单
+function resetBookForm() {
+	elOtherComName.hide();
+	elOtherComEmail.hide();
+
+	bookForm.resetForm();
+	elDefaultComEmail.show();
+	bookForm.unignore('#default-comemail-input');
+	bookForm.ignore('#other-comname,#other-comemail-input');
+
+}
 

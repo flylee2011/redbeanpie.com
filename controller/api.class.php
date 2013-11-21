@@ -79,11 +79,11 @@ class apiController extends appController {
 			
 			$sql = "SELECT COUNT(*) FROM `rbp_userinfo` WHERE `email` = '" . $params['param'] . "'";
 
-		}else if($params['name'] === 'comemail-default') {
+		}else if($params['name'] === 'default-comemail') {
 			
 			$sql = "SELECT COUNT(*) FROM `rbp_userinfo` WHERE `com_email_suffix` = '" . $params['com_email_suffix'] . "' AND `com_email_prefix` = '" . $params['param'] . "'";
 
-		}else if($params['name'] === 'comemail-other') {
+		}else if($params['name'] === 'other-comemail') {
 			
 			$email_split = explode('@', $params['param']);
 			$sql = "SELECT COUNT(*) FROM `rbp_userinfo` WHERE `com_email_suffix` = '" . $email_split[1] . "' AND `com_email_prefix` = '" . $email_split[0] . "'";
