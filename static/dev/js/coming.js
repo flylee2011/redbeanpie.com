@@ -18,9 +18,19 @@ var elComEmailSuffix = $('#comemailSuffix');
 // 其他公司名input
 var elOtherComName = $('#other-comname-row');
 
+// 申请按钮弹层
+applyBtn.fancybox({
+	scrolling : 'hidden',
+	padding : [30, 10, 30, 10],
+	afterClose : function() {
+		resetBookForm();
+	}
+});
+
 // 预定表单验证
 var bookForm = formNode.Validform({
-	tiptype:function(msg,o,cssctl){
+	ajaxPost : true,
+	tiptype : function(msg,o,cssctl){
 		var objtip = o.obj.parent().siblings().children('.Validform_checktip');
 		cssctl(objtip,o.type);
 		objtip.text(msg);
@@ -53,8 +63,8 @@ var bookForm = formNode.Validform({
 		}
 		console.log(reqData);
 		$.ajax({
-			type: "POST",
-			url: "?c=api&a=user_presign",
+			type: 'POST',
+			url: '?c=api&a=user_presign',
 			data: reqData,
 			dataType: 'json',
 			success: function(res) {
@@ -73,44 +83,69 @@ var bookForm = formNode.Validform({
 });
 bookForm.ignore('#other-comname,#other-comemail-input');
 
-// 申请按钮弹层
-applyBtn.fancybox({
-	scrolling : 'hidden',
-	padding : [30, 10, 30, 10]
-});
 // 公司切换
 elComSelect.on('change', function(){
 	var comid = $(this).val();
+	console.log(comid);
+	resetBookForm();
 
-	if(comid !== '0') {
-		var com_email_suffix = $(this).find('option:selected').attr('suffix');
-		elComEmailSuffix.html('@' + com_email_suffix);
-		elDefaultComEmail.show();
-		elOtherComEmail.hide();
-		elOtherComName.hide();
-
-		bookForm.unignore('#default-comemail-input');
-		bookForm.ignore('#other-comname,#other-comemail-input');
-	}else {
+	if(comid === '0') {
+		elComSelect.find('option').attr('selected', false);
+		elComSelect.find('option[value=0]').attr('selected', 'selected');
 		elDefaultComEmail.hide();
 		elOtherComEmail.show();
 		elOtherComName.show();
 
 		bookForm.unignore('#other-comname,#other-comemail-input');
 		bookForm.ignore('#default-comemail-input');
+	}else {
+		elComSelect.find('option').attr('selected', false);
+		elComSelect.find('option[value='+comid+']').attr('selected', 'selected');
+		var com_email_suffix = $(this).find('option:selected').attr('suffix');
+		elComEmailSuffix.html('@' + com_email_suffix);
+		$('#default-comemail-input').attr('ajaxurl', '?c=api&a=check_presign&com_email_suffix=' + com_email_suffix);
+
+		elDefaultComEmail.show();
+		elOtherComEmail.hide();
+		elOtherComName.hide();
 	}
 
-	// bookForm.resetForm();
+	// if(comid !== '0') {
+	// 	var com_email_suffix = $(this).find('option:selected').attr('suffix');
+	// 	elComEmailSuffix.html('@' + com_email_suffix);
+	// 	$('#default-comemail-input').attr('ajaxurl', '?c=api&a=check_presign&com_email_suffix=' + com_email_suffix);
+
+	// 	elDefaultComEmail.show();
+	// 	elOtherComEmail.hide();
+	// 	elOtherComName.hide();
+
+	// 	bookForm.unignore('#default-comemail-input');
+	// 	bookForm.ignore('#other-comname,#other-comemail-input');
+	// }else {
+	// 	elDefaultComEmail.hide();
+	// 	elOtherComEmail.show();
+	// 	elOtherComName.show();
+
+	// 	bookForm.unignore('#other-comname,#other-comemail-input');
+	// 	bookForm.ignore('#default-comemail-input');
+	// }
 
 });
 
 // 重置表单
 function resetBookForm() {
+
 	elOtherComName.hide();
 	elOtherComEmail.hide();
 
 	bookForm.resetForm();
 	elDefaultComEmail.show();
+	elComSelect.find('option').attr('selected', false);
+	elComSelect.find('option').selectedIndex = 0;
+	var com_email_suffix = elComSelect.find('option:selected').attr('suffix');
+	$('.Validform_checktip').html('');
+	elComEmailSuffix.html('@' + com_email_suffix);
+	$('#default-comemail-input').attr('ajaxurl', '?c=api&a=check_presign&com_email_suffix=' + com_email_suffix);
 	bookForm.unignore('#default-comemail-input');
 	bookForm.ignore('#other-comname,#other-comemail-input');
 
