@@ -6,13 +6,11 @@
  * @date    2013-11-04 22:25:44
  */
 
-@font-face {
+/*@font-face {
 	font-family: 'trends';
 	src: local('时尚中黑简体');
 	src: url('font/trends.ttf'), url('font/trends.eot');
-	/*src: url('font/trends.eot');*/
-	
-}
+}*/
 body, h1, h2, h3, h4, h5, h6 {
 	font-family: '微软雅黑';
 }
@@ -59,9 +57,7 @@ body, h1, h2, h3, h4, h5, h6 {
     margin-top: 90px;
 }
 .main-row .title {
-	font-family: 'trends';
-	font-size: 80px;
-	padding-left: 80px;
+	padding-left: 50px;
 }
 .main-row .title, .main-row .sub-title {
 	color: #fff;
@@ -78,6 +74,9 @@ body, h1, h2, h3, h4, h5, h6 {
 .contact-row .thumbnail img {
 	width: 100px;
 	height: 100px;
+}
+.contact-row .thumbnail a img:hover {
+	opacity: 0.8;
 }
 
 /* footer */
