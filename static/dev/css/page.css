@@ -6,35 +6,86 @@
  * @date    2013-11-04 22:25:44
  */
 
+@font-face {
+	font-family: 'trends';
+	src: local('时尚中黑简体');
+	src: url('font/trends.ttf'), url('font/trends.eot');
+	/*src: url('font/trends.eot');*/
+	
+}
+body, h1, h2, h3, h4, h5, h6 {
+	font-family: '微软雅黑';
+}
+
 .rp-come {
-	background: #f5e9d7 url('../images/paperbg.png') top center;
+    background-color: #dc4a1d;
 }
-.come-container {
-	padding-top: 180px;
+.top-line {
+    background-color: #000;
+    height: 10px;
 }
-.come-container .main {
+/* main */
+.main-wrap {
+    background: #ed8b4e url(../images/main_bg4.png) no-repeat;
+    filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+    -moz-background-size:100% 100%;
+    background-size:100% 100%;
+}
+.main-wrap .icon-logo {
+	position: absolute;
+	left: 20%;
+}
+.main-container {
+	padding-top: 140px;
+}
+.main-container .main-row {
     text-align: center;
 }
-.come-container .main button {
-    margin-top: 20px;
+.main-container .main-row button {
+    margin: 20px 0 45px 0;
+    background-color: #1b1b1b;
+    padding: 20px 60px;
+    border-radius: 30px;
+    border-color: #ff7237;
 }
-.come-container .main h1, .come-container .main h3 {
-    margin: 0 0 10px 0;
-    padding: 0;
+.main-container .main-row button:active {
+	color: #f00;
+	text-decoration: none;
 }
-.title-wrap {
-    text-align: center;
+.main-container .main-row h4 {
+    margin-top: 90px;
 }
-.des-wrap {
-    max-width: 604px;
-    margin: 0 auto;
-    margin-top: 10px;
-    padding: 0 90px;
+.main-row .title {
+	font-family: 'trends';
+	font-size: 80px;
+	padding-left: 80px;
 }
-.des-wrap .com-select {
-    width: 200px;
-    margin-left: 25px;
+.main-row .title, .main-row .sub-title {
+	color: #fff;
 }
+
+/* contact */
+.contact-wrap {
+	background-color: #fff;
+}
+.contact-row .thumbnail {
+	border: 0;
+	text-align: center;
+}
+.contact-row .thumbnail img {
+	width: 100px;
+	height: 100px;
+}
+
+/* footer */
+.footer-wrap {
+	color: #fff;
+	text-align: center;
+}
+
+
+
+/* bookform */
 .form-container {
     width: 540px;
 }
@@ -46,9 +97,6 @@
     padding: 40px 20px 0 20px;
     height: 215px;
 }*/
-.form-container .form-group input, .form-container .form-group select {
-    /*width: 200px;*/
-}
 .form-container .submit-group {
     margin: 20px 0 0 0;
 }
