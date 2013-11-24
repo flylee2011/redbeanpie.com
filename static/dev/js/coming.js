@@ -17,11 +17,14 @@ var elOtherComEmail = $('#other-comemail-group');
 var elComEmailSuffix = $('#comemailSuffix');
 // 其他公司名input
 var elOtherComName = $('#other-comname-row');
+// 报名结果
+var elFormRes = $('#formRes');
 
 // 申请按钮弹层
 applyBtn.fancybox({
 	scrolling : 'hidden',
 	padding : [30, 10, 30, 10],
+	maxHeight : 310,
 	afterClose : function() {
 		resetBookForm();
 	}
@@ -61,7 +64,10 @@ var bookForm = formNode.Validform({
 			reqData.com_email_suffix = email_split[1];
 			reqData.com_name = $('#other-comname').val();
 		}
-		console.log(reqData);
+		
+		submitBtn.addClass('disabled');
+		submitBtn.html('提交中...');
+
 		$.ajax({
 			type: 'POST',
 			url: '?c=api&a=user_presign',
@@ -70,11 +76,18 @@ var bookForm = formNode.Validform({
 			success: function(res) {
 				var code = res.code;
 				if(code === '0') {
-					alert('预定成功！');
 					resetBookForm();
+
+					formNode.hide();
+					elFormRes.show();
+
+					submitBtn.removeClass('disabled');
+					submitBtn.html('现在预订');
 				}
 			},
 			complete: function(res) {
+				submitBtn.removeClass('disabled');
+				submitBtn.html('现在预订');
 			}
 		});
 		
@@ -86,7 +99,7 @@ bookForm.ignore('#other-comname,#other-comemail-input');
 // 公司切换
 elComSelect.on('change', function(){
 	var comid = $(this).val();
-	console.log(comid);
+	
 	resetBookForm();
 
 	if(comid === '0') {
@@ -137,6 +150,7 @@ function resetBookForm() {
 
 	elOtherComName.hide();
 	elOtherComEmail.hide();
+	elFormRes.hide();
 
 	bookForm.resetForm();
 	elDefaultComEmail.show();
@@ -148,6 +162,8 @@ function resetBookForm() {
 	$('#default-comemail-input').attr('ajaxurl', '?c=api&a=check_presign&com_email_suffix=' + com_email_suffix);
 	bookForm.unignore('#default-comemail-input');
 	bookForm.ignore('#other-comname,#other-comemail-input');
+
+	formNode.show();
 
 }
 

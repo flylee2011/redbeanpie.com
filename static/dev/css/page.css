@@ -55,6 +55,9 @@
 .form-container .col-tip {
     padding: 5px 0 0 0;
 }
+.form-container .formRes {
+    text-align: center;
+}
 
 /*==========以下部分是Validform必须的===========*/
 .Validform_checktip{
