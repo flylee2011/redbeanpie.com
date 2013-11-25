@@ -14,7 +14,7 @@ class defaultController extends appController
 		db();
 		$data['com_email_arr'] = get_data('SELECT * FROM `rbp_comemail`');
 		$data['title'] = $data['top_title'] = '首页';
-		render($data, null, 'coming');
+		render($data, 'web', 'coming');
 	}
 	
 	function ajax_test()
