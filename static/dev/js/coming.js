@@ -24,7 +24,6 @@ var elFormRes = $('#formRes');
 applyBtn.fancybox({
 	scrolling : 'hidden',
 	padding : [30, 10, 30, 10],
-	maxHeight : 310,
 	afterClose : function() {
 		resetBookForm();
 	}

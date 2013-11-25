@@ -140,20 +140,24 @@
 					</div>
 				</div>
 				<div id="default-comemail-group" class="form-group">
-					<label for="default-comemail-input" class="col-sm-2 control-label">企业邮箱</label>
+					<label for="default-comemail-input" class="col-sm-2 control-label">公司邮箱</label>
 					<div class="col-sm-5 input-group">
-						<input id="default-comemail-input" name="default-comemail" ajaxurl="?c=api&a=check_presign&com_email_suffix=<?php echo $com_email_arr[0]['email_suffix'] ?>" datatype="*" nullmsg="还没填呢" errormsg="还没填呢" type="text" class="form-control" placeholder="企业邮箱">
+						<input id="default-comemail-input" name="default-comemail" ajaxurl="?c=api&a=check_presign&com_email_suffix=<?php echo $com_email_arr[0]['email_suffix'] ?>" datatype="*" nullmsg="还没填呢" errormsg="还没填呢" type="text" class="form-control" placeholder="公司邮箱">
 						<!-- 第一家企业的邮箱后缀 -->
 						<span id="comemailSuffix" class="input-group-addon">@<?php echo $com_email_arr[0]['email_suffix'] ?></span>
 					</div>
 					<div class="col-sm-5 col-tip">
 						<p class="Validform_checktip"></p>
 					</div>
+					<div class="col-sm-5 col-sm-offset-2">
+						<em>仅用于身份认证</em>
+					</div>
 				</div>
 				<div style="display:none;" id="other-comemail-group" class="form-group">
-					<label for="other-comemail-input" class="col-sm-2 control-label">企业邮箱</label>
+					<label for="other-comemail-input" class="col-sm-2 control-label">公司邮箱</label>
 					<div class="col-sm-5">
-						<input id="other-comemail-input" name="other-comemail" ajaxurl="?c=api&a=check_presign" datatype="e" nullmsg="还没填呢" errormsg="邮箱格式错误" type="text" class="form-control" placeholder="企业邮箱">
+						<input id="other-comemail-input" name="other-comemail" ajaxurl="?c=api&a=check_presign" datatype="e" nullmsg="还没填呢" errormsg="邮箱格式错误" type="text" class="form-control" placeholder="公司邮箱">
+						<em>仅用于身份认证</em>
 					</div>
 					<div class="col-sm-5 col-tip">
 						<p class="Validform_checktip"></p>
