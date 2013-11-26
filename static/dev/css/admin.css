@@ -1,0 +1,9 @@
+@charset "UTF-8";
+/**
+ * @fileoverview 管理后台样式
+ * @date    2013-11-26 13:53:56
+ * @authors yifei (flylee.bjfu@gmail.com)
+ * @version 1.0
+ */
+
+@import url('../css/bootstrap.min.css');
