@@ -55,7 +55,7 @@ body.signin {
   border-top-right-radius: 0;
 }
 
-/*首页*/
+/*首页，框架*/
 .wrap {
 	min-height: 100%;
 	height: auto;
@@ -68,4 +68,7 @@ body.signin {
 }
 .wrap>.container {
 	padding: 60px 15px 0;
+}
+.side-panel {
+  margin-top: 40px;
 }
