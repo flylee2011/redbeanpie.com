@@ -1,0 +1,43 @@
+<div class="panel panel-default side-panel">
+	<?php if(g('a') == 'index'):?>
+	<div class="panel-heading">常用功能</div>
+	<div class="list-group">
+		<a href="?c=admin&a=preuser" class="list-group-item">预注册用户</a>
+		<a href="?c=admin&a=cominfo" class="list-group-item">公司信息</a>
+		<a href="?c=admin&a=industryinfo" class="list-group-item">行业信息</a>
+	</div>
+	<?php endif; ?>
+	
+	<?php if(g('a') == 'preuser'):?>
+	<div class="panel-heading">用户管理</div>
+	<div class="list-group">
+		<a href="?c=admin&a=preuser" class="list-group-item active">预注册用户</a>
+		<a href="?c=admin&a=userinfo" class="list-group-item">注册用户</a>
+	</div>
+	<?php endif; ?>
+
+	<?php if(g('a') == 'userinfo'):?>
+	<div class="panel-heading">用户管理</div>
+	<div class="list-group">
+		<a href="?c=admin&a=preuser" class="list-group-item">预注册用户</a>
+		<a href="?c=admin&a=userinfo" class="list-group-item active">注册用户</a>
+	</div>
+	<?php endif; ?>
+
+	<?php if(g('a') == 'cominfo'):?>
+	<div class="panel-heading">公司管理</div>
+	<div class="list-group">
+		<a href="?c=admin&a=cominfo" class="list-group-item active">公司信息</a>
+		<a href="?c=admin&a=industryinfo" class="list-group-item">行业信息</a>
+	</div>
+	<?php endif; ?>
+
+	<?php if(g('a') == 'industryinfo'):?>
+	<div class="panel-heading">公司管理</div>
+	<div class="list-group">
+		<a href="?c=admin&a=cominfo" class="list-group-item">公司信息</a>
+		<a href="?c=admin&a=industryinfo" class="list-group-item active">行业信息</a>
+	</div>
+	<?php endif; ?>
+
+</div>
