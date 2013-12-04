@@ -13,8 +13,9 @@ define( 'CROOT' , ROOT . 'core' . DS  );
 error_reporting(E_ALL^E_NOTICE);
 ini_set( 'display_errors' , true );
 
+
 include_once( CROOT . 'lib' . DS . 'core.function.php' );
-// @include_once( AROOT . 'lib' . DS . 'app.function.php' );
+@include_once( AROOT . 'lib' . DS . 'app.function.php' );
 
 include_once( CROOT . 'config' .  DS . 'core.config.php' );
 include_once( AROOT . 'config' . DS . 'admin.config.php' );
