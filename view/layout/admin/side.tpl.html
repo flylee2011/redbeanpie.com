@@ -24,7 +24,7 @@
 	</div>
 	<?php endif; ?>
 
-	<?php if(g('a') == 'cominfo'):?>
+	<?php if(g('a') == 'cominfo' || g('a') == 'add_cominfo' || g('a') == 'edit_cominfo'):?>
 	<div class="panel-heading">公司管理</div>
 	<div class="list-group">
 		<a href="?c=admin&a=cominfo" class="list-group-item active">公司信息</a>
@@ -32,7 +32,7 @@
 	</div>
 	<?php endif; ?>
 
-	<?php if(g('a') == 'industryinfo'):?>
+	<?php if(g('a') == 'industryinfo' || g('a') == 'add_industryinfo' || g('a') == 'edit_industryinfo'):?>
 	<div class="panel-heading">公司管理</div>
 	<div class="list-group">
 		<a href="?c=admin&a=cominfo" class="list-group-item">公司信息</a>

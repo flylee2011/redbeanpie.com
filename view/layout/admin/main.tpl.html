@@ -9,7 +9,7 @@
 <?php endif; ?>
 
 <?php if(g('a') == 'preuser'):?>
-<!-- 预注册用户信息 -->
+<!-- 预注册用户管理 -->
 <div class="page-header">
 	<h1>预注册用户<small></small></h1>
 </div>
@@ -26,69 +26,248 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr>
-			<td>1</td>
-			<td>flylee2011@sina.com</td>
-			<td>yifei</td>
-			<td>男</td>
-			<td>yifei2@staff.sina.com.cn</td>
-			<td>新浪</td>
-			<td>2013-11-26</td>
-		</tr>
+		<?php foreach ($userinfo_arr as $userinfo): ?>
+			<tr>
+				<td><?php echo $userinfo['id'] ?></td>
+				<td><?php echo $userinfo['email'] ?></td>
+				<td><?php echo $userinfo['nickname'] ?></td>
+				<td>
+					<?php if($userinfo['gender'] == 0){
+						echo '男';
+					}else if($userinfo['gender'] == 1){
+						echo '女';
+					}
+					?>
+				</td>
+				<td><?php echo $userinfo['com_email_prefix'] . '@' . $userinfo['com_email_suffix'] ?></td>
+				<td><?php echo $userinfo['com_name'] ?></td>
+				<td><?php echo $userinfo['create_time'] ?></td>
+
+			</tr>
+		<?php endforeach; ?>
 	</tbody>
 </table>
+<?php endif; ?>
+
+<!-- 注册用户管理 -->
+<?php if(g('a') == 'userinfo'):?>
+	<div class="page-header">
+		<h1>注册用户管理<small></small></h1>
+	</div>
+	<h1><small>暂无信息</small></h1>
 <?php endif; ?>
 
 <?php if(g('a') == 'cominfo'):?>
 <!-- 公司信息管理 -->
 <div class="page-header">
 	<h1>公司信息管理<small></small></h1>
+	<p>
+		<a href="?c=admin&a=add_cominfo">
+			<button type="button" class="btn btn-primary">新增</button>
+		</a>
+	</p>
 </div>
-<table class="table table-hover">
+<table id="cominfo-table" class="table table-hover">
 	<thead>
 		<tr>
 			<th>公司id</th>
 			<th>公司名称</th>
 			<th>公司邮箱后缀</th>
-			<th>所在行业</th>
+			<!-- <th>所在行业</th> -->
+			<th>状态</th>
 			<th>操作</th>
 		</tr>
 	</thead>
 	<tbody>
+		<?php foreach ($cominfo_arr as $cominfo): ?>
 		<tr>
-			<td>1</td>
-			<td>联想集团</td>
-			<td>@lenovo.com</td>
-			<td>IT/互联网</td>
+			<td><?php echo $cominfo['id'] ?></td>
+			<td><?php echo $cominfo['company_name'] ?></td>
+			<td>@<?php echo $cominfo['email_suffix'] ?></td>
+			<!-- <td><?php echo $cominfo['industry_name'] ?></td> -->
 			<td>
-				<a href="">编辑</a>
+				<?php if ($cominfo['is_active'] == 1): ?>
+				<span class="label label-success">开放中</span>
+				<?php else: ?>
+				<span class="label label-danger">已关闭</span>
+				<?php endif; ?>
+				
+			</td>
+			<td>
+				<a href="?c=admin&a=edit_cominfo&com_id=<?php echo $cominfo['id'] ?>&industry_id=<?php echo $cominfo['industry_id'] ?>">编辑</a>
+				<?php if ($cominfo['is_active'] == 1): ?>
+				<a href="javascript:void(0);" data-role="updatelink" comid="<?php echo $cominfo['id'] ?>" isactive="<?php echo $cominfo['is_active'] ?>">设置关闭</a>
+				<?php else: ?>
+				<a href="javascript:void(0);" data-role="updatelink" comid="<?php echo $cominfo['id'] ?>" isactive="<?php echo $cominfo['is_active'] ?>">设置开启</a>
+				<?php endif; ?>
 			</td>
 		</tr>
+		<?php endforeach; ?>
 	</tbody>
 </table>
 <?php endif; ?>
 
-<?php if(g('a') == 'industryinfo'):?>
-<!-- 行业信息管理 -->
-<div class="page-header">
-	<h1>行业信息管理<small></small></h1>
-</div>
-<table class="table table-hover">
-	<thead>
-		<tr>
-			<th>行业id</th>
-			<th>行业名称</th>
-			<th>操作</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>1</td>
-			<td>IT/互联网</td>
-			<td>
-				<a href="">编辑</a>
-			</td>
-		</tr>
-	</tbody>
-</table>
+<?php if(g('a') == 'add_cominfo'):?>
+	<!-- 新增公司信息 -->
+	<div class="page-header">
+		<h1>新增公司信息<small></small></h1>
+	</div>
+	<form id="addComForm" class="form-horizontal" role="form">
+		<div class="form-group">
+			<label for="comname" class="col-sm-2 control-label">公司名称</label>
+			<div class="col-sm-5">
+				<input id="comname" name="comname" datatype="*" nullmsg="还没填呢" errormsg="填写错误" type="text" class="form-control" placeholder="公司名称">
+			</div>
+			<div class="col-sm-5 col-validtip">
+				<p class="Validform_checktip"></p>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="com_email_suffix" class="col-sm-2 control-label">公司邮箱后缀</label>
+			<div class="col-sm-5">
+				<input id="com_email_suffix" name="com_email_suffix" datatype="s" nullmsg="还没填呢" errormsg="请不要输入特殊字符" type="text" class="form-control" placeholder="后缀">
+			</div>
+			<div class="col-sm-5 col-validtip">
+				<p class="Validform_checktip"></p>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">所属行业</label>
+			<div class="col-sm-5">
+				<select name="industryid" class="form-control">
+					<?php foreach ($industryinfo_arr as $industry): ?>
+					<option value="<?php echo $industry['id'] ?>"><?php echo $industry['industry_name'] ?></option>
+					<?php endforeach; ?>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-default">提交</button>
+			</div>
+		</div>
+	</form>
 <?php endif; ?>
+
+<?php if(g('a') == 'edit_cominfo'):?>
+	<!-- 编辑公司页面 -->
+	<div class="page-header">
+		<h1>编辑公司信息<small></small></h1>
+	</div>
+	<form id="editComForm" class="form-horizontal" role="form">
+		<div class="form-group">
+			<label for="comname" class="col-sm-2 control-label">公司名称</label>
+			<div class="col-sm-5">
+				<input type="hidden" name="comid" value="<?php echo $cominfo['id'] ?>">
+				<input id="comname" name="comname" value="<?php echo $cominfo['company_name'] ?>" datatype="*" nullmsg="还没填呢" errormsg="填写错误" type="text" class="form-control" placeholder="公司名称">
+			</div>
+			<div class="col-sm-5 col-validtip">
+				<p class="Validform_checktip"></p>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="com_email_suffix" class="col-sm-2 control-label">公司邮箱后缀</label>
+			<div class="col-sm-5">
+				<input id="com_email_suffix" name="com_email_suffix" value="<?php echo $cominfo['email_suffix'] ?>" datatype="s" nullmsg="还没填呢" errormsg="请不要输入特殊字符" type="text" class="form-control" placeholder="后缀">
+			</div>
+			<div class="col-sm-5 col-validtip">
+				<p class="Validform_checktip"></p>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">所属行业</label>
+			<div class="col-sm-5">
+				<select name="industryid" class="form-control">
+					<?php foreach ($industryinfo_arr as $industry): ?>
+					<option <?php if($cominfo['industry_id'] == $industry['id']){ echo 'checked="checked"'; } ?> value="<?php echo $industry['id'] ?>"><?php echo $industry['industry_name'] ?></option>
+					<?php endforeach; ?>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-default">提交</button>
+			</div>
+		</div>
+	</form>
+<?php endif; ?>
+
+
+<?php if(g('a') == 'industryinfo'):?>
+	<!-- 行业信息管理 -->
+	<div class="page-header">
+		<h1>行业信息管理<small></small></h1>
+		<p>
+			<a href="?c=admin&a=add_industryinfo">
+				<button type="button" class="btn btn-primary">新增</button>
+			</a>
+		</p>
+	</div>
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>行业id</th>
+				<th>行业名称</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach ($industryinfo_arr as $industryinfo): ?>
+				<tr>
+					<td><?php echo $industryinfo['id'] ?></td>
+					<td><?php echo $industryinfo['industry_name'] ?></td>
+					<td>
+						<a href="?c=admin&a=edit_industryinfo&id=<?php echo $industryinfo['id'] ?>">编辑</a>
+					</td>
+				</tr>
+			<?php endforeach; ?>
+		</tbody>
+	</table>
+<?php endif; ?>
+
+<!-- 新增行业信息 -->
+<?php if(g('a') == 'add_industryinfo'):?>
+	<div class="page-header">
+		<h1>新增行业信息<small></small></h1>
+	</div>
+	<form id="addIndustryForm" class="form-horizontal" role="form">
+		<div class="form-group">
+			<label for="industryname" class="col-sm-2 control-label">行业名称</label>
+			<div class="col-sm-5">
+				<input id="industryname" name="industryname" datatype="*" nullmsg="还没填呢" errormsg="填写错误" ajaxurl="?c=admin&a=check_industryinfo" type="text" class="form-control" placeholder="行业名称">
+			</div>
+			<div class="col-sm-5 col-validtip">
+				<p class="Validform_checktip"></p>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-default">提交</button>
+			</div>
+		</div>
+	</form>
+<?php endif; ?>
+<!-- 编辑行业信息 -->
+<?php if(g('a') == 'edit_industryinfo'):?>
+	<div class="page-header">
+		<h1>编辑行业信息<small></small></h1>
+	</div>
+	<form id="editIndustryForm" class="form-horizontal" role="form">
+		<div class="form-group">
+			<label for="industryname" class="col-sm-2 control-label">行业名称</label>
+			<div class="col-sm-5">
+				<input name="industryid" value="<?php echo $id ?>" type="hidden">
+				<input id="industryname" name="industryname" datatype="*" nullmsg="还没填呢" errormsg="填写错误" type="text" class="form-control" placeholder="行业名称" value="<?php echo $industry_name ?>">
+			</div>
+			<div class="col-sm-5 col-validtip">
+				<p class="Validform_checktip"></p>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-default">提交</button>
+			</div>
+		</div>
+	</form>
+<?php endif; ?>
+

@@ -6,7 +6,8 @@
  * @version 1.0
  */
 
-@import url('../css/bootstrap.min.css');
+@import url('./lib/bootstrap.min.css');
+@import url('./lib/validform.css');
 
 html, body.index {
 	height: 100%;
@@ -71,4 +72,8 @@ body.signin {
 }
 .side-panel {
   margin-top: 40px;
+}
+
+form .col-validtip {
+  padding: 5px 5px 0 0;
 }
