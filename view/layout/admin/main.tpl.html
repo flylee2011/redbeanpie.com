@@ -179,7 +179,11 @@
 			<div class="col-sm-5">
 				<select name="industryid" class="form-control">
 					<?php foreach ($industryinfo_arr as $industry): ?>
-					<option <?php if($cominfo['industry_id'] == $industry['id']){ echo 'checked="checked"'; } ?> value="<?php echo $industry['id'] ?>"><?php echo $industry['industry_name'] ?></option>
+					<option 
+					<?php if($cominfo['industry_id'] == $industry['id']){
+						echo 'selected="selected"'; 
+					}
+					?> value="<?php echo $industry['id'] ?>"><?php echo $industry['industry_name'] ?></option>
 					<?php endforeach; ?>
 				</select>
 			</div>
