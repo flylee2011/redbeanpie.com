@@ -9,6 +9,7 @@ var elEditIndustryForm = $('#editIndustryForm');
 var elAddComForm = $('#addComForm');
 var elEditComForm = $('#editComForm');
 var elUpdateComLink = $('#cominfo-table').find('[data-role="updatelink"]');
+var elAddCodeForm = $('#addCodeForm');
 
 // 添加行业信息
 if(elAddIndustryForm.length) {
@@ -24,7 +25,7 @@ if(elAddIndustryForm.length) {
 				var status = res.status;
 				var msg = res.info;
 				if(res.status === 'y') {
-					$.Showmsg("添加成功");
+					$.Showmsg(msg);
 				}else {
 					$.Showmsg("系统繁忙");
 				}
@@ -57,10 +58,10 @@ if(elEditIndustryForm.length) {
 				var status = res.status;
 				var msg = res.info;
 				if(res.status === 'y') {
-					$.Showmsg("修改成功");
+					$.Showmsg(msg);
 					window.setTimeout(function() {
 						window.location.href = 'http://redbeanpie.com/admin.php?c=admin&a=industryinfo';
-					}, 1000);
+					}, 2000);
 				}else {
 					$.Showmsg("系统繁忙");
 				}
@@ -72,7 +73,7 @@ if(elEditIndustryForm.length) {
 			complete : function() {
 				window.setTimeout(function() {
 					$.Hidemsg();
-				}, 1000);
+				}, 2000);
 			}
 		}
 	});
@@ -93,7 +94,7 @@ if(elAddComForm.length) {
 				var status = res.status;
 				var msg = res.info;
 				if(status === 'y') {
-					$.Showmsg("添加成功");
+					$.Showmsg(msg);
 				}else {
 					$.Showmsg("系统繁忙");
 				}
@@ -128,11 +129,10 @@ if(elEditComForm.length) {
 				var status = res.status;
 				var msg = res.info;
 				if(status === 'y') {
-					$.Showmsg("修改成功");
+					$.Showmsg(msg);
 					window.setTimeout(function() {
-						$.Hidemsg();
 						window.location.href = 'http://redbeanpie.com/admin.php?c=admin&a=cominfo';
-					}, 1000);
+					}, 2000);
 				}else {
 					$.Showmsg("系统繁忙");
 				}
@@ -140,6 +140,11 @@ if(elEditComForm.length) {
 			error : function(res) {
 				console.log(res);
 				$.Showmsg("系统繁忙");
+			},
+			complete : function() {
+				window.setTimeout(function() {
+					$.Hidemsg();
+				}, 2000);
 			}
 		}
 	});
@@ -175,3 +180,46 @@ if(elUpdateComLink.length) {
 		});
 	});
 }
+
+// 添加邀请码
+if(elAddCodeForm.length) {
+	var addCodeValid = elAddCodeForm.Validform({
+		tiptype : 2,
+		ajaxPost : true,
+		postonce : true
+	});
+	addCodeValid.config({
+		tiptype : 2,
+		ajaxpost : {
+			url : '?c=admin&a=add_codeinfo_api',
+			timeout : 5000,
+			success : function(res) {
+				var status = res.status;
+				var msg = res.info;
+				if(status === 'y') {
+					$.Showmsg(msg);
+					window.setTimeout(function() {
+						window.location.href = 'http://redbeanpie.com/admin.php?c=admin&a=codeinfo';
+					}, 2000);
+				}else {
+					$.Showmsg("系统繁忙");
+				}
+			},
+			error : function(res) {
+				console.log(res);
+				$.Showmsg("系统繁忙");
+			},
+			complete : function() {
+				addCodeValid.resetForm();
+				window.setTimeout(function() {
+					$.Hidemsg();
+				}, 2000);
+			}
+		}
+	});
+}
+
+
+
+
+

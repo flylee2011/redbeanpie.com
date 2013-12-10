@@ -91,7 +91,6 @@
 				<?php else: ?>
 				<span class="label label-danger">已关闭</span>
 				<?php endif; ?>
-				
 			</td>
 			<td>
 				<a href="?c=admin&a=edit_cominfo&com_id=<?php echo $cominfo['id'] ?>&industry_id=<?php echo $cominfo['industry_id'] ?>">编辑</a>
@@ -274,4 +273,50 @@
 		</div>
 	</form>
 <?php endif; ?>
+
+<?php if(g('a') == 'codeinfo'):?>
+	<div class="page-header">
+		<h1>邀请码管理<small></small></h1>
+		<p>
+			<form id="addCodeForm" class="form-horizontal" role="form">
+				<div class="form-group">
+					<div class="input-group col-sm-3">
+						<input name="codecount" type="text" datatype="n1-2" nullmsg="还没填呢" errormsg="填写错误" class="form-control" placeholder="请输入个数">
+						<span class="input-group-btn">
+							<button class="btn btn-primary" type="submit">生成</button>
+						</span>
+					</div>
+				</div>	
+			</form>
+		</p>
+	</div>
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>邀请码id</th>
+				<th>邀请码</th>
+				<th>状态</th>
+				<th>创建时间</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach ($codeinfo_arr as $codeinfo): ?>
+				<tr>
+					<td><?php echo $codeinfo['id'] ?></td>
+					<td><?php echo $codeinfo['code'] ?></td>
+					<td>
+						<?php if ($codeinfo['is_active'] == 1): ?>
+						<span class="label label-success">可用</span>
+						<?php else: ?>
+						<span class="label label-danger">已使用</span>
+						<?php endif; ?>
+					</td>
+					<td><?php echo $codeinfo['create_time'] ?></td>
+				</tr>
+			<?php endforeach; ?>
+		</tbody>
+	</table>
+<?php endif; ?>
+
+
 

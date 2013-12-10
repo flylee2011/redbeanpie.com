@@ -5,6 +5,7 @@
 		<a href="?c=admin&a=preuser" class="list-group-item">预注册用户</a>
 		<a href="?c=admin&a=cominfo" class="list-group-item">公司信息</a>
 		<a href="?c=admin&a=industryinfo" class="list-group-item">行业信息</a>
+		<a href="?c=admin&a=codeinfo" class="list-group-item">邀请码管理</a>
 	</div>
 	<?php endif; ?>
 	
@@ -37,6 +38,13 @@
 	<div class="list-group">
 		<a href="?c=admin&a=cominfo" class="list-group-item">公司信息</a>
 		<a href="?c=admin&a=industryinfo" class="list-group-item active">行业信息</a>
+	</div>
+	<?php endif; ?>
+
+	<?php if(g('a') == 'codeinfo'):?>
+	<div class="panel-heading">系统管理</div>
+	<div class="list-group">
+		<a href="?c=admin&a=codeinfo" class="list-group-item active">邀请码管理</a>
 	</div>
 	<?php endif; ?>
 

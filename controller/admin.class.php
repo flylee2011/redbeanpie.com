@@ -268,6 +268,44 @@ class adminController extends coreController
 		echo json_encode($resobj);
 
 	}
+
+	// 邀请码管理
+	function codeinfo() {
+		$sql = 'SELECT `id`, `code`, `is_active`, `create_time` FROM `rbp_codeinfo`';
+
+		$data['title'] = 'RedBeanPie管理后台';
+		$data['codeinfo_arr'] = get_data($sql);
+		render($data, 'admin', 'index');
+	}
+	// 邀请码生成接口
+	function add_codeinfo_api() {
+		$count = intval(v('codecount'));
+		$rescount = $count;
+		$chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+		$resobj = array();
+		$resobj['info'] = '成功添加' . $count . '个邀请码';
+		$resobj['status'] = 'y';
+
+		for($i=0;$i<$count;$i++) {
+			$code = "";
+			for($j=0;$j<10;$j++) {
+				$code .= $chars[mt_rand(0, strlen($chars)-1)];
+			}
+			$sql = 'INSERT INTO `rbp_codeinfo`(`code`) VALUES ("'. $code .'")';
+
+			run_sql($sql);
+
+			if(db_errno() != 0) {
+				$rescount = $rescount - 1;
+				$resobj['info'] = '成功添加' . $rescount . '个邀请码';
+				$resobj['status'] = 'y';
+				continue;
+			}
+
+		}	
+		echo json_encode($resobj);
+	}
 	
 	
 }
