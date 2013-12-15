@@ -1,0 +1,89 @@
+/*
+ * coming soon页面
+ */
+body, h1, h2, h3, h4, h5, h6 {
+    font-family: '微软雅黑';
+}
+.rp-come {
+    background-color: #dc4a1d;
+}
+.top-line {
+    background-color: #000;
+    height: 10px;
+}
+/* main */
+.main-wrap {
+    background: #ed8b4e url(../images/main_bg.jpg) no-repeat;
+    filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+    -moz-background-size:100% 100%;
+    background-size:100% 100%;
+}
+.main-wrap .icon-logo {
+	position: absolute;
+	left: 20%;
+}
+.main-container {
+	padding-top: 140px;
+}
+.main-container .main-row {
+    text-align: center;
+}
+.main-container .main-row button {
+    margin: 20px 0 45px 0;
+    background-color: #1b1b1b;
+    padding: 20px 60px;
+    border-radius: 30px;
+    border-color: #ff7237;
+}
+.main-container .main-row button:active {
+	color: #f00;
+	text-decoration: none;
+}
+.main-container .main-row button:hover {
+	background-color: #333;
+}
+.main-container .main-row h4 {
+    margin-top: 90px;
+}
+.main-row .title {
+	padding-left: 50px;
+}
+.main-row .title, .main-row .sub-title {
+	color: #fff;
+}
+
+/* contact */
+.contact-wrap {
+	background-color: #fff;
+}
+.contact-row .thumbnail {
+	border: 0;
+	text-align: center;
+}
+.contact-row .thumbnail img {
+	width: 100px;
+	height: 100px;
+}
+.contact-row .thumbnail a img:hover {
+	opacity: 0.8;
+}
+
+/* footer */
+.footer-wrap {
+	color: #fff;
+	text-align: center;
+}
+
+/* bookform */
+.form-container {
+    width: 540px;
+}
+.form-container .submit-group {
+    margin: 20px 0 0 0;
+}
+.form-container .col-tip {
+    padding: 5px 0 0 0;
+}
+.form-container .formRes {
+    text-align: center;
+}

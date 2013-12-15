@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /**
- * @fileoverview coming soon页面
+ * @fileoverview 页面引入主文件
  * @authors yifei (yifei.li@redbeanpie.com)
  * @version 0.1
  * @date    2013-11-04 22:25:44
@@ -11,136 +11,10 @@
 	src: local('时尚中黑简体');
 	src: url('font/trends.ttf'), url('font/trends.eot');
 }*/
-body, h1, h2, h3, h4, h5, h6 {
-	font-family: '微软雅黑';
-}
 
-.rp-come {
-    background-color: #dc4a1d;
-}
-.top-line {
-    background-color: #000;
-    height: 10px;
-}
-/* main */
-.main-wrap {
-    background: #ed8b4e url(../images/main_bg.jpg) no-repeat;
-    filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
-    -moz-background-size:100% 100%;
-    background-size:100% 100%;
-}
-.main-wrap .icon-logo {
-	position: absolute;
-	left: 20%;
-}
-.main-container {
-	padding-top: 140px;
-}
-.main-container .main-row {
-    text-align: center;
-}
-.main-container .main-row button {
-    margin: 20px 0 45px 0;
-    background-color: #1b1b1b;
-    padding: 20px 60px;
-    border-radius: 30px;
-    border-color: #ff7237;
-}
-.main-container .main-row button:active {
-	color: #f00;
-	text-decoration: none;
-}
-.main-container .main-row button:hover {
-	background-color: #333;
-}
-.main-container .main-row h4 {
-    margin-top: 90px;
-}
-.main-row .title {
-	padding-left: 50px;
-}
-.main-row .title, .main-row .sub-title {
-	color: #fff;
-}
+@import url('./lib/bootstrap.min.css');
+@import url('./lib/validform.css');
 
-/* contact */
-.contact-wrap {
-	background-color: #fff;
-}
-.contact-row .thumbnail {
-	border: 0;
-	text-align: center;
-}
-.contact-row .thumbnail img {
-	width: 100px;
-	height: 100px;
-}
-.contact-row .thumbnail a img:hover {
-	opacity: 0.8;
-}
-
-/* footer */
-.footer-wrap {
-	color: #fff;
-	text-align: center;
-}
+@import url('./module/guest.css');
 
 
-
-/* bookform */
-.form-container {
-    width: 540px;
-}
-/*.form-wrap {
-    max-width: 604px;
-    margin: 0 auto;
-    margin-top: 10px;
-    background: url('http://static.redbeanpie.com/images/formbg.png') no-repeat;
-    padding: 40px 20px 0 20px;
-    height: 215px;
-}*/
-.form-container .submit-group {
-    margin: 20px 0 0 0;
-}
-.form-container .col-tip {
-    padding: 5px 0 0 0;
-}
-.form-container .formRes {
-    text-align: center;
-}
-
-/*==========以下部分是Validform必须的===========*/
-.Validform_checktip{
-    /*margin-left:8px;*/
-    line-height:20px;
-    height:20px;
-    overflow:hidden;
-    color:#999;
-    font-size:12px;
-    margin: 0;
-}
-.Validform_right{
-    color:#71b83d;
-    padding-left:20px;
-    background:url(../images/right.png) no-repeat left center;
-}
-.Validform_wrong{
-    color:red;
-    padding-left:20px;
-    white-space:nowrap;
-    background:url(../images/error.png) no-repeat left center;
-}
-.Validform_loading{
-    padding-left:20px;
-    background:url(../images/onLoad.gif) no-repeat left center;
-}
-.Validform_error{
-    background-color:#ffe7e7;
-}
-#Validform_msg{color:#7d8289; font: 12px/1.5 tahoma, arial, \5b8b\4f53, sans-serif; width:280px; -webkit-box-shadow:2px 2px 3px #aaa; -moz-box-shadow:2px 2px 3px #aaa; background:#fff; position:absolute; top:0px; right:50px; z-index:99999; display:none;filter: progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#999999'); box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);}
-#Validform_msg .iframe{position:absolute; left:0px; top:-1px; z-index:-1;}
-#Validform_msg .Validform_title{line-height:25px; height:25px; text-align:left; font-weight:bold; padding:0 8px; color:#fff; position:relative; background-color:#999;
-background: -moz-linear-gradient(top, #999, #666 100%); background: -webkit-gradient(linear, 0 0, 0 100%, from(#999), to(#666)); filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#999999', endColorstr='#666666');}
-#Validform_msg a.Validform_close:link,#Validform_msg a.Validform_close:visited{line-height:22px; position:absolute; right:8px; top:0px; color:#fff; text-decoration:none;}
-#Validform_msg a.Validform_close:hover{color:#ccc;}
-#Validform_msg .Validform_info{padding:8px;border:1px solid #bbb; border-top:none; text-align:left;}

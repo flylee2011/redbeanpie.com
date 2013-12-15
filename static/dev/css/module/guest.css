@@ -1,0 +1,108 @@
+/*** 布局 ***/
+html, body {
+	height: 100%;
+}
+.wrap {
+	min-height: 100%;
+	height: auto;
+	margin: 0 auto -60px;
+	padding: 0 0 60px;
+}
+.wrap > .container {
+	padding: 80px 15px 0;
+}
+.footer {
+	height: 60px;
+	background-color: #fff;
+}
+.footer a {
+	color: #999;
+}
+.footer .container {
+	padding-top: 20px;
+	text-align: center;
+}
+
+/*** 导航 ***/
+.navbar-default {
+	background-color: #1fbba6;
+}
+.navbar-brand {
+	padding: 0;
+}
+.navbar-btn-signin, .navbar-btn-signup {
+	background-color: #148e7e;
+	color: #fff;
+	margin-left: 15px;
+}
+.navbar-btn-signin:hover, .navbar-btn-signup:hover {
+	background-color: #148e7e;
+}
+
+
+/*** 轮播 ***/
+.carousel-wrap {
+	padding-top: 51px;
+}
+/* Carousel base class */
+.carousel {
+  height: 340px;
+}
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+  z-index: 10;
+}
+
+/* Declare heights because of positioning of img element */
+.carousel .item {
+  height: 340px;
+  background-color: #777;
+}
+.carousel-inner > .item > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  height: 340px;
+}
+.carousel-indicators li {
+	background-color: #ccc;
+}
+.carousel-indicators .active{
+	background-color: #1fbba6;
+}
+
+.rbp-callout {
+	border-left: 10px solid #1fbba6;
+}
+
+/*** 注册 ***/
+
+/*** 登录 ***/
+.btn-signin, .btn-signin:hover, .btn-signup, .btn-signup:hover {
+	background-color: #fb484c;
+	border-color: #fb484c;
+	padding: 13px 70px;
+	color: #fff;
+	font-size: 16px;
+	margin-bottom: 8px;
+}
+.nav-tabs {
+	border-bottom: 1px solid #1fbba6;
+}
+.nav-tabs>li {
+	margin-left: 10px;
+}
+.nav>li>a {
+	padding: 10px 40px;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+	color: #1fbba6;
+	border: 1px solid #1fbba6;
+	border-bottom-color: transparent;
+}
+
+
+
+
