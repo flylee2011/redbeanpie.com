@@ -1,80 +1,136 @@
-<div class="container container-signin">
+<div class="container">
 	<div class="row">
 		<div class="col-md-8">
 			<ul class="nav nav-tabs">
-				<li class="active"><a href="?c=guest&a=signup">名企员工绿色通道</a></li>
-				<li><a href="?c=guest&a=signup">邀请码注册</a></li>
+				<li class="active">
+					<a href="#staff" data-toggle="tab">名企员工绿色通道</a>
+				</li>
+				<li>
+					<a href="#code" data-toggle="tab">邀请码注册</a>
+				</li>
 			</ul>
 		</div>
 	</div>
 	<br>
 	<br>
-	<div class="row">
-		<div class="col-md-4">
-			<form id="signup-staff-form" role="form">
+	<div class="tab-content">
+		<!-- 公司邮箱注册 -->
+		<div id="staff" class="row col-sm-5 tab-pane fade active in">
+			<form id="signup-staff-form" class="form-horizontal" role="form">
 				<div class="form-group">
-					<label class="radio-inline">
-						<input type="radio" id="inlineCheckbox1" name="genderRadios" value="option1"> 男
-					</label>
-					<label class="radio-inline">
-						<input type="radio" id="inlineCheckbox2" name="genderRadios" value="option1"> 女
-					</label>
-				</div>
-				<div class="form-group">
-					<select class="form-control">
-						<option value="">选择公司名字</option>
-						<option value="">联想集团</option>
-						<option value="">新浪</option>
-					</select>
-
-					<label class="checkbox-inline">
-						<input type="checkbox" id="inlineCheckbox1" value="option1"> 隐藏公司名
-					</label>
-				</div>
-				<div class="form-group">
-					<div class="input-group">
-						<input type="text" class="form-control">
-						<span class="input-group-addon">@sina.com.cn</span>
+					<div class="col-sm-8">
+						<label class="radio-inline">
+							<input type="radio" name="gender" value="0" checked="checked"> 男
+						</label>
+						<label class="radio-inline">
+							<input type="radio" name="gender" value="1"> 女
+						</label>
+					</div>
+					<div class="col-sm-4 col-validtip">
+						<p class="Validform_checktip"></p>
 					</div>
 				</div>
 				<div class="form-group">
-					<input id="inputEmail" type="email" class="form-control" placeholder="用户名">
+					<div class="col-sm-8">
+						<input type="hidden" name="company_name" data-role="company_name" value="<?php echo $cominfo_arr[0]['company_name'] ?>">
+						<select name="company_select" datatype="*" error="还没填呢" nullmsg="还没填呢" class="form-control">
+							<!-- 读取公司信息 -->
+							<?php foreach ($cominfo_arr as $cominfo): ?>
+								<option suffix="<?php echo $cominfo['email_suffix'] ?>" value="<?php echo $cominfo['id'] ?>"><?php echo $cominfo['company_name'] ?></option>
+							<?php endforeach; ?>
+						</select>
+						<label class="checkbox-inline">
+							<input type="checkbox" name="company_visible" value="1"> 隐藏公司名
+						</label>
+					</div>
+					<div class="col-sm-4 col-validtip">
+						<p class="Validform_checktip"></p>
+					</div>
 				</div>
 				<div class="form-group">
-					<input id="inputEmail" type="password" class="form-control" placeholder="密码">
+					<div class="input-group col-sm-8">
+						<input type="text" name="com_email_prefix" datatype="*" errormsg="请输入正确邮箱" nullmsg="还没填呢" class="form-control" placeholder="公司邮箱前缀">
+						<input type="hidden" name="com_email_suffix" value="<?php echo $cominfo_arr[0]['email_suffix'] ?>">
+						<span class="input-group-addon" data-role="com_email_suffix">@lenove.com</span>
+					</div>
+					<div class="col-sm-4 col-validtip">
+						<p class="Validform_checktip"></p>
+					</div>
 				</div>
 				<div class="form-group">
-					<input id="inputEmail" type="password" class="form-control" placeholder="确认密码">
+					<div class="col-sm-8">
+						<input type="email" name="email" datatype="e" errormsg="请输入正确邮箱" nullmsg="还没填呢" class="form-control" placeholder="登录邮箱">
+					</div>
+					<div class="col-sm-4 col-validtip">
+						<p class="Validform_checktip"></p>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-8">
+						<input type="password" name="password" datatype="*6-16" errormsg="密码6-16位" nullmsg="还没填呢" class="form-control" placeholder="密码">
+					</div>
+					<div class="col-sm-4 col-validtip">
+						<p class="Validform_checktip"></p>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-8">
+						<input type="password" name="password2" recheck="password" datatype="*6-16" errormsg="您两次输入的密码不一致!" nullmsg="还没填呢" class="form-control" placeholder="确认密码">
+					</div>
+					<div class="col-sm-4 col-validtip">
+						<p class="Validform_checktip"></p>
+					</div>
 				</div>
 
   				<button type="submit" class="btn btn-default btn-signup">注册</button>
 			</form>
 		</div>
-	</div>
 
-	<div class="row">
-		<div class="col-md-4">
-			<form id="signup-code-form" role="form">
+		<!-- 邀请码注册 -->
+		<div id="code" class="row col-sm-5 tab-pane fade">
+			<form id="signup-code-form" class="form-horizontal" role="form">
 				<div class="form-group">
-					<label class="radio-inline">
-						<input type="radio" id="inlineCheckbox1" name="genderRadios" value="option1"> 男
-					</label>
-					<label class="radio-inline">
-						<input type="radio" id="inlineCheckbox2" name="genderRadios" value="option1"> 女
-					</label>
+					<div class="col-sm-8">
+						<label class="radio-inline">
+							<input type="radio" name="genderRadios" value="0" checked="checked"> 男
+						</label>
+						<label class="radio-inline">
+							<input type="radio" name="genderRadios" value="1"> 女
+						</label>
+					</div>
 				</div>
 				<div class="form-group">
-					<input id="inputEmail" type="email" class="form-control" placeholder="邀请码">
-					<span class="help-block">没有邀请码？赶快去<a href="">申请</a></span>
+					<div class="col-sm-8">
+						<input type="text" name="code" datatype="*10-10" errormsg="邀请码为10位" nullmsg="还没填呢" class="form-control" placeholder="邀请码">
+						<span class="help-block">没有邀请码？赶快去<a target="_blank" href="">申请</a></span>
+					</div>
+					<div class="col-sm-4 col-validtip">
+						<p class="Validform_checktip"></p>
+					</div>
 				</div>
 				<div class="form-group">
-					<input id="inputEmail" type="email" class="form-control" placeholder="个人邮箱">
+					<div class="col-sm-8">
+						<input type="email" name="email" datatype="e" errormsg="请输入正确邮箱" nullmsg="还没填呢" class="form-control" placeholder="登录邮箱">
+					</div>
+					<div class="col-sm-4 col-validtip">
+						<p class="Validform_checktip"></p>
+					</div>
 				</div>
 				<div class="form-group">
-					<input id="inputEmail" type="password" class="form-control" placeholder="密码">
+					<div class="col-sm-8">
+						<input type="password" name="password" datatype="*6-16" errormsg="密码6-16位" nullmsg="还没填呢" class="form-control" placeholder="密码">
+					</div>
+					<div class="col-sm-4 col-validtip">
+						<p class="Validform_checktip"></p>
+					</div>
 				</div>
 				<div class="form-group">
-					<input id="inputEmail" type="password" class="form-control" placeholder="确认密码">
+					<div class="col-sm-8">
+						<input type="password" name="password2" recheck="password" datatype="*6-16" errormsg="您两次输入的密码不一致!" nullmsg="还没填呢" class="form-control" placeholder="确认密码">
+					</div>
+					<div class="col-sm-4 col-validtip">
+						<p class="Validform_checktip"></p>
+					</div>
 				</div>
 
   				<button type="submit" class="btn btn-default btn-signup">注册</button>

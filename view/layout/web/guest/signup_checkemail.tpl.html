@@ -1,0 +1,76 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+		<?php if($_SESSION['user_type'] === 1): ?>
+
+			<?php if($_SESSION['level'] > 0): ?>
+			<div class="panel panel-danger">
+				<div class="panel-heading">
+					<h2 class="panel-title">您还未通过邮箱验证</h2>
+				</div>
+				<div class="panel-body">
+					<p>邮箱验证链接已经发送到您的公司邮箱，<?php echo $_SESSION['com_email'] ?>，验证后即可登录</p>
+					<p>没收到？<a id="sendCheckMail" emailadd="<?php echo $_SESSION['com_email'] ?>" href="javascript:void(0);">再发送一次</a></p>
+					<p>
+						<a href="?c=guest">
+							<button type="button" class="btn btn-primary">返回首页</button>
+						</a>
+					</p>
+				</div>
+			</div>
+			<?php else: ?>
+			<div class="panel panel-success">
+				<div class="panel-heading">
+					<h2 class="panel-title">邮箱验证链接已经发送到您的公司邮箱</h2>
+				</div>
+				<div class="panel-body">
+					<p><?php echo $_SESSION['com_email'] ?> 验证后即可登录</p>
+					<p>没收到？<a id="sendCheckMail" emailadd="<?php echo $_SESSION['com_email'] ?>" href="javascript:void(0);">再发送一次</a></p>
+					<p>
+						<a href="?c=guest">
+							<button type="button" class="btn btn-primary">返回首页</button>
+						</a>
+					</p>
+				</div>
+			</div>
+			<?php endif; ?>
+
+		<?php elseif($_SESSION['user_type'] === 2): ?>
+			
+			<?php if($_SESSION['level'] > 0): ?>
+			<div class="panel panel-danger">
+				<div class="panel-heading">
+					<h2 class="panel-title">您还未通过邮箱验证</h2>
+				</div>
+				<div class="panel-body">
+					<p>邮箱验证链接已经发送到您的个人邮箱，<?php echo $_SESSION['email'] ?>，验证后即可登录</p>
+					<p>没收到？<a id="sendCheckMail" emailadd="<?php echo $_SESSION['email'] ?>" href="javascript:void(0);">再发送一次</a></p>
+					<p>
+						<a href="?c=guest">
+							<button type="button" class="btn btn-primary">返回首页</button>
+						</a>
+					</p>
+				</div>
+			</div>
+			<?php else: ?>
+			<div class="panel panel-success">
+				<div class="panel-heading">
+					<h2 class="panel-title">邮箱验证链接已经发送到您的个人邮箱</h2>
+				</div>
+				<div class="panel-body">
+					<p><?php echo $_SESSION['email'] ?> 验证后即可登录</p>
+					<p>没收到？<a id="sendCheckMail" emailadd="<?php echo $_SESSION['email'] ?>" href="javascript:void(0);">再发送一次</a></p>
+					<p>
+						<a href="?c=guest">
+							<button type="button" class="btn btn-primary">返回首页</button>
+						</a>
+					</p>
+				</div>
+			</div>
+			<?php endif; ?>
+		<?php endif; ?>
+		</div>
+	</div>
+	
+	
+</div>
