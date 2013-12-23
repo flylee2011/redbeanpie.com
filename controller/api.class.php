@@ -199,7 +199,7 @@ class apiController extends appController {
             return self::send_error( API_DB_ERROR_CODE, '数据库错误' );
         }
 
-        $data = ['success'];
+        $data = array('');
 		session_set_cookie_params( c('session_time') );
 		@session_start();
 		$com_email = v('com_email_prefix') . '@' . v('com_email_suffix');
@@ -252,7 +252,7 @@ class apiController extends appController {
 			$sql_code = "UPDATE `rbp_codeinfo` SET `is_active`=0 WHERE `code`='" . v('code') ."'";
 			run_sql($sql_code);
 
-			$data = ['success'];
+			$data = array('');
 			session_set_cookie_params( c('session_time') );
 			@session_start();
 			$_SESSION['email'] = v('email');
