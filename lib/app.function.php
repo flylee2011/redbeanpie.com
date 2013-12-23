@@ -88,7 +88,7 @@
 	{
 	    if( !isset( $GLOBALS['LP_MAILER'] ) )
 	    {
-	        include_once( AROOT . 'lib' . DS . 'phpmailer.class.php' );
+	        include_once( AROOT . 'lib' . DS . 'class.phpmailer.php' );
 	        $GLOBALS['LP_MAILER'] = new PHPMailer();
 	    }
 
