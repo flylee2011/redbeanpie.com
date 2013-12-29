@@ -1,0 +1,141 @@
+<!-- 个人中心 -->
+<div class="container">
+	<div class="row row-profile-header">
+		<div class="col-md-3">
+			<div id="avatar" class="profile-avatar-box center-block">
+				<img src="/static/dev/images/avatar_demo.jpg">
+				<a href="javascript:;">修改头像</a>
+			</div>
+		</div>
+		<div class="col-md-9">
+			<div class="baseinfo">
+				<h3 class="nick-title">王纯子纯子1234</h3>
+				<p>18岁-女生-北京市海淀区</p>
+				<p class="text-muted">xxxxxx公司-销售经理</p>
+				<p class="text-muted">北京大学-硕士</p>
+				<div class="btn-wrap">
+					<button type="button" class="btn btn-default">收藏</button>
+					<button type="button" class="btn btn-default">发消息</button>
+				</div>
+				<div class="well">
+					<h4 class="album-title">她的相册</h4>
+					<div class="album-list clearfix">
+						<ul>
+							<li>
+								<a href=""><img class="img-responsive" src="/static/dev/images/avatar_demo.jpg"></a>
+							</li>
+							<li>
+								<img class="img-responsive" src="/static/dev/images/avatar_demo.jpg">
+							</li>
+							<li>
+								<img class="img-responsive" src="/static/dev/images/avatar_demo.jpg">
+							</li>
+							<li>
+								<img class="img-responsive" src="/static/dev/images/avatar_demo.jpg">
+							</li>
+							<li>
+								<img class="img-responsive" src="/static/dev/images/avatar_demo.jpg">
+							</li>
+							<li>
+								<img class="img-responsive" src="/static/dev/images/avatar_demo.jpg">
+							</li>
+							<li>
+								<img class="img-responsive" src="/static/dev/images/avatar_demo.jpg">
+							</li>
+							<li class="add-photo">
+								<span class="glyphicon glyphicon-plus"></span>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="profile-main-box">
+			<div class="col-md-3">
+				<div class="sideinfo-box center-block">
+					<div class="sideinfo-header clearfix">
+						<span class="title pull-left">个人信息</span>
+						<a href="" class="pull-right">修改</a>
+					</div>
+					<div class="sideinfo-content clearfix">
+						<p class="clearfix">
+							<span class="pull-left">昵称</span>
+							<span class="pull-right">xxxxxxx</span>
+						</p>
+						<p class="clearfix">
+							<span class="pull-left">昵称</span>
+							<span class="pull-right">xxxxxxx</span>
+						</p>
+						<p class="clearfix">
+							<span class="pull-left">昵称</span>
+							<span class="pull-right">xxxxxxx</span>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-9">
+				<ul class="nav nav-tabs nav-justified nav-tabs-profile">
+					<li class="active">
+						<a data-toggle="tab" href="#aboutme">关于我</a>
+					</li>
+					<li>
+						<a data-toggle="tab" href="#party">派对</a>
+					</li>
+					<li>
+						<a data-toggle="tab" href="#dating">约会</a>
+					</li>
+				</ul>
+				<div class="tab-content">
+				<!-- 关于我 -->
+				<div id="aboutme" class="aboutme-info-box tab-pane fade active in">
+					<div class="aboutme-info-title clearfix">
+						<span class="pull-left"><strong>自我介绍</strong></span>
+						<a href="javascript:;" class="pull-right">修改</a>
+					</div>
+					<div class="aboutme-info-content">
+						<p>自我介绍自我介绍自我介绍自我介绍自我介绍自我介绍自我介绍自我介绍自我介绍自我介绍</p>
+					</div>
+					<div class="aboutme-info-title clearfix">
+						<span class="pull-left"><strong>自我介绍</strong></span>
+						<a href="javascript:;" class="pull-right">修改</a>
+					</div>
+					<div class="aboutme-info-content">
+						<p>自我介绍自我介绍自我介绍自我介绍自我介绍自我介绍自我介绍自我介绍自我介绍自我介绍</p>
+					</div>
+					<div class="aboutme-info-title clearfix">
+						<span class="pull-left"><strong>自我介绍</strong></span>
+						<a class="pull-right">修改</a>
+					</div>
+					<div href="javascript:;" class="aboutme-info-content">
+						<p>自我介绍自我介绍自我介绍自我介绍自我介绍自我介绍自我介绍自我介绍自我介绍自我介绍</p>
+					</div>
+				</div>
+				<!-- 派对 -->
+				<div id="party" class="party-info-box tab-pane fade"></div>
+				<!-- 约会 -->
+				<div id="dating" class="dating-info-box tab-pane fade"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 上传头像浮层 -->
+	<div id="avatarModal" class="modal fade avatar-modal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">头像上传</h4>
+					<button id="upload-from-album">从相册中选择</button>
+				</div>
+				<div class="modal-body">
+					<div id="xiuxiuContent"></div>
+				</div>
+			</div>		
+		</div>
+	</div>
+
+
+</div>

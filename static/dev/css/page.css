@@ -18,5 +18,7 @@
 @import url('./module/common.css');
 @import url('./module/guest.css');
 @import url('./module/jcarousel.responsive.css');
+/*** 个人主页 ***/
+@import url('./module/profile.css');
 
 

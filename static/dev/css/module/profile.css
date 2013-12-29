@@ -1,0 +1,122 @@
+/*头像*/
+.profile-avatar-box, .sideinfo-box {
+	width: 219px;
+}
+.profile-avatar-box {
+	position: relative;
+	text-align: center;
+}
+.profile-avatar-box a {
+	position: absolute;
+	right: 5px;
+	top: 5px;
+	background-color: #000;
+	color: #fff;
+	padding: 5px;
+}
+
+.row-profile-header, .row-profile-main {
+	margin-bottom: 20px;
+}
+
+.row-profile-main {
+	background-color: #eee;
+}
+
+.baseinfo {
+	position: relative;
+}
+.baseinfo .btn-wrap {
+	position: absolute;
+	right: 0;
+	top: 60px;
+}
+.baseinfo .nick-title {
+	margin: 0;
+}
+.baseinfo .text-muted {
+	margin-bottom: 0;
+}
+.baseinfo .well {
+	margin: 5px 0 0 0;
+	padding: 10px;
+}
+.baseinfo .well .album-title {
+	margin: 0 0 5px 0;
+	color: #149987;
+}
+
+.album-list {
+	width: 100%;
+	overflow-x: scroll;
+}
+.album-list ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	width: 20000px;
+}
+.album-list ul li {
+	width: 73px;
+	float: left;
+	margin-right: 20px;
+}
+.album-list .add-photo {
+	position: relative;
+	height: 73px;
+	background-color: #d5d5d5;
+}
+.album-list .add-photo .glyphicon {
+	position: absolute;
+	font-size: 20px;
+	left: 35%;
+	top: 35%;
+	color: #b8b8b8;
+}
+
+
+.sideinfo-header {
+	margin: 15px 0 10px 0;
+	border-bottom: 3px solid #1fbba6;
+}
+.sideinfo-content p {
+	margin: 10px 0;
+	border-bottom: 2px solid #dbdbdb;
+
+}
+
+.nav-tabs-profile {
+	margin-top: 10px;
+}
+.nav-tabs-profile>li.active>a, .nav-tabs-profile>li.active>a:hover, .nav-tabs-profile>li.active>a:focus {
+	background-color: #f0f0f0;
+	color: #555;
+}
+.nav-tabs.nav-justified>.active>a, .nav-tabs.nav-justified>.active>a:hover, .nav-tabs.nav-justified>.active>a:focus {
+	border-bottom-color: #f0f0f0;
+}
+
+.aboutme-info-box {
+	background-color: #f0f0f0;
+	padding: 20px 30px;
+	border: 1px solid #ddd;
+	border-top: 0;
+}
+.aboutme-info-box .aboutme-info-title {
+	margin-bottom: 5px;
+}
+.aboutme-info-box .aboutme-info-title span {
+	color: #1fbba6;
+	font-size: 16px;
+}
+
+.avatar-modal .modal-content {
+	width: 660px;
+}
+.avatar-modal .modal-body {
+	width: 660px;
+	height: 440px;
+}
+
+
+
