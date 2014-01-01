@@ -14,6 +14,9 @@
 	color: #fff;
 	padding: 5px;
 }
+.profile-avatar-box img {
+	width: 219px;
+}
 
 .row-profile-header, .row-profile-main {
 	margin-bottom: 20px;
@@ -23,25 +26,25 @@
 	background-color: #eee;
 }
 
-.baseinfo {
+.baseinfo-box {
 	position: relative;
 }
-.baseinfo .btn-wrap {
+.baseinfo-box .btn-wrap {
 	position: absolute;
 	right: 0;
 	top: 60px;
 }
-.baseinfo .nick-title {
+.baseinfo-box .nick-title {
 	margin: 0;
 }
-.baseinfo .text-muted {
+.baseinfo-box .text-muted {
 	margin-bottom: 0;
 }
-.baseinfo .well {
+.baseinfo-box .well {
 	margin: 5px 0 0 0;
 	padding: 10px;
 }
-.baseinfo .well .album-title {
+.baseinfo-box .well .album-title {
 	margin: 0 0 5px 0;
 	color: #149987;
 }
@@ -54,7 +57,8 @@
 	list-style: none;
 	margin: 0;
 	padding: 0;
-	width: 20000px;
+	width: 800px;
+	overflow: hidden;
 }
 .album-list ul li {
 	width: 73px;
@@ -65,6 +69,7 @@
 	position: relative;
 	height: 73px;
 	background-color: #d5d5d5;
+	cursor: pointer;
 }
 .album-list .add-photo .glyphicon {
 	position: absolute;
@@ -110,12 +115,24 @@
 	font-size: 16px;
 }
 
-.avatar-modal .modal-content {
+.modal-avatar .modal-content {
 	width: 660px;
 }
-.avatar-modal .modal-body {
+.modal-avatar .modal-body {
 	width: 660px;
 	height: 440px;
+}
+
+.modal-album .btn-submit {
+	margin-top: 20px;
+	font-size: 20px;
+	padding: 5px 40px;
+}
+.modal-album .description {
+	margin-top: 10px;
+}
+.modal-album .upload-img-box .uploadify {
+	margin: 50% 0 0 20%;
 }
 
 

@@ -60,5 +60,44 @@ function update_email_status($email, $type)
 	return $ret;
 }
 
+// 添加相册信息
+function add_album_info($img_url, $cate_id, $user_id, $description = '')
+{
+	$img_url = s($img_url);
+	$cate_id = intval($cate_id);
+	$user_id = intval($user_id);
+	$description = s($description);
+
+	$sql = "INSERT INTO `rbp_album_info` ( `img_url` , `cate_id` , `user_id`, `description` ) VALUES ( '" . s($img_url) . "' , '" . intval( $cate_id ) . "', '" . intval( $user_id ) . "', '" . s($description) . "' )";
+	
+	run_sql($sql);
+	if(db_errno() != 0) {
+		return false;
+	}
+	$lid = last_id();
+
+	return $lid;
+}
+
+// 更新用户头像
+function update_user_avatar($uid, $avatar_url)
+{
+	$uid = intval($uid);
+	$avatar_url = s($avatar_url);
+
+	$sql = "UPDATE `rbp_userinfo` SET `avatar_url`='" . $avatar_url . "' WHERE `id`=" . $uid;
+
+	run_sql($sql);
+	if(db_errno() != 0) {
+		return false;
+	}
+	return true;
+}
+
+
+// 根据用户uid，获取用户所有信息
+
+// 根据用户uid，获取相册信息
+
 ?>
 

@@ -35,6 +35,12 @@
 		return $_SESSION['info_complete'] === 1;
 	}
 
+	// 是否是登录用户查看自己的个人主页
+	function is_login_profile()
+	{
+		return intval(v('uid')) === intval($_SESSION['uid']);
+	}
+
 	// 通用接口向前端返回json数据
 	function send_json_res($code, $msg, $data)
 	{
@@ -46,7 +52,7 @@
 		return json_encode( $obj );
 	}
 
-	// 请求api接口
+	// 请求api controller的方法
 	function send_request( $action , $param , $token = null )
 	{
 		require_once( AROOT . 'controller' . DS . 'api.class.php' );
@@ -122,6 +128,31 @@
 	        return true;
 	    }
 	}
+
+	// 创建支持多级目录
+	function  mkpath( $mkpath , $mode =0777){
+ 
+      $path_arr = explode ( '/' , $mkpath );
+ 
+      foreach  ( $path_arr   as   $value ){
+ 
+              if (! empty  ( $value )){
+ 
+                  if ( empty  ( $path )) $path = $value ;
+ 
+                  else   $path .= '/' . $value ;
+ 
+                  is_dir ( $path )  or   mkdir ( $path , $mode );
+ 
+             }
+ 
+     }
+ 
+      if ( is_dir ( $mkpath )) return  true;
+ 
+      return  false;
+ 
+}
 
 	/***************************************************************/
 	// 登录

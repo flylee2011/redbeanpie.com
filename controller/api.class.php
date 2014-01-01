@@ -23,8 +23,17 @@ define( 'LR_API_UPGRADE_ABORT' , 10011 );
 define('API_SUCCESS_CODE', 'S00001');
 // 数据库操作失败
 define('API_DB_ERROR_CODE' , 'E00001');
+
 // 用户名或密码错误
 define('API_TOKEN_ERROR_CODE' , 'E10001');
+// 图片或文件上传失败
+define('API_UPLOAD_FAILED_ERROR_CODE' , 'E10002');
+// 没有文件数据
+define('API_UPLOAD_NODATA_ERROR_CODE' , 'E10003');
+// 参数错误
+define('API_ARGS_ERROR_CODE' , 'E10004');
+
+
 
 class apiController extends appController {
 
@@ -307,101 +316,122 @@ class apiController extends appController {
 		}
 	}
 
-	public function upload_file()
-	{		
+	/**
+	 * 上传头像（通过美图秀秀公共平台插件）
+	 *
+	 * @return lastid
+	 */
+	public function upload_avatar()
+	{	
 		$post_input = 'php://input';
 		$save_path = dirname( __FILE__ );
 		$postdata = file_get_contents( $post_input );
 
 		if ( isset( $postdata ) && strlen( $postdata ) > 0 ) {
-			$filename = AROOT . 'upload/' . uniqid() . '.jpg';
+			$path = 'upload/' . date('Y') . DS . date('m') . DS;
+			if (!file_exists($path) && !is_dir($path)){
+				mkpath($path, 0777);
+			}
+			$filename = $path . uniqid() . '.jpg';
 			$handle = fopen( $filename, 'w+' );
 			fwrite( $handle, $postdata );
 			fclose( $handle );
 			if ( is_file( $filename ) ) {
-				echo 'Image data save successed,file:' . $filename;
-				exit ();
+
+				session_set_cookie_params( c('session_time') );
+				@session_start();
+
+				// 插入数据库
+				// 目前相册没有分类，默认2是头像相册分类
+				$lastid = add_album_info($filename, 2, $_SESSION['uid']);
+				$api_res = update_user_avatar($_SESSION['uid'], $filename);
+
+				if($lastid && $api_res) {
+					$data['lastid'] = $lastid;
+					echo send_json_res(API_SUCCESS_CODE, '操作成功', $data);
+				}else {
+					echo send_json_res(API_DB_ERROR_CODE, '数据库操作失败', null);
+				}
 			}else {
-				// die ( 'Image upload error!' );
-				echo 'Image upload error!';
+				echo send_json_res(API_UPLOAD_FAILED_ERROR_CODE, '上传失败', null);
 			}
 		}else {
-			// die ( 'Image data not detected!' );
-			echo 'Image data not detected!';
+			echo send_json_res(API_UPLOAD_NODATA_ERROR_CODE, '没有数据', null);
 		}
 	}
 
 	/**
-	 * Note:for multipart/form-data upload
-	 * 这个是标准表单上传PHP文件
-	 * Please be amended accordingly based on the actual situation
+	 * 上传照片到相册
+	 *
+	 * @return json
 	 */
-	public function upload_file_form()
+	public function upload_img()
 	{
+		$targetFolder = 'upload/' . date('Y') . DS . date('m');
+		if (!file_exists($targetFolder) && !is_dir($targetFolder)){
+			mkpath($targetFolder, 0777);
+		}
+		$verifyToken = md5('unique_salt' . $_POST['timestamp']);
 
-		if (!$_FILES['Filedata']) {
-			die ( 'Image data not detected!' );
+		if (!empty($_FILES)) {
+			$tempFile = $_FILES['Filedata']['tmp_name'];
+			$targetPath = $_SERVER['DOCUMENT_ROOT'] . $targetFolder;
+			$newfileName = uniqid() . '.' . pathinfo($_FILES['Filedata']['name'])['extension'];
+			$targetFile = rtrim($targetPath,'/') . '/' . $newfileName;
+			
+			move_uploaded_file($tempFile, $targetFile);
+			
+			$data['img_path'] = $targetFolder . DS . $newfileName;
+			echo send_json_res(API_SUCCESS_CODE, '操作成功', $data);
+			// 文件类型
+			// $fileTypes = array('jpg','jpeg','gif','png');
+			// $fileParts = pathinfo($_FILES['Filedata']['name']);
+			
+			// if (in_array($fileParts['extension'],$fileTypes)) {
+			// 	move_uploaded_file($tempFile,$targetFile);
+			// 	echo '1';
+			// } else {
+			// 	echo 'Invalid file type.';
+			// }
+		}else {
+			echo send_json_res(API_UPLOAD_NODATA_ERROR_CODE, '没有数据', null);
 		}
-		if ($_FILES['Filedata']['error'] > 0) {
-			switch ($_FILES ['Filedata'] ['error']) {
-				case 1 :
-					$error_log = 'The file is bigger than this PHP installation allows';
-					break;
-				case 2 :
-					$error_log = 'The file is bigger than this form allows';
-					break;
-				case 3 :
-					$error_log = 'Only part of the file was uploaded';
-					break;
-				case 4 :
-					$error_log = 'No file was uploaded';
-					break;
-				default :
-					break;
-			}
-			die ( 'upload error:' . $error_log );
-		} else {
-			$img_data = $_FILES['Filedata']['tmp_name'];
-			$size = getimagesize($img_data);
-			$file_type = $size['mime'];
-			if (!in_array($file_type, array('image/jpg', 'image/jpeg', 'image/pjpeg', 'image/png', 'image/gif'))) {
-				$error_log = 'only allow jpg,png,gif';
-				die ( 'upload error:' . $error_log );
-			}
-			switch($file_type) {
-				case 'image/jpg' :
-				case 'image/jpeg' :
-				case 'image/pjpeg' :
-					$extension = 'jpg';
-					break;
-				case 'image/png' :
-					$extension = 'png';
-					break;
-				case 'image/gif' :
-					$extension = 'gif';
-					break;
-			}	
-		}
-		if (!is_file($img_data)) {
-			die ( 'Image upload error!' );
-		}
-		//图片保存路径,默认保存在该代码所在目录(可根据实际需求修改保存路径)
-		$save_path = dirname( __FILE__ );
-		$uinqid = uniqid();
-		$filename = $save_path . '/' . $uinqid . '.' . $extension;
-		$result = move_uploaded_file( $img_data, $filename );
-		if ( ! $result || ! is_file( $filename ) ) {
-			die ( 'Image upload error!' );
-		}
-		echo 'Image data save successed,file:' . $filename;
-		exit ();
 	}
+
+	/**
+	 * 添加照片信息到数据库
+	 *
+	 * @return json
+	 */
+	public function add_img_info()
+	{
+		session_set_cookie_params( c('session_time') );
+		@session_start();
+
+		$img_path = v('img_path');
+		$description = v('description');
+		$user_id = $_SESSION['uid'];
+
+		if($img_path && $user_id > 0) {
+			$lastid = add_album_info($img_path, 1, $user_id, $description);
+
+			if($lastid) {
+				$data['lastid'] = $lastid;
+				echo send_json_res(API_SUCCESS_CODE, '操作成功', $data);
+			}else {
+				echo send_json_res(API_DB_ERROR_CODE, '数据库操作失败', null);
+			}
+		}else {
+			echo send_json_res(API_ARGS_ERROR_CODE, '参数错误', null);
+		}
+	}
+
 
 
 	/**
 	 * 返回成功信息（json）
 	 */
-	public static function send_result( $data )
+	public static function send_result( $data = null )
 	{   
 		$obj = array();
 		$obj[ 'code' ] = '0';

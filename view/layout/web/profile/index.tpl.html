@@ -1,14 +1,15 @@
 <!-- 个人中心 -->
+<?php echo $_SESSION['uid']; ?>
 <div class="container">
 	<div class="row row-profile-header">
 		<div class="col-md-3">
-			<div id="avatar" class="profile-avatar-box center-block">
-				<img src="/static/dev/images/avatar_demo.jpg">
-				<a href="javascript:;">修改头像</a>
+			<div id="profile-avatar-box" class="profile-avatar-box center-block">
+				<img src="/static/dev/images/avatar_default.jpg">
+				<a class="avatar-modify-link" href="javascript:void(0);">修改头像</a>
 			</div>
 		</div>
 		<div class="col-md-9">
-			<div class="baseinfo">
+			<div class="baseinfo-box">
 				<h3 class="nick-title">王纯子纯子1234</h3>
 				<p>18岁-女生-北京市海淀区</p>
 				<p class="text-muted">xxxxxx公司-销售经理</p>
@@ -19,28 +20,10 @@
 				</div>
 				<div class="well">
 					<h4 class="album-title">她的相册</h4>
-					<div class="album-list clearfix">
-						<ul>
+					<div class="album-list">
+						<ul id="profile-album-ul" class="clearfix">
 							<li>
 								<a href=""><img class="img-responsive" src="/static/dev/images/avatar_demo.jpg"></a>
-							</li>
-							<li>
-								<img class="img-responsive" src="/static/dev/images/avatar_demo.jpg">
-							</li>
-							<li>
-								<img class="img-responsive" src="/static/dev/images/avatar_demo.jpg">
-							</li>
-							<li>
-								<img class="img-responsive" src="/static/dev/images/avatar_demo.jpg">
-							</li>
-							<li>
-								<img class="img-responsive" src="/static/dev/images/avatar_demo.jpg">
-							</li>
-							<li>
-								<img class="img-responsive" src="/static/dev/images/avatar_demo.jpg">
-							</li>
-							<li>
-								<img class="img-responsive" src="/static/dev/images/avatar_demo.jpg">
 							</li>
 							<li class="add-photo">
 								<span class="glyphicon glyphicon-plus"></span>
@@ -65,11 +48,31 @@
 							<span class="pull-right">xxxxxxx</span>
 						</p>
 						<p class="clearfix">
-							<span class="pull-left">昵称</span>
+							<span class="pull-left">恋爱状态</span>
 							<span class="pull-right">xxxxxxx</span>
 						</p>
 						<p class="clearfix">
-							<span class="pull-left">昵称</span>
+							<span class="pull-left">性别</span>
+							<span class="pull-right">xxxxxxx</span>
+						</p>
+						<p class="clearfix">
+							<span class="pull-left">年龄</span>
+							<span class="pull-right">xxxxxxx</span>
+						</p>
+						<p class="clearfix">
+							<span class="pull-left">身高</span>
+							<span class="pull-right">xxxxxxx</span>
+						</p>
+						<p class="clearfix">
+							<span class="pull-left">所在地</span>
+							<span class="pull-right">xxxxxxx</span>
+						</p>
+						<p class="clearfix">
+							<span class="pull-left">月收入</span>
+							<span class="pull-right">xxxxxxx</span>
+						</p>
+						<p class="clearfix">
+							<span class="pull-left">学历</span>
 							<span class="pull-right">xxxxxxx</span>
 						</p>
 					</div>
@@ -87,7 +90,7 @@
 						<a data-toggle="tab" href="#dating">约会</a>
 					</li>
 				</ul>
-				<div class="tab-content">
+				
 				<!-- 关于我 -->
 				<div id="aboutme" class="aboutme-info-box tab-pane fade active in">
 					<div class="aboutme-info-title clearfix">
@@ -95,34 +98,53 @@
 						<a href="javascript:;" class="pull-right">修改</a>
 					</div>
 					<div class="aboutme-info-content">
-						<p>自我介绍自我介绍自我介绍自我介绍自我介绍自我介绍自我介绍自我介绍自我介绍自我介绍</p>
+						<p>无</p>
 					</div>
 					<div class="aboutme-info-title clearfix">
-						<span class="pull-left"><strong>自我介绍</strong></span>
+						<span class="pull-left"><strong>喜欢的事情、兴趣爱好等</strong></span>
 						<a href="javascript:;" class="pull-right">修改</a>
 					</div>
 					<div class="aboutme-info-content">
-						<p>自我介绍自我介绍自我介绍自我介绍自我介绍自我介绍自我介绍自我介绍自我介绍自我介绍</p>
+						<p>无</p>
 					</div>
 					<div class="aboutme-info-title clearfix">
-						<span class="pull-left"><strong>自我介绍</strong></span>
-						<a class="pull-right">修改</a>
+						<span class="pull-left"><strong>不喜欢的事情</strong></span>
+						<a href="javascript:;" class="pull-right">修改</a>
 					</div>
-					<div href="javascript:;" class="aboutme-info-content">
-						<p>自我介绍自我介绍自我介绍自我介绍自我介绍自我介绍自我介绍自我介绍自我介绍自我介绍</p>
+					<div class="aboutme-info-content">
+						<p>无</p>
+					</div>
+					<div class="aboutme-info-title clearfix">
+						<span class="pull-left"><strong>理想异性</strong></span>
+						<a href="javascript:;" class="pull-right">修改</a>
+					</div>
+					<div class="aboutme-info-content">
+						<p>无</p>
+						<!-- <p>
+							<strong>年龄: </strong>18-28岁
+						</p>
+						<p>
+							<strong>身高: </strong>180
+						</p>
+						<p>
+							<strong>收入: </strong>5000以上
+						</p>
+						<p>
+							<strong>其他: </strong>其他其他其他其他其他其他其他
+						</p> -->
 					</div>
 				</div>
 				<!-- 派对 -->
 				<div id="party" class="party-info-box tab-pane fade"></div>
 				<!-- 约会 -->
 				<div id="dating" class="dating-info-box tab-pane fade"></div>
-				</div>
+				
 			</div>
 		</div>
 	</div>
 
 	<!-- 上传头像浮层 -->
-	<div id="avatarModal" class="modal fade avatar-modal">
+	<div id="modal-avatar" class="modal fade modal-avatar">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -137,5 +159,40 @@
 		</div>
 	</div>
 
+	<!-- 相册图片上传浮层 -->
+	<div id="modal-album" class="modal fade modal-album">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">上传照片</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="upload-img-box">
+								<input id="upload-img-btn" type="file" name="file_upload" />
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="img-preview-box">
+								<a href="javascript:void(0);" title="点击查看原图" target="_blank">
+									<img src="/static/dev/images/avatar_demo.jpg" class="img-responsive" alt="图片预览">
+								</a>
+							</div>
+							<p>
+								<textarea class="form-control description" rows="3" placeholder="照片描述"></textarea>
+							</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<button type="button" class="btn btn-primary btn-submit">确定</button>
+						</div>
+					</div>
+				</div>
+			</div>		
+		</div>
+	</div>
 
 </div>
