@@ -1,11 +1,13 @@
 <!-- 个人中心 -->
-<?php echo $_SESSION['uid']; ?>
+<?php echo is_login_profile(); ?>
 <div class="container">
 	<div class="row row-profile-header">
 		<div class="col-md-3">
 			<div id="profile-avatar-box" class="profile-avatar-box center-block">
 				<img src="/static/dev/images/avatar_default.jpg">
+				<?php if(is_login_profile()): ?>
 				<a class="avatar-modify-link" href="javascript:void(0);">修改头像</a>
+				<?php endif; ?>
 			</div>
 		</div>
 		<div class="col-md-9">
@@ -25,9 +27,11 @@
 							<li>
 								<a href=""><img class="img-responsive" src="/static/dev/images/avatar_demo.jpg"></a>
 							</li>
+							<?php if(is_login_profile()): ?>
 							<li class="add-photo">
 								<span class="glyphicon glyphicon-plus"></span>
 							</li>
+							<?php endif; ?>
 						</ul>
 					</div>
 				</div>
@@ -40,7 +44,9 @@
 				<div class="sideinfo-box center-block">
 					<div class="sideinfo-header clearfix">
 						<span class="title pull-left">个人信息</span>
-						<a href="" class="pull-right">修改</a>
+						<?php if(is_login_profile()): ?>
+						<a href="javascript:void(0);" class="pull-right">修改</a>
+						<?php endif; ?>
 					</div>
 					<div class="sideinfo-content clearfix">
 						<p class="clearfix">
@@ -95,28 +101,36 @@
 				<div id="aboutme" class="aboutme-info-box tab-pane fade active in">
 					<div class="aboutme-info-title clearfix">
 						<span class="pull-left"><strong>自我介绍</strong></span>
-						<a href="javascript:;" class="pull-right">修改</a>
+						<?php if(is_login_profile()): ?>
+						<a href="javascript:void(0);" class="pull-right">修改</a>
+						<?php endif; ?>
 					</div>
 					<div class="aboutme-info-content">
 						<p>无</p>
 					</div>
 					<div class="aboutme-info-title clearfix">
 						<span class="pull-left"><strong>喜欢的事情、兴趣爱好等</strong></span>
-						<a href="javascript:;" class="pull-right">修改</a>
+						<?php if(is_login_profile()): ?>
+						<a href="javascript:void(0);" class="pull-right">修改</a>
+						<?php endif; ?>
 					</div>
 					<div class="aboutme-info-content">
 						<p>无</p>
 					</div>
 					<div class="aboutme-info-title clearfix">
 						<span class="pull-left"><strong>不喜欢的事情</strong></span>
-						<a href="javascript:;" class="pull-right">修改</a>
+						<?php if(is_login_profile()): ?>
+						<a href="javascript:void(0);" class="pull-right">修改</a>
+						<?php endif; ?>
 					</div>
 					<div class="aboutme-info-content">
 						<p>无</p>
 					</div>
 					<div class="aboutme-info-title clearfix">
 						<span class="pull-left"><strong>理想异性</strong></span>
-						<a href="javascript:;" class="pull-right">修改</a>
+						<?php if(is_login_profile()): ?>
+						<a href="javascript:void(0);" class="pull-right">修改</a>
+						<?php endif; ?>
 					</div>
 					<div class="aboutme-info-content">
 						<p>无</p>
@@ -143,6 +157,7 @@
 		</div>
 	</div>
 
+	<?php if(is_login_profile()): ?>
 	<!-- 上传头像浮层 -->
 	<div id="modal-avatar" class="modal fade modal-avatar">
 		<div class="modal-dialog">
@@ -194,5 +209,6 @@
 			</div>		
 		</div>
 	</div>
+	<?php endif; ?>
 
 </div>

@@ -131,28 +131,24 @@
 
 	// 创建支持多级目录
 	function  mkpath( $mkpath , $mode =0777){
- 
-      $path_arr = explode ( '/' , $mkpath );
- 
-      foreach  ( $path_arr   as   $value ){
- 
-              if (! empty  ( $value )){
- 
-                  if ( empty  ( $path )) $path = $value ;
- 
-                  else   $path .= '/' . $value ;
- 
-                  is_dir ( $path )  or   mkdir ( $path , $mode );
- 
-             }
- 
-     }
- 
-      if ( is_dir ( $mkpath )) return  true;
- 
-      return  false;
- 
-}
+		$path_arr = explode ( '/' , $mkpath );
+
+		foreach($path_arr as $value) {
+			if (!empty( $value )) {
+				if ( empty  ( $path )) {
+					$path = $value;
+				}else {
+					$path .= '/' . $value ;
+				}
+				is_dir ( $path )  or   mkdir ( $path , $mode );
+			}
+		}
+
+		if (is_dir( $mkpath )) {
+			return true;
+		}
+		return false;
+	}
 
 	/***************************************************************/
 	// 登录
