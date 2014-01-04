@@ -16,6 +16,7 @@
 }
 .profile-avatar-box img {
 	width: 219px;
+	border-radius: 10px;
 }
 
 .row-profile-header, .row-profile-main {
@@ -32,7 +33,7 @@
 .baseinfo-box .btn-wrap {
 	position: absolute;
 	right: 0;
-	top: 60px;
+	top: 40px;
 }
 .baseinfo-box .nick-title {
 	margin: 0;
@@ -51,7 +52,7 @@
 
 .album-list {
 	width: 100%;
-	overflow-x: scroll;
+	overflow-x: auto;
 }
 .album-list ul {
 	list-style: none;
@@ -65,11 +66,17 @@
 	float: left;
 	margin-right: 20px;
 }
+.album-list ul li img {
+	border-radius: 10px;
+	width: 73px;
+	height: 73px;
+}
 .album-list .add-photo {
 	position: relative;
 	height: 73px;
 	background-color: #d5d5d5;
 	cursor: pointer;
+	border-radius: 10px;
 }
 .album-list .add-photo .glyphicon {
 	position: absolute;
@@ -123,7 +130,7 @@
 	height: 440px;
 }
 
-.modal-album .btn-submit {
+.modal-album .btn-submit, .modal-sideinfo .btn-submit {
 	margin-top: 20px;
 	font-size: 20px;
 	padding: 5px 40px;

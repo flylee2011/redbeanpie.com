@@ -20,5 +20,7 @@
 @import url('./module/jcarousel.responsive.css');
 /*** 个人主页 ***/
 @import url('./module/profile.css');
+/*** 浏览会员列表 ***/
+@import url('./module/profilelist.css');
 
 

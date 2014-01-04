@@ -26,13 +26,28 @@
 				<?php endif; ?>
 					<a href="?c=dashboard">动态</a>
 				</li>
+
+				<?php if(g('c') === 'profilelist'): ?>
+				<li class="active">
+				<?php else: ?>
 				<li>
+				<?php endif; ?>
 					<a href="?c=profilelist">浏览</a>
 				</li>
+
+				<?php if(g('c') === 'partylist'): ?>
+				<li class="active">
+				<?php else: ?>
 				<li>
+				<?php endif; ?>
 					<a href="?c=partylist">派对</a>
 				</li>
+
+				<?php if(g('c') === 'datinglist'): ?>
+				<li class="active">
+				<?php else: ?>
 				<li>
+				<?php endif; ?>
 					<a href="?c=datinglist">约会</a>
 				</li>
 			</ul>

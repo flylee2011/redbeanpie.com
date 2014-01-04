@@ -1,32 +1,81 @@
 <!-- 个人中心 -->
-<?php echo is_login_profile(); ?>
 <div class="container">
 	<div class="row row-profile-header">
 		<div class="col-md-3">
 			<div id="profile-avatar-box" class="profile-avatar-box center-block">
-				<img src="/static/dev/images/avatar_default.jpg">
+				<?php if( $user_info['avatar_url'] == ''): ?>
+				<img src="static/dev/images/avatar_default.jpg">
+				<?php else: ?>
+				<img src="<?php echo $user_info['avatar_url']; ?>">
+				<?php endif; ?>
+
 				<?php if(is_login_profile()): ?>
-				<a class="avatar-modify-link" href="javascript:void(0);">修改头像</a>
+				<a class="avatar-modify-link" style="display:none;" href="javascript:void(0);">修改头像</a>
 				<?php endif; ?>
 			</div>
 		</div>
 		<div class="col-md-9">
 			<div class="baseinfo-box">
-				<h3 class="nick-title">王纯子纯子1234</h3>
-				<p>18岁-女生-北京市海淀区</p>
-				<p class="text-muted">xxxxxx公司-销售经理</p>
-				<p class="text-muted">北京大学-硕士</p>
+				<h3 class="nick-title"><?php echo $user_info['nickname']; ?></h3>
+				<p>
+					<span>24岁-</span>
+					<span><?php if($user_info['gender'] == 0){echo '男生';}else {echo '女生';} ?>-</span>
+					<span>北京市海淀区</span>
+				</p>
+				<?php if($user_info['company_visible'] == 1): ?>
+				<p class="text-muted">
+					<?php 
+						if($user_info['com_name']){
+							echo $user_info['com_name'];
+						}
+						if($user_info['job']){
+							echo '-' . $user_info['job'];
+						}
+					?>
+				</p>
+				<?php endif; ?>
+				<p class="text-muted">
+					<?php 
+						if($user_info['university']){
+							echo $user_info['university'];
+						}
+
+						switch ($user_info['education']) {
+							case 1:
+							echo "-本科";
+							break;
+							case 2:
+							echo "-研究生";
+							break;
+							case 3:
+							echo "-博士";
+							break;
+						}
+					?>
+				</p>
 				<div class="btn-wrap">
+					<?php if(!is_login_profile()): ?>
 					<button type="button" class="btn btn-default">收藏</button>
+					<?php endif; ?>
 					<button type="button" class="btn btn-default">发消息</button>
 				</div>
+				
 				<div class="well">
-					<h4 class="album-title">她的相册</h4>
+					<h4 class="album-title">
+						<?php if($user_info['gender'] == 0){echo '他';}else {echo '她';} ?>的相册
+					</h4>
 					<div class="album-list">
 						<ul id="profile-album-ul" class="clearfix">
+							<?php if($album_info):  ?>
+							<?php foreach ($album_info as $album_info_item): ?>
 							<li>
-								<a href=""><img class="img-responsive" src="/static/dev/images/avatar_demo.jpg"></a>
+								<a href="">
+									<img class="img-responsive" src="<?php echo $album_info_item['img_url']; ?>">
+								</a>
 							</li>
+							<?php endforeach; ?>
+							<?php endif; ?>
+							
 							<?php if(is_login_profile()): ?>
 							<li class="add-photo">
 								<span class="glyphicon glyphicon-plus"></span>
@@ -35,6 +84,7 @@
 						</ul>
 					</div>
 				</div>
+				
 			</div>
 		</div>
 	</div>
@@ -45,41 +95,108 @@
 					<div class="sideinfo-header clearfix">
 						<span class="title pull-left">个人信息</span>
 						<?php if(is_login_profile()): ?>
-						<a href="javascript:void(0);" class="pull-right">修改</a>
+						<a id="edit-sideinfo-link" href="javascript:void(0);" class="pull-right">修改</a>
 						<?php endif; ?>
 					</div>
 					<div class="sideinfo-content clearfix">
 						<p class="clearfix">
 							<span class="pull-left">昵称</span>
-							<span class="pull-right">xxxxxxx</span>
+							<?php if($user_info['nickname']): ?>
+							<span class="pull-right"><?php echo $user_info['nickname']; ?></span>
+							<?php else: ?>
+							<span class="pull-right">未填写</span>
+							<?php endif; ?>
 						</p>
 						<p class="clearfix">
 							<span class="pull-left">恋爱状态</span>
-							<span class="pull-right">xxxxxxx</span>
+							<?php if($user_info['relationship'] == 0): ?>
+							<span class="pull-right">寻觅中</span>
+							<?php else: ?>
+							<span class="pull-right">恋爱中</span>
+							<?php endif; ?>
 						</p>
 						<p class="clearfix">
 							<span class="pull-left">性别</span>
-							<span class="pull-right">xxxxxxx</span>
+							<?php if($user_info['gender'] == 0): ?>
+							<span class="pull-right">男</span>
+							<?php else: ?>
+							<span class="pull-right">女</span>
+							<?php endif; ?>
 						</p>
 						<p class="clearfix">
 							<span class="pull-left">年龄</span>
-							<span class="pull-right">xxxxxxx</span>
+							<span class="pull-right"></span>
 						</p>
 						<p class="clearfix">
 							<span class="pull-left">身高</span>
-							<span class="pull-right">xxxxxxx</span>
+							<?php if($user_info['height']): ?>
+							<span class="pull-right"><?php echo $user_info['height'] . 'cm'; ?></span>
+							<?php else: ?>
+							<span class="pull-right">未填写</span>
+							<?php endif; ?>
 						</p>
 						<p class="clearfix">
 							<span class="pull-left">所在地</span>
-							<span class="pull-right">xxxxxxx</span>
+							<span class="pull-right">北京-海淀</span>
 						</p>
 						<p class="clearfix">
 							<span class="pull-left">月收入</span>
-							<span class="pull-right">xxxxxxx</span>
+							<?php if($user_info['income']): ?>
+							<span class="pull-right">
+								<?php
+									switch ($user_info['income']) {
+										case 1:
+										echo "4000元以下";
+										break;
+										case 2:
+										echo "4000元-6000元";
+										break;
+										case 3:
+										echo "6000元-10000元";
+										break;
+										case 4:
+										echo "10000元-15000元";
+										break;
+										case 5:
+										echo "15000元-20000元";
+										break;
+										case 6:
+										echo "20000元-30000元";
+										break;
+										case 7:
+										echo "30000元-50000元";
+										break;
+										case 8:
+										echo "50000元以上";
+										break;
+									}
+							 	?>
+							</span>
+							<?php else: ?>
+							<span class="pull-right">未填写</span>
+							<?php endif; ?>
 						</p>
 						<p class="clearfix">
 							<span class="pull-left">学历</span>
-							<span class="pull-right">xxxxxxx</span>
+							<?php if($user_info['education']): ?>
+							<span class="pull-right">
+								<?php
+									switch ($user_info['education']) {
+										case 1:
+										echo "本科";
+										break;
+										case 2:
+										echo "研究生";
+										break;
+										case 3:
+										echo "博士";
+										break;
+									}
+								 ?>
+							</span>
+							<?php else: ?>
+							<span class="pull-right">未填写</span>
+							<?php endif; ?>
 						</p>
 					</div>
 				</div>
@@ -106,7 +223,7 @@
 						<?php endif; ?>
 					</div>
 					<div class="aboutme-info-content">
-						<p>无</p>
+						<p>未填写</p>
 					</div>
 					<div class="aboutme-info-title clearfix">
 						<span class="pull-left"><strong>喜欢的事情、兴趣爱好等</strong></span>
@@ -115,7 +232,7 @@
 						<?php endif; ?>
 					</div>
 					<div class="aboutme-info-content">
-						<p>无</p>
+						<p>未填写</p>
 					</div>
 					<div class="aboutme-info-title clearfix">
 						<span class="pull-left"><strong>不喜欢的事情</strong></span>
@@ -124,7 +241,7 @@
 						<?php endif; ?>
 					</div>
 					<div class="aboutme-info-content">
-						<p>无</p>
+						<p>未填写</p>
 					</div>
 					<div class="aboutme-info-title clearfix">
 						<span class="pull-left"><strong>理想异性</strong></span>
@@ -133,7 +250,7 @@
 						<?php endif; ?>
 					</div>
 					<div class="aboutme-info-content">
-						<p>无</p>
+						<p>未填写</p>
 						<!-- <p>
 							<strong>年龄: </strong>18-28岁
 						</p>
@@ -209,6 +326,221 @@
 			</div>		
 		</div>
 	</div>
+
+	<!-- 个人信息修改浮层 -->
+	<div id="modal-sideinfo" class="modal fade modal-sideinfo">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">修改个人信息</h4>
+				</div>
+				<div class="modal-body">
+					<form id="edit-sideinfo-form" class="form-horizontal" role="form">
+						<div class="form-group">
+							<label for="inputNickname" class="col-sm-2 control-label">昵称</label>
+							<div class="col-sm-6">
+								<input id="inputNickname" name="nickname" type="text" class="form-control" placeholder="昵称" datatype="s2-10" errormsg="昵称2-10位" nullmsg="还没填呢" value="<?php echo $user_info['nickname']; ?>">
+							</div>
+							<div class="col-sm-4 col-validtip">
+								<p class="Validform_checktip"></p>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="selectRelationship" class="col-sm-2 control-label">恋爱状态</label>
+							<div class="col-sm-6">
+								<select id="selectRelationship" name="relationship" class="form-control" datatype="*" errormsg="还没填呢" nullmsg="还没填呢">
+									<?php if($user_info['relationship'] == 0): ?>
+									<option value="0" selected="selected">寻觅中</option>
+									<option value="1">恋爱中</option>
+									<?php else: ?>
+									<option value="0">寻觅中</option>
+									<option value="1" selected="selected">恋爱中</option>
+									<?php endif; ?>
+								</select>
+							</div>
+							<div class="col-sm-4 col-validtip">
+								<p class="Validform_checktip"></p>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="selectGender" class="col-sm-2 control-label">性别</label>
+							<div class="col-sm-6">
+								<select id="selectGender" name="gender" class="form-control" datatype="*" errormsg="还没填呢" nullmsg="还没填呢">
+									<?php if($user_info['gender'] == 0): ?>
+									<option value="0" selected="selected">男</option>
+									<option value="1">女</option>
+									<?php else: ?>
+									<option value="0">男</option>
+									<option value="1" selected="selected">女</option>
+									<?php endif; ?>
+								</select>
+							</div>
+							<div class="col-sm-4 col-validtip">
+								<p class="Validform_checktip"></p>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="inputBirthday" class="col-sm-2 control-label">出生日期</label>
+							<div class="col-sm-6">
+								<input id="inputBirthday" name="birthday" value="1990" readonly="true" datatype="*" errormsg="还没填呢" nullmsg="还没填呢" class="form-control">
+							</div>
+							<div class="col-sm-4 col-validtip">
+								<p class="Validform_checktip"></p>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="selectHeight" class="col-sm-2 control-label">身高</label>
+							<div class="col-sm-6">
+								<select id="selectHeight" name="height" datatype="*" errormsg="还没填呢" nullmsg="还没填呢" class="form-control">
+									<option value="">-</option>
+									<option <?php if($user_info['height'] == '150') echo 'selected="selected"' ?> value="150">150cm</option>
+									<option <?php if($user_info['height'] == '155') echo 'selected="selected"' ?> value="155">155cm</option>
+									<option <?php if($user_info['height'] == '160') echo 'selected="selected"' ?> value="160">160cm</option>
+									<option <?php if($user_info['height'] == '165') echo 'selected="selected"' ?> value="165">165cm</option>
+									<option <?php if($user_info['height'] == '170') echo 'selected="selected"' ?> value="170">170cm</option>
+									<option <?php if($user_info['height'] == '175') echo 'selected="selected"' ?> value="175">175cm</option>
+									<option <?php if($user_info['height'] == '180') echo 'selected="selected"' ?> value="180">180cm</option>
+									<option <?php if($user_info['height'] == '185') echo 'selected="selected"' ?> value="185">185cm</option>
+									<option <?php if($user_info['height'] == '190') echo 'selected="selected"' ?> value="190">190cm</option>
+									<option <?php if($user_info['height'] == '195') echo 'selected="selected"' ?> value="195">195cm</option>
+									<option <?php if($user_info['height'] == '200') echo 'selected="selected"' ?> value="200">200cm</option>
+									<option <?php if($user_info['height'] == '205') echo 'selected="selected"' ?> value="205">205cm</option>
+									<option <?php if($user_info['height'] == '210') echo 'selected="selected"' ?> value="210">210cm</option>
+									<option <?php if($user_info['height'] == '215') echo 'selected="selected"' ?> value="215">215cm</option>
+									<option <?php if($user_info['height'] == '220') echo 'selected="selected"' ?> value="220">220cm</option>
+								</select>
+							</div>
+							<div class="col-sm-4 col-validtip">
+								<p class="Validform_checktip"></p>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="inputWeight" class="col-sm-2 control-label">体重</label>
+							<div class="input-group col-sm-6">
+								<input id="inputWeight" name="weight" type="text" class="form-control" value="<?php echo $user_info['weight']; ?>" datatype="n1-3" errormsg="请输入数字" nullmsg="还没填呢">
+								<span class="input-group-addon">公斤(KG)</span>
+							</div>
+							<div class="col-sm-4 col-validtip">
+								<p class="Validform_checktip"></p>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="selectLocation" class="col-sm-2 control-label">所在地</label>
+							<div class="col-sm-3">
+								<select id="selectProvince" name="province" class="form-control">
+									<option value="1">北京市</option>
+								</select>
+							</div>
+							<div class="col-sm-3">
+								<select id="selectCity" name="city" class="form-control">
+									<option value="1">海淀区</option>
+								</select>
+							</div>
+							<div class="col-sm-4 col-validtip">
+								<p class="Validform_checktip"></p>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="selectComVisible" class="col-sm-2 control-label">公司</label>
+							<div class="col-sm-3">
+								<input name="com_name" disabled="disabled" value="<?php echo $user_info['com_name']; ?>" class="form-control">
+							</div>
+							<div class="col-sm-3">
+								<select id="selectComVisible" name="company_visible" class="form-control" datatype="*" errormsg="还没填呢" nullmsg="还没填呢">
+									<option <?php if($user_info['company_visible'] == 1) echo 'selected="selected"'; ?> value="1">可见</option>
+									<option <?php if($user_info['company_visible'] == 0) echo 'selected="selected"'; ?> value="0">隐藏</option>
+								</select>
+							</div>
+							<div class="col-sm-4 col-validtip">
+								<p class="Validform_checktip"></p>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="inputJob" class="col-sm-2 control-label">职位</label>
+							<div class="col-sm-6">
+								<input id="inputJob" name="job" value="<?php echo $user_info['job']; ?>" class="form-control" datatype="s2-20" errormsg="职位名称为2-20个字符" nullmsg="还没填呢">
+							</div>
+							<div class="col-sm-4 col-validtip">
+								<p class="Validform_checktip"></p>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="selectIncome" class="col-sm-2 control-label">月收入</label>
+							<div class="col-sm-6">
+								<select id="selectIncome" name="income" class="form-control" datatype="*" errormsg="还没填呢" nullmsg="还没填呢">
+									<option value="">-</option>
+									<option <?php if($user_info['income'] == 1) echo 'selected="selected"'; ?> value="1">4000元以下</option>
+									<option <?php if($user_info['income'] == 2) echo 'selected="selected"'; ?> value="2">4000元-6000元</option>
+									<option <?php if($user_info['income'] == 3) echo 'selected="selected"'; ?> value="3">6000元-10000元</option>
+									<option <?php if($user_info['income'] == 4) echo 'selected="selected"'; ?> value="4">10000元-15000元</option>
+									<option <?php if($user_info['income'] == 5) echo 'selected="selected"'; ?> value="5">15000元-20000元</option>
+									<option <?php if($user_info['income'] == 6) echo 'selected="selected"'; ?> value="6">20000元-30000元</option>
+									<option <?php if($user_info['income'] == 7) echo 'selected="selected"'; ?> value="7">30000元-50000元</option>
+									<option <?php if($user_info['income'] == 8) echo 'selected="selected"'; ?> value="8">50000元以上</option>
+								</select>
+							</div>
+							<div class="col-sm-4 col-validtip">
+								<p class="Validform_checktip"></p>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="inputUniversity" class="col-sm-2 control-label">毕业大学</label>
+							<div class="col-sm-6">
+								<input id="inputUniversity" name="university" value="<?php echo $user_info['university']; ?>" class="form-control" datatype="*" errormsg="大学名称在2-20个字符" nullmsg="还没填呢">
+							</div>
+							<div class="col-sm-4 col-validtip">
+								<p class="Validform_checktip"></p>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="selectEducation" class="col-sm-2 control-label">学历</label>
+							<div class="col-sm-6">
+								<select id="selectEducation" name="education" class="form-control" datatype="*" errormsg="还没填呢" nullmsg="还没填呢">
+									<option value="">-</option>
+									<option <?php if($user_info['education'] == 1) echo 'selected="selected"'; ?> value="1">本科</option>
+									<option <?php if($user_info['education'] == 2) echo 'selected="selected"'; ?> value="2">硕士</option>
+									<option <?php if($user_info['education'] == 3) echo 'selected="selected"'; ?> value="3">博士</option>
+								</select>
+							</div>
+							<div class="col-sm-4 col-validtip">
+								<p class="Validform_checktip"></p>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="inputWeibo" class="col-sm-2 control-label">新浪微博</label>
+							<div class="col-sm-6">
+								<input id="inputWeibo" name="weibo_link" value="<?php echo $user_info['weibo_link']; ?>" class="form-control" datatype="url" errormsg="地址格式错误" nullmsg="还没填呢">
+							</div>
+							<div class="col-sm-4 col-validtip">
+								<p class="Validform_checktip"></p>
+							</div>
+						</div>
+
+						<div class="form-group text-center">
+							<button type="submit" class="btn btn-primary btn-submit">确定</button>
+						</div>
+					</form>
+
+				</div>
+			</div>		
+		</div>
+	</div>
+
+	<!-- 发消息浮层 -->
+
 	<?php endif; ?>
 
 </div>

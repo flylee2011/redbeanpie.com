@@ -96,8 +96,82 @@ function update_user_avatar($uid, $avatar_url)
 
 
 // 根据用户uid，获取用户所有信息
+function get_userinfo_by_uid($uid)
+{
+	$ret = false;
+
+	$uid = intval($uid);
+	$sql = "SELECT * FROM `rbp_userinfo` WHERE `id`=" . $uid;
+
+	if($data = get_line($sql)) {
+		$ret = $data;
+	}
+	return $ret;
+}
 
 // 根据用户uid，获取相册信息
+function get_albuminfo_by_uid($uid)
+{
+	$ret = false;
+
+	$uid = intval($uid);
+	$sql = "SELECT `id`, `img_url`, `cate_id`, `user_id`, `description` FROM `rbp_album_info` WHERE `user_id`=" . $uid . " AND `cate_id`!=2";
+
+	if($data = get_data($sql)) {
+		$ret = $data;
+	}
+	return $ret;
+}
+
+// 根据用户uid，获取个人中心需要的信息，用户信息+相册信息
+function get_profile_info_by_uid($uid)
+{
+	$ret = false;
+
+	$uid = intval($uid);
+	$sql_userinfo = "SELECT * FROM `rbp_userinfo` WHERE `id`=" . $uid;
+	$sql_albuminfo = "SELECT `id`, `img_url`, `cate_id`, `user_id`, `description` FROM `rbp_album_info` WHERE `user_id`=" . $uid;
+
+	$data = array();
+
+	if($data['user_info'] = get_data($sql_userinfo) and $data['album_info'] = get_data($sql_albuminfo)) {
+		$ret = $data;
+	}
+
+	return $ret;
+}
+
+// 根据用户uid，更新用户基本信息(sideinfo)
+function update_user_sideinfo_by_uid($params, $uid)
+{
+	$uid = intval($uid);
+	
+	$dsql = array();
+	$dsql[] = "`nickname`='" . s( $params['nickname'] ) . "'";
+	$dsql[] = "`relationship`='" . s( $params['relationship'] ) . "'";
+	$dsql[] = "`gender`='" . s( $params['gender'] ) . "'";
+	$dsql[] = "`birthday`='" . s( $params['birthday'] ) . "'";
+	$dsql[] = "`height`='" . s( $params['height'] ) . "'";
+	$dsql[] = "`weight`='" . s( $params['weight'] ) . "'";
+	$dsql[] = "`province_id`='" . s( $params['province'] ) . "'";
+	$dsql[] = "`city_id`='" . s( $params['city'] ) . "'";
+	$dsql[] = "`company_visible`='" . s( $params['company_visible'] ) . "'";
+	$dsql[] = "`job`='" . s( $params['job'] ) . "'";
+	$dsql[] = "`income`='" . s( $params['income'] ) . "'";
+	$dsql[] = "`university`='" . s( $params['university'] ) . "'";
+	$dsql[] = "`education`='" . s( $params['education'] ) . "'";
+	$dsql[] = "`weibo_link`='" . s( $params['weibo_link'] ) . "'";
+
+	$setstring = join( ' , ' , $dsql );
+
+	$sql = "UPDATE `rbp_userinfo` SET ". $setstring ." WHERE `id`=" . $uid;
+	
+	run_sql($sql);
+	if(db_errno() != 0) {
+		return false;
+	}
+	return true;
+}
 
 ?>
 

@@ -13,8 +13,22 @@ class profileController extends appController
 	// 个人中心首页
 	function index()
 	{
-		$data['title'] = '';
-		render($data, 'web', 'default');
+		$params = array();
+		$params['uid'] = intval(v('uid'));
+		
+		if($params['uid'] > 0) {
+
+			$resjson = send_request('get_profile_info_by_uid', $params);
+			$res = json_decode( $resjson , 1 );
+
+			$data['user_info'] = $res['data']['user_info'];
+			$data['album_info'] = $res['data']['album_info'];
+			$data['title'] = '个人中心';
+			
+			render($data, 'web', 'default');
+		}
+		
+
 	}
 	
 }

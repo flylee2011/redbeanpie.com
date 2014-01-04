@@ -62,7 +62,7 @@
 		// local request
 		$bake_request = $_REQUEST;
 		$_REQUEST['c'] = 'api';
-		$GLOBALS['a'] = $_REQUEST['a'] = $action;
+		// $GLOBALS['a'] = $_REQUEST['a'] = $action;
 		if( $token !== null )
 			$_REQUEST['token'] = $token;
 
@@ -78,7 +78,7 @@
 		if( method_exists($api, $action) || has_hook('API_'.$action) ) {
 			$content = $api->$action();
 			$_REQUEST = $bake_request;
-			$GLOBALS['a'] = $_REQUEST['a'];
+			// $GLOBALS['a'] = $_REQUEST['a'];
 
 			return $content;
 			//if($data = json_decode( $content , 1 ))

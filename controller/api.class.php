@@ -140,6 +140,8 @@ class apiController extends appController {
 
 		echo json_encode($resobj);
 	}
+	/******************************* 华丽的分割线 **********************************/
+
 
 	/**
      * 登录，通过email和密码获取token
@@ -426,6 +428,70 @@ class apiController extends appController {
 		}
 	}
 
+	/**
+	 * 根据用户id获取个人中心信息，个人信息+相册信息
+	 *
+	 * @return json
+	 */
+	public function get_profile_info_by_uid()
+	{
+		$uid = intval(v('uid'));
+
+		if($uid > 0) {
+			$data['album_info'] = get_albuminfo_by_uid($uid);
+			$data['user_info'] = get_userinfo_by_uid($uid);
+
+			if($data) {
+				return send_json_res(API_SUCCESS_CODE, '操作成功', $data);
+			}else {
+				return send_json_res(API_DB_ERROR_CODE, '数据库操作失败', null);
+			}
+		}else {
+			return send_json_res(API_ARGS_ERROR_CODE, '参数错误', null);
+		}
+	}
+
+	/**
+	 * 根据用户id，更新用户基本信息(sideinfo)
+	 *
+	 * @return json
+	 */
+	public function update_user_sideinfo()
+	{
+		$params = array();
+		$params['nickname'] = v('nickname');
+		$params['relationship'] = intval(v('relationship'));
+		$params['gender'] = intval(v('gender'));
+		$params['birthday'] = v('birthday');
+		$params['height'] = v('height');
+		$params['weight'] = intval(v('weight'));
+		$params['province'] = intval(v('province'));
+		$params['city'] = intval(v('city'));
+		$params['company_visible'] = intval(v('company_visible'));
+		$params['job'] = v('job');
+		$params['income'] = intval(v('income'));
+		$params['university'] = v('university');
+		$params['education'] = intval(v('education'));
+		$params['weibo_link'] = v('weibo_link');
+
+		session_set_cookie_params( c('session_time') );
+		@session_start();
+
+		$uid = intval($_SESSION['uid']);
+
+		if($uid > 0) {
+			$res = update_user_sideinfo_by_uid($params, $uid);
+			if($res) {
+				echo send_json_res(API_SUCCESS_CODE, '操作成功', $data);
+			}else {
+				echo send_json_res(API_DB_ERROR_CODE, '数据库操作失败', null);
+
+			}
+		}else {
+			echo send_json_res(API_ARGS_ERROR_CODE, '参数错误', null);
+		}
+
+	}
 
 
 	/**

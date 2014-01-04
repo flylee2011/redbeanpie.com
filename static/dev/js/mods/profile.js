@@ -19,6 +19,10 @@ var elAlbumModal = $('#modal-album');
 var elPreviewImg = elAlbumModal.find('.img-preview-box img');
 var elDesText = elAlbumModal.find('textarea');
 var elSubmitAlbumBtn = elAlbumModal.find('.btn-submit');
+// 修改个人资料
+var elEditSideInfoLink = $('#edit-sideinfo-link');
+var elSideInfoModal = $('#modal-sideinfo');
+var elSideInfoForm = $('#edit-sideinfo-form');
 
 // 相册列表设置宽度
 if(elAlbumList.length) {
@@ -98,8 +102,16 @@ if(elSubmitAlbumBtn.length) {
 
 // 头像上传
 if(elAvatarLink.length) {
+	// 修改头像链接
+	elAvatarBox.on('mouseover', function(e){
+		elAvatarLink.show();
+	});
+	elAvatarBox.on('mouseout', function(e){
+		elAvatarLink.hide();
+	});
+
 	elAvatarLink.on('click', function(e){
-		var imgUrl = 'http://dev.redbeanpie.com' + elAvatarImg.attr('src');
+		var imgUrl = 'http://dev.redbeanpie.com/' + elAvatarImg.attr('src');
 		// 第1个参数是加载编辑器div容器，第2个参数是编辑器类型，第3个参数是div容器宽，第4个参数是div容器高
 		xiuxiu.embedSWF("xiuxiuContent", 5, "100%", "100%");
 		
@@ -143,6 +155,57 @@ if(elAvatarLink.length) {
 		};
 
 		elAvatarModal.modal();
+	});
+}
+
+// 个人资料修改
+if(elEditSideInfoLink.length) {
+	// 表单
+	var sideinfoValid = elSideInfoForm.Validform({
+		tiptype : function(msg,o,cssctl){
+			if(!o.obj.is("form")){
+				var objtip_form = o.obj.parent().next().find('.Validform_checktip');
+				cssctl(objtip_form, o.type);
+				objtip_form.text(msg);
+			}else{
+				var objtip_btn = o.obj.find(".btn-submit");
+				objtip_btn.text('提交中...');
+			}
+		},
+		ajaxPost : true
+	});
+
+	sideinfoValid.config({
+		ajaxpost : {
+			url : '?c=api&a=update_user_sideinfo',
+			timeout : 5000,
+			success : function(res, obj) {
+				var btnNode = obj.find('.btn-submit');
+				var code = res.code;
+				var msg = res.msg;
+				btnNode.attr('disabled', false).html('提交');
+				switch(code) {
+					case 'S00001' :
+						alert('修改成功');
+						window.location.reload();
+						break;
+					case 'E00001' :
+						alert('修改失败');
+						break;
+					default :
+						alert('系统繁忙');
+				}
+			},
+			error : function(res) {
+				alert('系统繁忙');
+			}
+		}
+	});
+	sideinfoValid.tipmsg.r = ' ';
+
+	// 浮层
+	elEditSideInfoLink.on('click', function(e){
+		elSideInfoModal.modal();
 	});
 }
 
