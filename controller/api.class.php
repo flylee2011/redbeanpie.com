@@ -378,7 +378,7 @@ class apiController extends appController {
 		if (!empty($_FILES)) {
 			$tempFile = $_FILES['Filedata']['tmp_name'];
 			$targetPath = $_SERVER['DOCUMENT_ROOT'] . $targetFolder;
-			$newfileName = uniqid() . '.' . pathinfo($_FILES['Filedata']['name'])['extension'];
+			$newfileName = uniqid() . '.' . pathinfo($_FILES['Filedata']['name'], PATHINFO_EXTENSION);
 			$targetFile = rtrim($targetPath,'/') . '/' . $newfileName;
 			
 			move_uploaded_file($tempFile, $targetFile);
