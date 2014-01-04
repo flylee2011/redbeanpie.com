@@ -9,9 +9,16 @@ class profileController extends appController
 	{
 		parent::__construct();
 	}
-	
-	// 个人中心首页
+
+	// 会员列表
 	function index()
+	{
+		$data['title'] = '浏览会员';
+		render($data, 'web', 'default');
+	}
+	
+	// 个人中心，会员详情页
+	function detail()
 	{
 		$params = array();
 		$params['uid'] = intval(v('uid'));
@@ -27,8 +34,8 @@ class profileController extends appController
 			
 			render($data, 'web', 'default');
 		}
-		
-
 	}
+
+
 	
 }

@@ -27,39 +27,39 @@
 					<a href="?c=dashboard">动态</a>
 				</li>
 
-				<?php if(g('c') === 'profilelist'): ?>
+				<?php if(g('c') === 'profile'): ?>
 				<li class="active">
 				<?php else: ?>
 				<li>
 				<?php endif; ?>
-					<a href="?c=profilelist">浏览</a>
+					<a href="?c=profile">浏览</a>
 				</li>
 
-				<?php if(g('c') === 'partylist'): ?>
+				<?php if(g('c') === 'party'): ?>
 				<li class="active">
 				<?php else: ?>
 				<li>
 				<?php endif; ?>
-					<a href="?c=partylist">派对</a>
+					<a href="?c=party">派对</a>
 				</li>
 
-				<?php if(g('c') === 'datinglist'): ?>
+				<?php if(g('c') === 'dating'): ?>
 				<li class="active">
 				<?php else: ?>
 				<li>
 				<?php endif; ?>
-					<a href="?c=datinglist">约会</a>
+					<a href="?c=dating">约会</a>
 				</li>
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#">约会</a></li>
-				<li><a href="#">信息</a></li>
-				<li><a href="#">收藏</a></li>
+				<li><a href="?c=message&a=dating_send">约会</a></li>
+				<li><a href="?c=message&a=index">信息</a></li>
+				<li><a href="?c=message&a=save_party">收藏</a></li>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $_SESSION['nickname'] ?> <b class="caret"></b></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="?c=profile&uid=<?php echo $_SESSION['uid'] ?>">个人中心</a></li>
+						<li><a href="?c=profile&a=detail&uid=<?php echo $_SESSION['uid'] ?>">个人中心</a></li>
 						<li><a href="#">发布</a></li>
 						<li><a href="#">消息</a></li>
 						<li><a href="#">收藏</a></li>
