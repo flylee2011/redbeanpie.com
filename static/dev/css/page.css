@@ -22,5 +22,7 @@
 @import url('./module/profile.css');
 /*** 浏览会员列表 ***/
 @import url('./module/profilelist.css');
+/*** 消息页 ***/
+@import url('./module/message.css');
 
 

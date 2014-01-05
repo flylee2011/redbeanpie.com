@@ -27,7 +27,7 @@
 					<a href="?c=dashboard">动态</a>
 				</li>
 
-				<?php if(g('c') === 'profile'): ?>
+				<?php if(g('c') === 'profile' && g('a') === 'index'): ?>
 				<li class="active">
 				<?php else: ?>
 				<li>
@@ -35,7 +35,7 @@
 					<a href="?c=profile">浏览</a>
 				</li>
 
-				<?php if(g('c') === 'party'): ?>
+				<?php if(g('c') === 'party' && g('a') === 'index'): ?>
 				<li class="active">
 				<?php else: ?>
 				<li>
@@ -43,7 +43,7 @@
 					<a href="?c=party">派对</a>
 				</li>
 
-				<?php if(g('c') === 'dating'): ?>
+				<?php if(g('c') === 'dating' && g('a') === 'index'): ?>
 				<li class="active">
 				<?php else: ?>
 				<li>
