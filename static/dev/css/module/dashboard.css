@@ -1,0 +1,12 @@
+/*** 动态 ***/
+.feed-item {
+	background-color: #ededed;
+	margin-bottom: 20px;
+}
+.feed-avatar {
+	height: auto;
+	width: 100px;
+}
+.feed-content {
+	padding-left: 20px;
+}

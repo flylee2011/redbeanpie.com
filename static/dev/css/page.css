@@ -24,5 +24,7 @@
 @import url('./module/profilelist.css');
 /*** 消息页 ***/
 @import url('./module/message.css');
+/*** 动态页 ***/
+@import url('./module/dashboard.css');
 
 

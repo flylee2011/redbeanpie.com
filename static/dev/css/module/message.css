@@ -1,10 +1,55 @@
-.btn-group {
+
+.nav-message {
 	margin-bottom: 20px;
 }
-.msg-content .nickname {
-	margin: 0;
+
+.message-back {
+	background-color: #e8e8e8;
 }
-.msg-avatar {
+
+.message-main {
+	background-color: #fff;
+	padding: 20px;
+}
+
+.message-side {
+	padding: 70px 0;
+}
+
+.message-side ul li {
+	font-size: 16px;
+	padding: 5px 0;
+	text-align: center;
+}
+.message-side ul li a {
+	color: #000;
+}
+.message-side ul li.active {
+	background-color: #fff;
+}
+
+.message-item {
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 20px;
+}
+.message-content {
+	background-color: #f3f3f3;
+	height: 100px;
+	padding: 0 10px;
+	margin-left: 110px;
+	overflow: hidden;
+}
+.message-content .nickname {
+	margin: 10px 0 5px 0;
+}
+.message-content .detail {
+	margin-bottom: 5px;
+}
+.message-content .time {
+	margin-bottom: 0;
+}
+.message-avatar {
 	height: auto;
-	max-width: 150px;
+	width: 100px;
 }
