@@ -72,6 +72,10 @@ a:hover {
 .rbp-callout {
 	border-left: 8px solid #1fbba6;
 	padding-left: 5px;
+	margin-bottom: 20px;
+}
+.rbp-callout .title {
+	margin: 0;
 }
 
 /*上传图片按钮和进度样式*/
