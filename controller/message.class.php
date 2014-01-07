@@ -25,34 +25,40 @@ class messageController extends appController
 	// 信息-单条详情
 	function msg_detail()
 	{
-
+		$data['title'] = '单条信息';
+		render($data, 'web', 'default');
 	}
 
 	// 约会-发出的
 	function dating_send()
 	{
-
+		$data['title'] = '约会';
+		render($data, 'web', 'default');
 	}
 	// 约会-收到的
 	function dating_in()
 	{
-
+		$data['title'] = '约会';
+		render($data, 'web', 'default');
 	}
 
 	// 收藏-派对
 	function save_party()
 	{
-
+		$data['title'] = '收藏';
+		render($data, 'web', 'default');
 	}
 	// 收藏-我收藏的会员
 	function save_people()
 	{
-
+		$data['title'] = '收藏';
+		render($data, 'web', 'default');
 	}
 	// 收藏-收藏我的会员
 	function saved_people()
 	{
-
+		$data['title'] = '收藏';
+		render($data, 'web', 'default');
 	}
 
 	

@@ -5,28 +5,83 @@
 			<div class="col-md-2 col-nopadding">
 				<div class="message-side">
 					<ul class="list-unstyled">
+						<?php if(g('a') === 'index' || g('a') === 'index_send'): ?>
+						<li class="active">
+							<a href="?c=message&a=index">信息</a>
+						</li>
 						<li>
-							<a href="">信息</a>
+							<a href="?c=message&a=dating_send">约会</a>
+						</li>
+						<li>
+							<a href="?c=message&a=save_party">收藏</a>
+						</li>
+						<?php endif; ?>
+
+						<?php if(g('a') === 'dating_send' || g('a') === 'dating_in'): ?>
+						<li>
+							<a href="?c=message&a=index">信息</a>
 						</li>
 						<li class="active">
-							<a href="">约会</a>
+							<a href="?c=message&a=dating_send">约会</a>
 						</li>
 						<li>
-							<a href="">收藏</a>
+							<a href="?c=message&a=save_party">收藏</a>
 						</li>
+						<?php endif; ?>
+
+						<?php if(g('a') === 'save_party' || g('a') === 'save_people' || g('a') === 'saved_people'): ?>
+						<li>
+							<a href="?c=message&a=index">信息</a>
+						</li>
+						<li>
+							<a href="?c=message&a=dating_send">约会</a>
+						</li>
+						<li class="active">
+							<a href="?c=message&a=save_party">收藏</a>
+						</li>
+						<?php endif; ?>
 					</ul>
 				</div>
 			</div>
 			<div class="col-md-10 col-nopadding">
 				<div class="message-main">
+					<?php if(g('a') === 'index' || g('a') === 'index_send'): ?>
 					<ul class="nav nav-tabs nav-justified nav-message">
-						<li class="active">
-							<a href="#">收件箱</a>
+						<li <?php if(g('a') === 'index'){echo 'class="active"';} ?>>
+							<a href="?c=message&a=index">收件箱</a>
 						</li>
-						<li>
-							<a href="#">发件箱</a>
+						<li <?php if(g('a') === 'index_send'){echo 'class="active"';} ?>>
+							<a href="?c=message&a=index_send">发件箱</a>
 						</li>
 					</ul>
+					<?php endif; ?>
+					
+					<?php if(g('a') === 'dating_send' || g('a') === 'dating_in'): ?>
+					<ul class="nav nav-tabs nav-justified nav-message">
+						<li <?php if(g('a') === 'dating_send'){echo 'class="active"';} ?>>
+							<a href="?c=message&a=dating_send">我发出的邀请</a>
+						</li>
+						<li <?php if(g('a') === 'dating_in'){echo 'class="active"';} ?>>
+							<a href="?c=message&a=dating_in">我收到的邀请</a>
+						</li>
+					</ul>
+					<?php endif; ?>
+
+					<?php if(g('a') === 'save_party' || g('a') === 'save_people' || g('a') === 'saved_people'): ?>
+					<ul class="nav nav-tabs nav-justified nav-message">
+						<li <?php if(g('a') === 'save_party'){echo 'class="active"';} ?>>
+							<a href="?c=message&a=save_party">收藏的派对</a>
+						</li>
+						<li <?php if(g('a') === 'save_people'){echo 'class="active"';} ?>>
+							<a href="?c=message&a=save_people">收藏的人</a>
+						</li>
+						<li <?php if(g('a') === 'saved_people'){echo 'class="active"';} ?>>
+							<a href="?c=message&a=saved_people">谁收藏了我</a>
+						</li>
+					</ul>
+					<?php endif; ?>
+
+
 					<div class="message-item clearfix">
 						<div class="message-avatar pull-left">
 							<img class="img-responsive img-rounded" src="static/dev/images/avatar_default.jpg">
@@ -47,6 +102,7 @@
 							<p class="text-muted time">5小时前</p>
 						</div>
 					</div>
+
 				</div>
 			</div>
 		</div>
