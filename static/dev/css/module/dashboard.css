@@ -10,3 +10,49 @@
 .feed-content {
 	padding-left: 20px;
 }
+
+.load-more .btn-feed-loadmore {
+	width: 100%;
+	background-color: #eeeeee;
+}
+
+.progress-dashboard {
+	background-color: #e0e0e0;
+	height: 40px;
+}
+.progress-bar-dashboard {
+	background-color: #fd4d52;
+	line-height: 40px;
+	font-size: 16px;
+}
+
+.btn-dashboard {
+	width: 100%;
+	background-color: #fd4b50;
+	border: 0;
+}
+.btn-dashboard:hover {
+	background-color: #fd4b50;
+	opacity: 0.8;
+}
+
+.send-box, .info-box {
+	margin-bottom: 20px;
+	background-color: #ededed;
+	padding: 10px;
+}
+
+.send-box .avatar-box {
+	width: 100px;
+	height: auto;
+}
+.send-box .user-info {
+	padding: 0 10px;
+}
+.send-box .send-area {
+	margin-top: 10px;
+}
+.send-box .send-area textarea {
+	width: 100%;
+	margin-bottom: 10px;
+}
