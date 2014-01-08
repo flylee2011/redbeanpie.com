@@ -35,6 +35,14 @@
 						}
 					?>
 				</p>
+				<?php else: ?>
+				<p class="text-muted">
+					<?php 
+						if($user_info['job']){
+							echo $user_info['job'];
+						}
+					?>
+				</p>
 				<?php endif; ?>
 				<p class="text-muted">
 					<?php 
@@ -218,53 +226,113 @@
 				
 				<!-- 关于我 -->
 				<div id="aboutme" class="aboutme-info-box tab-pane fade active in">
-					<div class="aboutme-info-title clearfix">
-						<span class="pull-left"><strong>自我介绍</strong></span>
-						<?php if(is_login_profile()): ?>
-						<a href="javascript:void(0);" class="pull-right">修改</a>
-						<?php endif; ?>
+
+					<div id="essay1" class="essay-box">
+						<div class="aboutme-info-title clearfix">
+							<span class="pull-left"><strong>自我介绍</strong></span>
+							<?php if(is_login_profile()): ?>
+							<a href="javascript:void(0);" class="pull-right">修改</a>
+							<?php endif; ?>
+						</div>
+						<div class="aboutme-info-content">
+							<p>
+								<?php
+									if($user_info['essay1']) {
+										echo $user_info['essay1'];
+									}else {
+										echo '未填写';
+									}
+								?>
+							</p>
+						</div>
 					</div>
-					<div class="aboutme-info-content">
-						<p>未填写</p>
+					<div id="essay1-edit" class="edit-box">
+						<div class="aboutme-info-title">
+							<span><strong>自我介绍</strong></span>
+						</div>
+						<div class="aboutme-info-content">
+							<textarea data-type="essay1" class="form-control" value="<?php echo $user_info['essay1']; ?>"><?php echo $user_info['essay1']; ?></textarea>
+						</div>
 					</div>
-					<div class="aboutme-info-title clearfix">
-						<span class="pull-left"><strong>喜欢的事情、兴趣爱好等</strong></span>
-						<?php if(is_login_profile()): ?>
-						<a href="javascript:void(0);" class="pull-right">修改</a>
-						<?php endif; ?>
+
+					<div id="essay2" class="essay-box">
+						<div class="aboutme-info-title clearfix">
+							<span class="pull-left"><strong>喜欢的事情、兴趣爱好等</strong></span>
+							<?php if(is_login_profile()): ?>
+							<a href="javascript:void(0);" class="pull-right">修改</a>
+							<?php endif; ?>
+						</div>
+						<div class="aboutme-info-content">
+							<p>
+								<?php
+									if($user_info['essay2']) {
+										echo $user_info['essay2'];
+									}else {
+										echo '未填写';
+									}
+								?>
+							</p>
+						</div>
 					</div>
-					<div class="aboutme-info-content">
-						<p>未填写</p>
+					<div id="essay2-edit" class="edit-box">
+						<div class="aboutme-info-title">
+							<span><strong>喜欢的事情、兴趣爱好等</strong></span>
+						</div>
+						<div class="aboutme-info-content">
+							<textarea data-type="essay2" class="form-control" value="<?php echo $user_info['essay2']; ?>"><?php echo $user_info['essay2']; ?></textarea>
+						</div>
 					</div>
-					<div class="aboutme-info-title clearfix">
-						<span class="pull-left"><strong>不喜欢的事情</strong></span>
-						<?php if(is_login_profile()): ?>
-						<a href="javascript:void(0);" class="pull-right">修改</a>
-						<?php endif; ?>
+
+					<div id="essay3" class="essay-box">
+						<div class="aboutme-info-title clearfix">
+							<span class="pull-left"><strong>不喜欢的事情</strong></span>
+							<?php if(is_login_profile()): ?>
+							<a href="javascript:void(0);" class="pull-right">修改</a>
+							<?php endif; ?>
+						</div>
+						<div class="aboutme-info-content">
+							<p>
+								<?php
+									if($user_info['essay3']) {
+										echo $user_info['essay3'];
+									}else {
+										echo '未填写';
+									}
+								?>
+							</p>
+						</div>
 					</div>
-					<div class="aboutme-info-content">
-						<p>未填写</p>
+					<div id="essay3-edit" class="edit-box">
+						<div class="aboutme-info-title">
+							<span><strong>不喜欢的事情</strong></span>
+						</div>
+						<div class="aboutme-info-content">
+							<textarea data-type="essay3" class="form-control" value="<?php echo $user_info['essay3']; ?>"><?php echo $user_info['essay3']; ?></textarea>
+						</div>
 					</div>
-					<div class="aboutme-info-title clearfix">
-						<span class="pull-left"><strong>理想异性</strong></span>
-						<?php if(is_login_profile()): ?>
-						<a href="javascript:void(0);" class="pull-right">修改</a>
-						<?php endif; ?>
-					</div>
-					<div class="aboutme-info-content">
-						<p>未填写</p>
-						<!-- <p>
-							<strong>年龄: </strong>18-28岁
-						</p>
-						<p>
-							<strong>身高: </strong>180
-						</p>
-						<p>
-							<strong>收入: </strong>5000以上
-						</p>
-						<p>
-							<strong>其他: </strong>其他其他其他其他其他其他其他
-						</p> -->
+
+					<div id="essay4" class="essay-box">
+						<div class="aboutme-info-title clearfix">
+							<span class="pull-left"><strong>理想异性</strong></span>
+							<?php if(is_login_profile()): ?>
+							<a href="javascript:void(0);" class="pull-right">修改</a>
+							<?php endif; ?>
+						</div>
+						<div class="aboutme-info-content">
+							<p>未填写</p>
+							<!-- <p>
+								<strong>年龄: </strong>18-28岁
+							</p>
+							<p>
+								<strong>身高: </strong>180
+							</p>
+							<p>
+								<strong>收入: </strong>5000以上
+							</p>
+							<p>
+								<strong>其他: </strong>其他其他其他其他其他其他其他
+							</p> -->
+						</div>
 					</div>
 				</div>
 				<!-- 派对 -->

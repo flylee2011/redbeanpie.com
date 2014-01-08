@@ -173,5 +173,35 @@ function update_user_sideinfo_by_uid($params, $uid)
 	return true;
 }
 
+// 根据用户uid，更新用户关于我信息
+function update_user_aboutme_by_uid($params, $uid)
+{
+	$uid = intval($uid);
+
+	switch ($params['data_field']) {
+		case 'essay1':
+			$sql = "UPDATE `rbp_userinfo` SET `essay1`='". $params['content'] ."' WHERE `id`=". $uid;
+			break;
+		case 'essay2':
+			$sql = "UPDATE `rbp_userinfo` SET `essay2`='". $params['content'] ."' WHERE `id`=". $uid;
+			break;
+		case 'essay3':
+			$sql = "UPDATE `rbp_userinfo` SET `essay3`='". $params['content'] ."' WHERE `id`=". $uid;
+			break;
+		case 'essay4':
+			# code...
+			break;
+		default:
+			return false;
+			break;
+	}
+	
+	run_sql($sql);
+	if(db_errno() != 0) {
+		return false;
+	}
+	return true;
+}
+
 ?>
 

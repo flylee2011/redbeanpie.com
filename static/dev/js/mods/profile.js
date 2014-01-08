@@ -209,4 +209,47 @@ if(elEditSideInfoLink.length) {
 	});
 }
 
+// 关于我资料修改
+var elEssayBox = $('#essay1,#essay2,#essay3');
+var elEssayEditText = $('.edit-box textarea');
+
+$('#aboutme .essay-box').on('mouseover', function(){
+	$(this).css({
+		'background-color': '#f5f5f5'
+	});
+});
+$('#aboutme .essay-box').on('mouseout', function(){
+	$(this).css({
+		'background-color': 'transparent'
+	});
+});
+elEssayBox.on('click', function(){
+	$(this).hide();
+	$(this).next('.edit-box').show();
+	$(this).next('.edit-box').find('textarea').focus();
+});
+elEssayEditText.on('blur', function(){
+	var type = $(this).attr('data-type');
+	var content = $(this).val();
+	var targetEssayBox = $(this).parents('.edit-box').prev('.essay-box');
+
+	$(this).parents('.edit-box').hide();
+	targetEssayBox.find('.aboutme-info-content p').html(content);
+	targetEssayBox.show();
+
+	var reqdata = {
+		data_field : type,
+		content : content
+	};
+	$.ajax({
+		url : '/?c=api&a=update_user_aboutme',
+		type : 'POST',
+		data : reqdata,
+		success : function(res){
+		}
+	});
+
+});
+
+
 

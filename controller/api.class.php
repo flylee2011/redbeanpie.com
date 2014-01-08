@@ -493,6 +493,35 @@ class apiController extends appController {
 
 	}
 
+	/**
+	 * 根据用户id，更新用户关于我信息
+	 *
+	 * @return json
+	 */
+	public function update_user_aboutme()
+	{
+		$params = array();
+		$params['data_field'] = v('data_field');
+		$params['content'] = v('content');
+
+		session_set_cookie_params( c('session_time') );
+		@session_start();
+
+		$uid = intval($_SESSION['uid']);
+
+		if($uid > 0) {
+			$res = update_user_aboutme_by_uid($params, $uid);
+			if($res) {
+				echo send_json_res(API_SUCCESS_CODE, '操作成功', $data);
+			}else {
+				echo send_json_res(API_DB_ERROR_CODE, '数据库操作失败', null);
+
+			}
+		}else {
+			echo send_json_res(API_ARGS_ERROR_CODE, '参数错误', null);
+		}
+	}
+
 
 	/**
 	 * 返回成功信息（json）
