@@ -330,41 +330,7 @@
 							<a href="javascript:void(0);" class="pull-right">修改</a>
 							<?php endif; ?>
 						</div>
-						<div class="aboutme-info-content">
-							<?php
-							if(intval($user_info['age_min']) != 0) {
-								if(intval($user_info['age_max']) != 0) {
-									echo '<p><strong>年龄：</strong>'. $user_info['age_min'] .'-'. $user_info['age_max'] .'<p>';
-								}else {
-									echo '<p><strong>年龄：</strong> 大于'. $user_info['age_min']. '<p>';
-								}
-							}else {
-								if(intval($user_info['age_max']) != 0) {
-									echo '<p><strong>年龄：</strong> 小于'. $user_info['age_max']. '<p>';
-
-									echo '<p><strong>年龄：</strong>'. $user_info['age_min'] .'-'. $user_info['age_max'] .'<p>';
-								}else {
-									echo '<p><strong>年龄：</strong>不限<p>';
-								}
-							}
-							if(intval($user_info['height_looking_for']) != 0) {
-								echo '<p><strong>身高：</strong>'. $user_info['height_looking_for'] .'</p>';
-							}else {
-								echo '<p><strong>身高：</strong>不限</p>';
-							}
-							if(intval($user_info['income_looking_for']) != 0) {
-								echo '<p><strong>收入：</strong>'. $user_info['income_looking_for'] .'</p>';
-							}else {
-								echo '<p><strong>收入：</strong>不限</p>';
-							}
-							if($user_info['other_looking_for']) {
-								echo '<p><strong>其他：</strong>'. $user_info['other_looking_for'] .'</p>';
-							}else {
-								echo '<p><strong>其他：</strong>未填写</p>';
-							}
-							?>
-							
-						</div>
+						
 					</div>
 				</div>
 				<!-- 派对 -->
