@@ -462,7 +462,7 @@ class apiController extends appController {
 		$params['nickname'] = v('nickname');
 		$params['relationship'] = intval(v('relationship'));
 		$params['gender'] = intval(v('gender'));
-		$params['birthday'] = v('birthday');
+		$params['birthday'] = v('year') . '-' . v('month') . '-' . v('day');
 		$params['height'] = v('height');
 		$params['weight'] = intval(v('weight'));
 		$params['province'] = intval(v('province'));

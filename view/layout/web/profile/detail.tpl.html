@@ -18,7 +18,9 @@
 			<div class="baseinfo-box">
 				<h3 class="nick-title"><?php echo $user_info['nickname']; ?></h3>
 				<p>
-					<span>24岁-</span>
+					<?php if($user_info['birthday'] != '0000-00-00'): ?>
+					<span><?php echo cal_age($user_info['birthday']); ?>岁-</span>
+					<?php endif; ?>
 					<span><?php if($user_info['gender'] == 0){echo '男生';}else {echo '女生';} ?>-</span>
 					<span>北京市海淀区</span>
 				</p>
@@ -125,7 +127,7 @@
 						</p>
 						<p class="clearfix">
 							<span class="pull-left">年龄</span>
-							<span class="pull-right"></span>
+							<span class="pull-right"><?php echo cal_age($user_info['birthday']); ?></span>
 						</p>
 						<p class="clearfix">
 							<span class="pull-left">身高</span>
@@ -385,8 +387,50 @@
 
 						<div class="form-group">
 							<label for="inputBirthday" class="col-sm-2 control-label">出生日期</label>
-							<div class="col-sm-6">
-								<input id="inputBirthday" name="birthday" value="1990" readonly="true" datatype="*" errormsg="还没填呢" nullmsg="还没填呢" class="form-control">
+							<div class="col-sm-2">
+								<select id="selectYear" name="year" class="form-control" datatype="*" errormsg="还没填呢" nullmsg="还没填呢">
+									<option value="">-</option>
+									<?php
+									for($year=1996; $year>=1950; $year--)
+									{
+										if( (int)explode('-', $user_info['birthday'])[0] === $year ) {
+											echo '<option selected="selected" value="'. $year .'">'. $year .'</option>';
+										}else {
+											echo '<option value="'. $year .'">'. $year .'</option>';
+										}
+									} 
+									?>
+								</select>
+							</div>
+							<div class="col-sm-2">
+								<select id="selectMonth" name="month" class="form-control" datatype="*" errormsg="还没填呢" nullmsg="还没填呢">
+									<option value="">-</option>
+									<?php
+									for($month=1; $month<12 ; $month++)
+									{
+										if( (int)explode('-', $user_info['birthday'])[1] == $month ) {
+											echo '<option selected="selected" value="'. $month .'">'. $month .'</option>';
+										}else {
+											echo '<option value="'. $month .'">'. $month .'</option>';
+										}
+									}
+									?>
+								</select>
+							</div>
+							<div class="col-sm-2">
+								<select id="selectDay" name="day" class="form-control" datatype="*" errormsg="还没填呢" nullmsg="还没填呢">
+									<option value="">-</option>
+									<?php
+									for($day=1; $day<31 ; $day++)
+									{
+										if( (int)explode('-', $user_info['birthday'])[2] == $day ) {
+											echo '<option selected="selected" value="'. $day .'">'. $day .'</option>';
+										}else {
+											echo '<option value="'. $day .'">'. $day .'</option>';
+										}
+									}
+									?>
+								</select>
 							</div>
 							<div class="col-sm-4 col-validtip">
 								<p class="Validform_checktip"></p>

@@ -164,7 +164,7 @@ if(elEditSideInfoLink.length) {
 	var sideinfoValid = elSideInfoForm.Validform({
 		tiptype : function(msg,o,cssctl){
 			if(!o.obj.is("form")){
-				var objtip_form = o.obj.parent().next().find('.Validform_checktip');
+				var objtip_form = o.obj.parent().siblings().find('.Validform_checktip');
 				cssctl(objtip_form, o.type);
 				objtip_form.text(msg);
 			}else{

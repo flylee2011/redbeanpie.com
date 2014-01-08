@@ -150,6 +150,21 @@
 		return false;
 	}
 
+	// 计算年龄
+	function cal_age($birth)
+	{
+		// $birth='0000-00-00';
+		if($birth ===  '0000-00-00') {
+			return '';
+		}
+		list($by,$bm,$bd) = explode('-',$birth);
+		$cm = date('n');
+		$cd = date('j');
+		$age = date('Y') - $by -1;
+		if ($cm>$bm || $cm==$bm && $cd>$bd) $age++;
+		return $age;
+	}
+
 	/***************************************************************/
 	// 登录
 	function login( $email , $password )
