@@ -169,7 +169,7 @@ if(elEditSideInfoLink.length) {
 				objtip_form.text(msg);
 			}else{
 				var objtip_btn = o.obj.find(".btn-submit");
-				objtip_btn.text('提交中...');
+				objtip_btn.text('更新中...');
 			}
 		},
 		ajaxPost : true
@@ -183,7 +183,7 @@ if(elEditSideInfoLink.length) {
 				var btnNode = obj.find('.btn-submit');
 				var code = res.code;
 				var msg = res.msg;
-				btnNode.attr('disabled', false).html('提交');
+				btnNode.attr('disabled', false).html('更 新');
 				switch(code) {
 					case 'S00001' :
 						alert('修改成功');
@@ -212,44 +212,93 @@ if(elEditSideInfoLink.length) {
 // 关于我资料修改
 var elEssayBox = $('#essay1,#essay2,#essay3');
 var elEssayEditText = $('.edit-box textarea');
-
-$('#aboutme .essay-box').on('mouseover', function(){
-	$(this).css({
-		'background-color': '#f5f5f5'
+var elLookingForBox = $('#essay4');
+var elAboutmeModal = $('#modal-aboutme');
+var elAboutmeForm = $('#aboutme-form');
+// 关于我资料浮层
+if(elAboutmeModal.length) {
+	elLookingForBox.on('click', function(){
+		elAboutmeModal.modal();
 	});
-});
-$('#aboutme .essay-box').on('mouseout', function(){
-	$(this).css({
-		'background-color': 'transparent'
+
+	var aboutmeValid = elAboutmeForm.Validform({
+		tiptype : function(msg,o,cssctl){
+			if(!o.obj.is("form")){
+				var objtip_form = o.obj.parent().siblings().find('.Validform_checktip');
+				cssctl(objtip_form, o.type);
+				objtip_form.text(msg);
+			}else{
+				var objtip_btn = o.obj.find(".btn-submit");
+				objtip_btn.text('更新中...');
+			}
+		},
+		ajaxPost : true
 	});
-});
-elEssayBox.on('click', function(){
-	$(this).hide();
-	$(this).next('.edit-box').show();
-	$(this).next('.edit-box').find('textarea').focus();
-});
-elEssayEditText.on('blur', function(){
-	var type = $(this).attr('data-type');
-	var content = $(this).val();
-	var targetEssayBox = $(this).parents('.edit-box').prev('.essay-box');
-
-	$(this).parents('.edit-box').hide();
-	targetEssayBox.find('.aboutme-info-content p').html(content);
-	targetEssayBox.show();
-
-	var reqdata = {
-		data_field : type,
-		content : content
-	};
-	$.ajax({
-		url : '/?c=api&a=update_user_aboutme',
-		type : 'POST',
-		data : reqdata,
-		success : function(res){
+	aboutmeValid.config({
+		ajaxpost : {
+			url : '?c=api&a=update_user_lookingfor',
+			timeout : 5000,
+			success : function(res, obj) {
+				var btnNode = obj.find('.btn-submit');
+				var code = res.code;
+				var msg = res.msg;
+				btnNode.attr('disabled', false).html('更 新');
+				switch(code) {
+					case 'S00001' :
+						alert('修改成功');
+						window.location.reload();
+						break;
+					case 'E00001' :
+						alert('修改失败');
+						break;
+					default :
+						alert('系统繁忙');
+				}
+			},
+			error : function(res) {
+				alert('系统繁忙');
+			}
 		}
 	});
+	aboutmeValid.tipmsg.r = ' ';
 
-});
+	$('#aboutme .essay-box').on('mouseover', function(){
+		$(this).css({
+			'background-color': '#f5f5f5'
+		});
+	});
+	$('#aboutme .essay-box').on('mouseout', function(){
+		$(this).css({
+			'background-color': 'transparent'
+		});
+	});
+	elEssayBox.on('click', function(){
+		$(this).hide();
+		$(this).next('.edit-box').show();
+		$(this).next('.edit-box').find('textarea').focus();
+	});
+	elEssayEditText.on('blur', function(){
+		var type = $(this).attr('data-type');
+		var content = $(this).val();
+		var targetEssayBox = $(this).parents('.edit-box').prev('.essay-box');
+
+		$(this).parents('.edit-box').hide();
+		targetEssayBox.find('.aboutme-info-content p').html(content);
+		targetEssayBox.show();
+
+		var reqdata = {
+			data_field : type,
+			content : content
+		};
+		$.ajax({
+			url : '/?c=api&a=update_user_aboutme',
+			type : 'POST',
+			data : reqdata,
+			success : function(res){
+			}
+		});
+	});
+}
 
 
 

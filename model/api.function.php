@@ -188,14 +188,34 @@ function update_user_aboutme_by_uid($params, $uid)
 		case 'essay3':
 			$sql = "UPDATE `rbp_userinfo` SET `essay3`='". $params['content'] ."' WHERE `id`=". $uid;
 			break;
-		case 'essay4':
-			# code...
-			break;
 		default:
 			return false;
 			break;
 	}
+
+	run_sql($sql);
+	if(db_errno() != 0) {
+		return false;
+	}
+	return true;
+}
+
+// 根据用户uid，更新用户关于我-理想配偶信息
+function update_user_lookingfor_by_uid($params, $uid)
+{
+	$uid = intval($uid);
 	
+	$dsql = array();
+	$dsql[] = "`age_min`='" . s( $params['age_min'] ) . "'";
+	$dsql[] = "`age_max`='" . s( $params['age_max'] ) . "'";
+	$dsql[] = "`height_looking_for`='" . s( $params['height_looking_for'] ) . "'";
+	$dsql[] = "`income_looking_for`='" . s( $params['income_looking_for'] ) . "'";
+	$dsql[] = "`other_looking_for`='" . s( $params['other_looking_for'] ) . "'";
+
+	$setstring = join( ' , ' , $dsql );
+
+	$sql = "UPDATE `rbp_userinfo` SET ". $setstring ." WHERE `id`=" . $uid;
+
 	run_sql($sql);
 	if(db_errno() != 0) {
 		return false;

@@ -522,6 +522,38 @@ class apiController extends appController {
 		}
 	}
 
+	/**
+	 * 根据用户id，更新用户关于我-理想配偶信息
+	 *
+	 * @return json
+	 */
+	public function update_user_lookingfor()
+	{
+		$params = array();
+		$params['age_min'] =  intval(v('age_min'));
+		$params['age_max'] =  intval(v('age_max'));
+		$params['height_looking_for'] =  intval(v('height_looking_for'));
+		$params['income_looking_for'] =  intval(v('income_looking_for'));
+		$params['other_looking_for'] = v('other_looking_for');
+
+		session_set_cookie_params( c('session_time') );
+		@session_start();
+
+		$uid = intval($_SESSION['uid']);
+
+		if($uid > 0) {
+			$res = update_user_lookingfor_by_uid($params, $uid);
+			if($res) {
+				echo send_json_res(API_SUCCESS_CODE, '操作成功', $data);
+			}else {
+				echo send_json_res(API_DB_ERROR_CODE, '数据库操作失败', null);
+
+			}
+		}else {
+			echo send_json_res(API_ARGS_ERROR_CODE, '参数错误', null);
+		}
+	}
+
 
 	/**
 	 * 返回成功信息（json）
