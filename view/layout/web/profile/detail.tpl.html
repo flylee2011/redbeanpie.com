@@ -488,9 +488,11 @@
 								<select id="selectYear" name="year" class="form-control" datatype="*" errormsg="还没填呢" nullmsg="还没填呢">
 									<option value="">-</option>
 									<?php
+									$user_birthday = explode('-', $user_info['birthday']);
+
 									for($year=1996; $year>=1950; $year--)
 									{
-										if( (int)explode('-', $user_info['birthday'])[0] === $year ) {
+										if( (int)$user_birthday[0] === $year ) {
 											echo '<option selected="selected" value="'. $year .'">'. $year .'</option>';
 										}else {
 											echo '<option value="'. $year .'">'. $year .'</option>';
@@ -503,9 +505,11 @@
 								<select id="selectMonth" name="month" class="form-control" datatype="*" errormsg="还没填呢" nullmsg="还没填呢">
 									<option value="">-</option>
 									<?php
+									$user_birthday = explode('-', $user_info['birthday']);
+
 									for($month=1; $month<12 ; $month++)
 									{
-										if( (int)explode('-', $user_info['birthday'])[1] == $month ) {
+										if( (int)$user_birthday[1] == $month ) {
 											echo '<option selected="selected" value="'. $month .'">'. $month .'</option>';
 										}else {
 											echo '<option value="'. $month .'">'. $month .'</option>';
@@ -518,9 +522,11 @@
 								<select id="selectDay" name="day" class="form-control" datatype="*" errormsg="还没填呢" nullmsg="还没填呢">
 									<option value="">-</option>
 									<?php
+									$user_birthday = explode('-', $user_info['birthday']);
+
 									for($day=1; $day<31 ; $day++)
 									{
-										if( (int)explode('-', $user_info['birthday'])[2] == $day ) {
+										if( (int)$user_birthday[2] == $day ) {
 											echo '<option selected="selected" value="'. $day .'">'. $day .'</option>';
 										}else {
 											echo '<option value="'. $day .'">'. $day .'</option>';
