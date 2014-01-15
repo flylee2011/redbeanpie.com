@@ -152,5 +152,32 @@
 	margin: 50% 0 0 20%;
 }
 
+.modal-letter .letter-img-box {
+	position: relative;
+	width: 100px;
+	height: 100px;
+}
+.modal-letter .letter-img-box img {
+	width: 50px;
+	height: 50px;
+	position: absolute;
+}
+.modal-letter .letter-img-box .to-user, .modal-letter .letter-img-box .src-user {
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	border: 2px solid #fff;
+}
+.modal-letter .letter-img-box .to-user {
+	right: 0;
+}
+.modal-letter .letter-img-box .src-user {
+	top: 25px;
+	left: 20px;
+}
+.modal-letter .letter-content textarea {
+	margin-bottom: 20px;
+}
+
 
 

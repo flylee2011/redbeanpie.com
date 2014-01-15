@@ -65,9 +65,9 @@
 				</p>
 				<div class="btn-wrap">
 					<?php if(!is_login_profile()): ?>
-					<button type="button" class="btn btn-default">收藏</button>
+					<button data-role="fav-btn" type="button" class="btn btn-default">收藏</button>
+					<button data-role="letter-btn" type="button" class="btn btn-default">发消息</button>
 					<?php endif; ?>
-					<button type="button" class="btn btn-default">发消息</button>
 				</div>
 				
 				<div class="well">
@@ -541,32 +541,15 @@
 						</div>
 
 						<div class="form-group">
-							<label for="selectHeight" class="col-sm-2 control-label">身高</label>
-							<div class="col-sm-6">
-								<select id="selectHeight" name="height" datatype="*" errormsg="还没填呢" nullmsg="还没填呢" class="form-control">
-									<option value="">-</option>
-									<option <?php if($user_info['height'] == '150') echo 'selected="selected"' ?> value="150">150cm</option>
-									<option <?php if($user_info['height'] == '155') echo 'selected="selected"' ?> value="155">155cm</option>
-									<option <?php if($user_info['height'] == '160') echo 'selected="selected"' ?> value="160">160cm</option>
-									<option <?php if($user_info['height'] == '165') echo 'selected="selected"' ?> value="165">165cm</option>
-									<option <?php if($user_info['height'] == '170') echo 'selected="selected"' ?> value="170">170cm</option>
-									<option <?php if($user_info['height'] == '175') echo 'selected="selected"' ?> value="175">175cm</option>
-									<option <?php if($user_info['height'] == '180') echo 'selected="selected"' ?> value="180">180cm</option>
-									<option <?php if($user_info['height'] == '185') echo 'selected="selected"' ?> value="185">185cm</option>
-									<option <?php if($user_info['height'] == '190') echo 'selected="selected"' ?> value="190">190cm</option>
-									<option <?php if($user_info['height'] == '195') echo 'selected="selected"' ?> value="195">195cm</option>
-									<option <?php if($user_info['height'] == '200') echo 'selected="selected"' ?> value="200">200cm</option>
-									<option <?php if($user_info['height'] == '205') echo 'selected="selected"' ?> value="205">205cm</option>
-									<option <?php if($user_info['height'] == '210') echo 'selected="selected"' ?> value="210">210cm</option>
-									<option <?php if($user_info['height'] == '215') echo 'selected="selected"' ?> value="215">215cm</option>
-									<option <?php if($user_info['height'] == '220') echo 'selected="selected"' ?> value="220">220cm</option>
-								</select>
+							<label for="inputHeight" class="col-sm-2 control-label">身高</label>
+							<div class="input-group col-sm-6">
+								<input id="inputHeight" type="text" class="form-control" name="height" value="<?php echo $user_info['height']; ?>" placeholder="身高" datatype="n3-3" errormsg="请输入三位数字" nullmsg="还没填呢">
+								<span class="input-group-addon">厘米(CM)</span>
 							</div>
 							<div class="col-sm-4 col-validtip">
 								<p class="Validform_checktip"></p>
 							</div>
 						</div>
-
 						<div class="form-group">
 							<label for="inputWeight" class="col-sm-2 control-label">体重</label>
 							<div class="input-group col-sm-6">
@@ -699,7 +682,7 @@
 						<div class="form-group">
 							<label class="col-sm-2 control-label">年龄范围</label>
 							<div class="col-sm-3">
-								<select name="age_min" class="form-control" datatype="*" errormsg="还没填呢" nullmsg="还没填呢">
+								<select name="age_min" class="form-control" datatype="*,agerange" errormsg="年龄范围有误" nullmsg="还没填呢">
 									<option value="0">不限</option>
 									<?php
 									for($age_min=18; $age_min<40 ;$age_min++)
@@ -714,7 +697,7 @@
 								</select>
 							</div>
 							<div class="col-sm-3">
-								<select name="age_max" class="form-control" datatype="*" errormsg="还没填呢" nullmsg="还没填呢">
+								<select name="age_max" class="form-control" datatype="*,agerange" errormsg="年龄范围有误" nullmsg="还没填呢">
 									<option value="0">不限</option>
 									<?php
 									for($age_max=18; $age_max<40 ;$age_max++)
@@ -785,9 +768,36 @@
 			</div>		
 		</div>
 	</div>
+	<?php endif; ?>
 
+	<?php if(!is_login_profile()): ?>
 	<!-- 发消息浮层 -->
-
+	<div id="modal-letter" class="modal fade modal-letter">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">私信</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-3">
+							<div class="letter-img-box">
+								<img class="src-user" src="/static/dev/images/avatar_demo.jpg">
+								<img class="to-user" src="<?php echo $user_info['avatar_url']; ?>">
+							</div>
+						</div>
+						<div class="col-md-9">
+							<div class="letter-content">
+								<textarea class="form-control" rows="8" placeholder="发给 <?php echo $user_info['nickname']; ?>: "></textarea>
+								<button data-role="" type="button" class="btn btn-primary btn-submit pull-right">发 送</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<?php endif; ?>
 
 </div>

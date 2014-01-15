@@ -232,6 +232,17 @@ if(elAboutmeModal.length) {
 				objtip_btn.text('更新中...');
 			}
 		},
+		datatype : {
+			'agerange' : function(gets, obj, curform, regxp){
+				var age_min = curform.find('select[name="age_min"]').val();
+				var age_max = curform.find('select[name="age_max"]').val();
+				if(age_min <= age_max) {
+					return true;
+				}else {
+					return false;
+				}
+			}
+		},
 		ajaxPost : true
 	});
 	aboutmeValid.config({
@@ -299,6 +310,18 @@ if(elAboutmeModal.length) {
 		});
 	});
 }
+
+// 发消息
+var elMsgBtn = $('.baseinfo-box [data-role="letter-btn"]');
+var elLetterModal = $('#modal-letter');
+elMsgBtn.on('click', function(){
+	elLetterModal.modal();
+
+});
+
+
+
+
 
 
 
