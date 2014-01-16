@@ -316,8 +316,11 @@ var elMsgBtn = $('.baseinfo-box [data-role="letter-btn"]');
 var elLetterModal = $('#modal-letter');
 elMsgBtn.on('click', function(){
 	elLetterModal.modal();
-
 });
+
+// 收藏
+
+// 用户列表读取渲染
 
 
 

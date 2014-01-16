@@ -155,6 +155,7 @@ function update_user_sideinfo_by_uid($params, $uid)
 	$dsql[] = "`weight`='" . s( $params['weight'] ) . "'";
 	$dsql[] = "`province_id`='" . s( $params['province'] ) . "'";
 	$dsql[] = "`city_id`='" . s( $params['city'] ) . "'";
+	$dsql[] = "`com_name`='" . s( $params['com_name'] ) . "'";
 	$dsql[] = "`company_visible`='" . s( $params['company_visible'] ) . "'";
 	$dsql[] = "`job`='" . s( $params['job'] ) . "'";
 	$dsql[] = "`income`='" . s( $params['income'] ) . "'";
@@ -221,6 +222,50 @@ function update_user_lookingfor_by_uid($params, $uid)
 		return false;
 	}
 	return true;
+}
+
+/**
+ * 获取用户信息列表
+ * @param status 1是激活用户，2为未激活用户，0为全部用户
+ * @param page 页数
+ * @param pagesize 每页条数
+ * @return get_data
+*/
+function get_profile_list($params)
+{
+	$status = $params['status'];
+	$page = $params['page'];
+	$pagesize = $params['pagesize'];
+	$limit = 'LIMIT ' . ($page-1)*$pagesize . ',' . $page*$pagesize;
+
+	$sql_list = 'SELECT `id`, `nickname`, `com_name`, `job`, `birthday`, `essay1`, `avatar_url`, `company_visible` FROM `rbp_userinfo` ';
+	$sql_count = 'SELECT COUNT(*) FROM `rbp_userinfo` ';
+	switch ($status) {
+		case 0:
+			$sql_count = $sql_count . $limit;
+			$sql_list = $sql_list . $limit;
+			break;
+		case 1:
+			$sql_count = $sql_count . ' WHERE `email_active`=1 ' . $limit;
+			$sql_list = $sql_list . ' WHERE `email_active`=1 ' . $limit;
+			break;
+		case 2:
+			$sql_count = $sql_count . ' WHERE `email_active`=0 ' . $limit;
+			$sql_list = $sql_list . ' WHERE `email_active`=0 ' . $limit;
+			break;
+		default:
+			$sql_count = $sql_count . ' WHERE `email_active`=1 ' . $limit;
+			$sql_list = $sql_list . ' WHERE `email_active`=1 ' . $limit;
+			break;
+	}
+	$profile_list = get_data($sql_list);
+	$list_count = get_var($sql_count);
+
+	$res = array();
+	$res['profile_list'] = $profile_list;
+	$res['total_count'] = intval($list_count);
+	
+	return $res;
 }
 
 ?>

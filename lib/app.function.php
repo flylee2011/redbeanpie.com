@@ -41,7 +41,7 @@
 		return intval(v('uid')) === intval($_SESSION['uid']);
 	}
 
-	// 通用接口向前端返回json数据
+	// 通用接口返回json数据
 	function send_json_res($code, $msg, $data)
 	{
 		$obj = array();
@@ -49,7 +49,12 @@
 		$obj[ 'msg' ] = $msg;
 		$obj[ 'data' ] = $data;
 
-		return json_encode( $obj );
+		if( g('API_EMBED_MODE') == 1 ) {
+			return json_encode( $obj );
+		} else {
+			header('Content-type: application/json');
+			die( json_encode( $obj ) );
+		}
 	}
 
 	// 请求api controller的方法

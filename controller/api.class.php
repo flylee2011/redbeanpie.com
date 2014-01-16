@@ -467,6 +467,7 @@ class apiController extends appController {
 		$params['weight'] = intval(v('weight'));
 		$params['province'] = intval(v('province'));
 		$params['city'] = intval(v('city'));
+		$params['com_name'] = v('com_name');
 		$params['company_visible'] = intval(v('company_visible'));
 		$params['job'] = v('job');
 		$params['income'] = intval(v('income'));
@@ -482,13 +483,12 @@ class apiController extends appController {
 		if($uid > 0) {
 			$res = update_user_sideinfo_by_uid($params, $uid);
 			if($res) {
-				echo send_json_res(API_SUCCESS_CODE, '操作成功', $data);
+				return send_json_res(API_SUCCESS_CODE, '操作成功', $data);
 			}else {
-				echo send_json_res(API_DB_ERROR_CODE, '数据库操作失败', null);
-
+				return send_json_res(API_DB_ERROR_CODE, '数据库操作失败', null);
 			}
 		}else {
-			echo send_json_res(API_ARGS_ERROR_CODE, '参数错误', null);
+			return send_json_res(API_ARGS_ERROR_CODE, '参数错误', null);
 		}
 
 	}
@@ -512,13 +512,13 @@ class apiController extends appController {
 		if($uid > 0) {
 			$res = update_user_aboutme_by_uid($params, $uid);
 			if($res) {
-				echo send_json_res(API_SUCCESS_CODE, '操作成功', $data);
+				return send_json_res(API_SUCCESS_CODE, '操作成功', $data);
 			}else {
-				echo send_json_res(API_DB_ERROR_CODE, '数据库操作失败', null);
+				return send_json_res(API_DB_ERROR_CODE, '数据库操作失败', null);
 
 			}
 		}else {
-			echo send_json_res(API_ARGS_ERROR_CODE, '参数错误', null);
+			return send_json_res(API_ARGS_ERROR_CODE, '参数错误', null);
 		}
 	}
 
@@ -544,13 +544,39 @@ class apiController extends appController {
 		if($uid > 0) {
 			$res = update_user_lookingfor_by_uid($params, $uid);
 			if($res) {
-				echo send_json_res(API_SUCCESS_CODE, '操作成功', $data);
+				return send_json_res(API_SUCCESS_CODE, '操作成功', $data);
 			}else {
-				echo send_json_res(API_DB_ERROR_CODE, '数据库操作失败', null);
+				return send_json_res(API_DB_ERROR_CODE, '数据库操作失败', null);
 
 			}
 		}else {
-			echo send_json_res(API_ARGS_ERROR_CODE, '参数错误', null);
+			return send_json_res(API_ARGS_ERROR_CODE, '参数错误', null);
+		}
+	}
+
+	/**
+	 * 获取用户信息列表，浏览用户页面
+	 * @param status 1是激活用户，2为未激活用户，0为全部用户
+	 * @param page 页数
+	 * @param pagesize 每页显示条数
+	 * @return json
+	 */
+	public function get_profile_list()
+	{
+		$params = array();
+		$params['status'] = intval(v('status'));
+		$params['page'] = intval(v('page'));
+		$params['pagesize'] = intval(v('pagesize'));
+		
+		if($params['page'] > 0) {
+			$data = get_profile_list($params);
+			if($data) {
+				return send_json_res(API_SUCCESS_CODE, '操作成功', $data);
+			}else {
+				return send_json_res(API_DB_ERROR_CODE, '数据库操作失败', null);
+			}
+		}else {
+			return send_json_res(API_ARGS_ERROR_CODE, '参数错误', null);
 		}
 	}
 
