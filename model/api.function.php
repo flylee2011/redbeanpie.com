@@ -8,10 +8,35 @@
 
 define( 'USER_INFO' , "`id` ,  `id` as  `uid` , `username` , `password` , `email`, `com_email_prefix`, `com_email_suffix`, `com_email_id`, `invitation_code`, `nickname` , `gender` , `email_active` , `info_complete`, `level` " );
 
+// 数据表命名定义
+// 用户表
+define('RBP_USER', 'rbp_user');
+// 管理员用户表
+define('RBP_ADMIN', 'rbp_admin');
+// 邀请码表
+define('RBP_CODE', 'rbp_code');
+// 用户相册表
+define('RBP_ALBUM_USER', 'rbp_album_user');
+// 用户相册分类表
+define('RBP_ALBUM_CATE_USER', 'rbp_album_cate_user');
+// 公司表
+define('RBP_COMPANY', 'rbp_company');
+// 行业表
+define('RBP_INDUSTRY', 'rbp_industry');
+// 用户私信表
+define('RBP_MESSAGE_USER', 'rbp_message_user');
+// 用户关注表
+define('RBP_ATTENTION_USER', 'rbp_attention_user');
+// 约会信息表
+define('RBP_DATING', 'rbp_dating');
+// 派对信息表
+define('RBP_PARTY', 'rbp_party');
+
+
 // 获取用户信息
 function get_full_info_by_email_password( $email , $password )
 {
-	$sql = "SELECT ". USER_INFO ." FROM `rbp_userinfo` WHERE `email` = '" . s( $email ) . "' LIMIT 1";
+	$sql = "SELECT ". USER_INFO ." FROM `". RBP_USER ."` WHERE `email` = '" . s( $email ) . "' LIMIT 1";
 	if(!$line = get_line( $sql )) return false;
 
 	$ret = false;
@@ -28,7 +53,7 @@ function get_full_info_by_email_password( $email , $password )
 // 获取所有公司邮箱信息
 function get_full_cominfo()
 {
-	$sql = "SELECT * FROM `rbp_comemail`";
+	$sql = "SELECT * FROM `". RBP_COMPANY ."`";
 	$ret = false;
 
 	if($data = get_data($sql)) {
@@ -45,11 +70,11 @@ function update_email_status($email, $type)
 	// 公司邮箱激活
 	if($type === 1) {
 		$email_arr = explode('@', $email);
-		$sql = "UPDATE `rbp_userinfo` SET `email_active`=1 WHERE `com_email_prefix`='" . $email_arr[0] . "' AND `com_email_suffix`='" . $email_arr[1] . "'";
+		$sql = "UPDATE `". RBP_USER ."` SET `email_active`=1 WHERE `com_email_prefix`='" . $email_arr[0] . "' AND `com_email_suffix`='" . $email_arr[1] . "'";
 	}
 	// 个人邮箱激活
 	if($type === 2) {
-		$sql = "UPDATE `rbp_userinfo` SET `email_active`=1 WHERE `email`='" . $email . "'";
+		$sql = "UPDATE `". RBP_USER ."` SET `email_active`=1 WHERE `email`='" . $email . "'";
 	}
 
 	run_sql($sql);
@@ -68,7 +93,7 @@ function add_album_info($img_url, $cate_id, $user_id, $description = '')
 	$user_id = intval($user_id);
 	$description = s($description);
 
-	$sql = "INSERT INTO `rbp_album_info` ( `img_url` , `cate_id` , `user_id`, `description` ) VALUES ( '" . s($img_url) . "' , '" . intval( $cate_id ) . "', '" . intval( $user_id ) . "', '" . s($description) . "' )";
+	$sql = "INSERT INTO `". RBP_ALBUM_USER ."` ( `img_url` , `cate_id` , `user_id`, `description` ) VALUES ( '" . s($img_url) . "' , '" . intval( $cate_id ) . "', '" . intval( $user_id ) . "', '" . s($description) . "' )";
 	
 	run_sql($sql);
 	if(db_errno() != 0) {
@@ -85,7 +110,7 @@ function update_user_avatar($uid, $avatar_url)
 	$uid = intval($uid);
 	$avatar_url = s($avatar_url);
 
-	$sql = "UPDATE `rbp_userinfo` SET `avatar_url`='" . $avatar_url . "' WHERE `id`=" . $uid;
+	$sql = "UPDATE `". RBP_USER ."` SET `avatar_url`='" . $avatar_url . "' WHERE `id`=" . $uid;
 
 	run_sql($sql);
 	if(db_errno() != 0) {
@@ -101,7 +126,7 @@ function get_userinfo_by_uid($uid)
 	$ret = false;
 
 	$uid = intval($uid);
-	$sql = "SELECT * FROM `rbp_userinfo` WHERE `id`=" . $uid;
+	$sql = "SELECT * FROM `". RBP_USER ."` WHERE `id`=" . $uid;
 
 	if($data = get_line($sql)) {
 		$ret = $data;
@@ -115,7 +140,7 @@ function get_albuminfo_by_uid($uid)
 	$ret = false;
 
 	$uid = intval($uid);
-	$sql = "SELECT `id`, `img_url`, `cate_id`, `user_id`, `description` FROM `rbp_album_info` WHERE `user_id`=" . $uid . " AND `cate_id`!=2";
+	$sql = "SELECT `id`, `img_url`, `cate_id`, `user_id`, `description` FROM `". RBP_ALBUM_USER ."` WHERE `user_id`=" . $uid . " AND `cate_id`!=2";
 
 	if($data = get_data($sql)) {
 		$ret = $data;
@@ -129,8 +154,8 @@ function get_profile_info_by_uid($uid)
 	$ret = false;
 
 	$uid = intval($uid);
-	$sql_userinfo = "SELECT * FROM `rbp_userinfo` WHERE `id`=" . $uid;
-	$sql_albuminfo = "SELECT `id`, `img_url`, `cate_id`, `user_id`, `description` FROM `rbp_album_info` WHERE `user_id`=" . $uid;
+	$sql_userinfo = "SELECT * FROM `". RBP_USER ."` WHERE `id`=" . $uid;
+	$sql_albuminfo = "SELECT `id`, `img_url`, `cate_id`, `user_id`, `description` FROM `". RBP_ALBUM_USER ."` WHERE `user_id`=" . $uid;
 
 	$data = array();
 
@@ -165,7 +190,7 @@ function update_user_sideinfo_by_uid($params, $uid)
 
 	$setstring = join( ' , ' , $dsql );
 
-	$sql = "UPDATE `rbp_userinfo` SET ". $setstring ." WHERE `id`=" . $uid;
+	$sql = "UPDATE `". RBP_USER ."` SET ". $setstring ." WHERE `id`=" . $uid;
 	
 	run_sql($sql);
 	if(db_errno() != 0) {
@@ -181,13 +206,13 @@ function update_user_aboutme_by_uid($params, $uid)
 
 	switch ($params['data_field']) {
 		case 'essay1':
-			$sql = "UPDATE `rbp_userinfo` SET `essay1`='". $params['content'] ."' WHERE `id`=". $uid;
+			$sql = "UPDATE `". RBP_USER ."` SET `essay1`='". $params['content'] ."' WHERE `id`=". $uid;
 			break;
 		case 'essay2':
-			$sql = "UPDATE `rbp_userinfo` SET `essay2`='". $params['content'] ."' WHERE `id`=". $uid;
+			$sql = "UPDATE `". RBP_USER ."` SET `essay2`='". $params['content'] ."' WHERE `id`=". $uid;
 			break;
 		case 'essay3':
-			$sql = "UPDATE `rbp_userinfo` SET `essay3`='". $params['content'] ."' WHERE `id`=". $uid;
+			$sql = "UPDATE `". RBP_USER ."` SET `essay3`='". $params['content'] ."' WHERE `id`=". $uid;
 			break;
 		default:
 			return false;
@@ -215,7 +240,7 @@ function update_user_lookingfor_by_uid($params, $uid)
 
 	$setstring = join( ' , ' , $dsql );
 
-	$sql = "UPDATE `rbp_userinfo` SET ". $setstring ." WHERE `id`=" . $uid;
+	$sql = "UPDATE `". RBP_USER ."` SET ". $setstring ." WHERE `id`=" . $uid;
 
 	run_sql($sql);
 	if(db_errno() != 0) {
@@ -238,8 +263,8 @@ function get_profile_list($params)
 	$pagesize = $params['pagesize'];
 	$limit = 'LIMIT ' . ($page-1)*$pagesize . ',' . $page*$pagesize;
 
-	$sql_list = 'SELECT `id`, `nickname`, `com_name`, `job`, `birthday`, `essay1`, `avatar_url`, `company_visible` FROM `rbp_userinfo` ';
-	$sql_count = 'SELECT COUNT(*) FROM `rbp_userinfo` ';
+	$sql_list = 'SELECT `id`, `nickname`, `com_name`, `job`, `birthday`, `essay1`, `avatar_url`, `company_visible` FROM `'. RBP_USER .'` ';
+	$sql_count = 'SELECT COUNT(*) FROM `'. RBP_USER .'` ';
 	switch ($status) {
 		case 0:
 			$sql_count = $sql_count . $limit;

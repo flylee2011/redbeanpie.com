@@ -73,7 +73,7 @@ class apiController extends appController {
 		$dsql[] = "'" . s( $params['com_email_id'] ) . "'";
 		$dsql[] = "'" . s( $params['com_name'] ) . "'";
 
-		$sql = "INSERT INTO `rbp_userinfo` ( `username` , `nickname` , `gender`, `email` , `com_email_suffix` , `com_email_prefix`, `com_email_id`, `com_name` ) VALUES ( " . join( ' , ' , $dsql ) . " )";
+		$sql = "INSERT INTO `rbp_user` ( `username` , `nickname` , `gender`, `email` , `com_email_suffix` , `com_email_prefix`, `com_email_id`, `com_name` ) VALUES ( " . join( ' , ' , $dsql ) . " )";
 
 		run_sql($sql);
 		
@@ -104,16 +104,16 @@ class apiController extends appController {
 		
 		if($params['name'] === 'useremail') {
 			
-			$sql = "SELECT COUNT(*) FROM `rbp_userinfo` WHERE `email` = '" . $params['param'] . "'";
+			$sql = "SELECT COUNT(*) FROM `rbp_user` WHERE `email` = '" . $params['param'] . "'";
 
 		}else if($params['name'] === 'default-comemail') {
 			
-			$sql = "SELECT COUNT(*) FROM `rbp_userinfo` WHERE `com_email_suffix` = '" . $params['com_email_suffix'] . "' AND `com_email_prefix` = '" . $params['param'] . "'";
+			$sql = "SELECT COUNT(*) FROM `rbp_user` WHERE `com_email_suffix` = '" . $params['com_email_suffix'] . "' AND `com_email_prefix` = '" . $params['param'] . "'";
 
 		}else if($params['name'] === 'other-comemail') {
 			
 			$email_split = explode('@', $params['param']);
-			$sql = "SELECT COUNT(*) FROM `rbp_userinfo` WHERE `com_email_suffix` = '" . $email_split[1] . "' AND `com_email_prefix` = '" . $email_split[0] . "'";
+			$sql = "SELECT COUNT(*) FROM `rbp_user` WHERE `com_email_suffix` = '" . $email_split[1] . "' AND `com_email_prefix` = '" . $email_split[0] . "'";
 
 		}
 
@@ -129,7 +129,7 @@ class apiController extends appController {
 		$params = array();
 		$params['comid'] = intval(v('comid'));
 
-		$sql = 'SELECT `email_suffix` FROM `rbp_comemail` WHERE `id` = "'. $params['comid'] .'"';
+		$sql = 'SELECT `email_suffix` FROM `rbp_company` WHERE `id` = "'. $params['comid'] .'"';
 
 		$resobj = array();
 		$resobj['code'] = '0';
@@ -201,7 +201,7 @@ class apiController extends appController {
         $dsql[] = "'" . s( v( 'company_visible' ) ) . "'";
         // $dsql[] = "'" . s( date( "Y-m-d H:i:s" ) ) . "'";
         
-		$sql = "INSERT INTO `rbp_userinfo` ( `username` , `email` , `password` , `gender`, `com_email_prefix`, `com_email_suffix`, `com_name`, `com_email_id`, `company_visible` ) VALUES ( " . join( ' , ' , $dsql ) . " )";
+		$sql = "INSERT INTO `rbp_user` ( `username` , `email` , `password` , `gender`, `com_email_prefix`, `com_email_suffix`, `com_name`, `com_email_id`, `company_visible` ) VALUES ( " . join( ' , ' , $dsql ) . " )";
 		
         run_sql( $sql );
         
@@ -252,7 +252,7 @@ class apiController extends appController {
 		$dsql[] = "'" . s( v( 'gender' ) ) . "'";
 		$dsql[] = "'" . s( v( 'code' ) ) . "'";
 
-		$sql = "INSERT INTO `rbp_userinfo` ( `username` , `email` , `password` , `gender`, `invitation_code` ) VALUES ( " . join( ' , ' , $dsql ) . " )";
+		$sql = "INSERT INTO `rbp_user` ( `username` , `email` , `password` , `gender`, `invitation_code` ) VALUES ( " . join( ' , ' , $dsql ) . " )";
 
 		run_sql( $sql );
 
@@ -260,7 +260,7 @@ class apiController extends appController {
 		{
 		    return self::send_error( API_DB_ERROR_CODE, '数据库错误' );
 		}else {
-			$sql_code = "UPDATE `rbp_codeinfo` SET `is_active`=0 WHERE `code`='" . v('code') ."'";
+			$sql_code = "UPDATE `rbp_code` SET `is_active`=0 WHERE `code`='" . v('code') ."'";
 			run_sql($sql_code);
 
 			$data = array('');

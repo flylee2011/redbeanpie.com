@@ -12,7 +12,7 @@ class defaultController extends appController
 	function index()
 	{
 		db();
-		$data['com_email_arr'] = get_data('SELECT * FROM `rbp_comemail`');
+		$data['com_email_arr'] = get_data('SELECT * FROM `rbp_company`');
 		$data['title'] = $data['top_title'] = '首页';
 		render($data, 'web', 'coming');
 	}
