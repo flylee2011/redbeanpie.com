@@ -328,25 +328,89 @@ if(elFavBtn.length) {
 	});
 }
 
-/*** 浏览用户列表 ***/
+/*** 浏览用户列表页 ***/
 var elProfileList = $('#pl-profile-list');
 var profile_requseting = false;
 var profile_page = 1;
+var profile_pagesize = 16;
 var profile_pagedone = false;
-
+var profile_init = false;
+var profile_tpl = '<div class="col-md-3">' +
+						'<div class="thumbnail profile-list-box">' +
+						'<div class="avatar-box">' +
+							'<a class="avatar-link" href="/?c=profile&a=detail&uid={{id}}">' +
+								'<img src="{{avatar_url}}" alt="{{nickname}}">' +
+							'</a>' +
+						'</div>' +
+						'<div class="caption profile-info">' +
+							'<a class="nickname-link" href="/?c=profile&a=detail&uid={{id}}">' +
+								'{{{nickname}}}' +
+							'</a>' +
+							'<p class="text-muted">北京海淀</p>' +
+							'<p class="text-muted">{{{job}}}-{{{com_name}}}-24岁</p>' +
+						'</div>' +
+						'<div class="aboutme">' +
+							'<p>{{{essay1}}}</p>' +
+						'</div>' +
+					'</div>' +
+				'</div>';
+var profile_html = [];
+// 加载用户列表
 function loadProfileList(page) {
-	
+	var reqdata = {
+		page : page,
+		pagesize : profile_pagesize,
+		status : 1
+	};
+	profile_requseting = true;
+	$.ajax({
+		url : '/?c=api&a=get_profile_list',
+		dataType : 'json',
+		data : reqdata,
+		success : function(res){
+			var code = res.code;
+			if(code === 'S00001'){
+				var listData = res.data.profile_list;
+				var total = res.data.total_count;
+				var listNode = elProfileList.find('[data-role="list"]');
+				var loadMoreNode = elProfileList.find('[data-role="load-more"]');
+				listData.forEach(function(item){
+					profile_html.push(Mustache.render(profile_tpl, item));
+				});
+				listNode.append(profile_html.join(''));
+				
+				profile_init = true;
+				if(page >= Math.ceil(total/profile_pagesize)) {
+					profile_pagedone = true;
+					loadMoreNode.hide();
+				}else {
+					loadMoreNode.show();
+				}
+			}
+		},
+		complete : function(){
+			var loaddingNode = elProfileList.find('[data-role="loadding"]');
+			if(page === 1) {
+				loaddingNode.hide();
+			}
+			profile_requseting = false;
+		},
+		error : function(){
+		}
+	});
 }
 
 if(elProfileList.length) {
+	loadProfileList(1);
 	$(window).scroll(function(){
-		if(profile_requseting || profile_pagedone) {
+		if(profile_requseting || profile_pagedone || !profile_init) {
 			return;
 		}
 		var sTop = parseInt($(window).scrollTop(), 10);
 		var winHeight = parseInt($(window).height(), 10);
+		// 滚动到底部加载更多
 		if(sTop + winHeight >= $(document).height()) {
-			profile_requseting = true;
+			loadProfileList(profile_page + 1);
 		}
 	});
 }
