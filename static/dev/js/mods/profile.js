@@ -311,20 +311,44 @@ if(elAboutmeModal.length) {
 	});
 }
 
-// 发消息
+/*** 发私信 ***/
 var elMsgBtn = $('.baseinfo-box [data-role="letter-btn"]');
 var elLetterModal = $('#modal-letter');
-elMsgBtn.on('click', function(){
-	elLetterModal.modal();
-});
+if(elMsgBtn.length) {
+	elMsgBtn.on('click', function(){
+		elLetterModal.modal();
+	});
+}
 
-// 收藏
+/*** 收藏 ***/
+var elFavBtn = $('.baseinfo-box [data-role="letter-btn"]');
+if(elFavBtn.length) {
+	elFavBtn.on('click', function(){
 
-// 用户列表读取渲染
+	});
+}
 
+/*** 浏览用户列表 ***/
+var elProfileList = $('#pl-profile-list');
+var profile_requseting = false;
+var profile_page = 1;
+var profile_pagedone = false;
 
+function loadProfileList(page) {
+	
+}
 
-
-
+if(elProfileList.length) {
+	$(window).scroll(function(){
+		if(profile_requseting || profile_pagedone) {
+			return;
+		}
+		var sTop = parseInt($(window).scrollTop(), 10);
+		var winHeight = parseInt($(window).height(), 10);
+		if(sTop + winHeight >= $(document).height()) {
+			profile_requseting = true;
+		}
+	});
+}
 
 

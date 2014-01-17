@@ -29,7 +29,7 @@ class guestController extends appController
 	// 注册页
 	function signup()
 	{
-		$resjson = send_request('get_full_cominfo', null);
+		$resjson = send_request('api', 'get_full_cominfo', null);
 		$cominfo_data = json_decode( $resjson , 1 );
 
 		$data['title'] = '用户注册';
@@ -67,7 +67,7 @@ class guestController extends appController
 		$params['email'] = base64_decode(t(v('email')));
 		$params['type'] = intval(v('type'));
 
-		if($resjson = send_request('update_email_status', $params)) {
+		if($resjson = send_request('api', 'update_email_status', $params)) {
 			$data = json_decode( $resjson , 1 );
 			if($data['code'] === '0') {
 				forward('?c=guest&a=signup_complete');
@@ -126,7 +126,7 @@ class guestController extends appController
 		$params['company_id'] = $company_id;
 		$params['company_visible'] = $company_visible;
 
-		if($content = send_request( 'add_user_staff' ,  $params )) {
+		if($content = send_request('api', 'add_user_staff' ,  $params )) {
 			$data = json_decode( $content , 1 );
 			if( ($data['code'] == 0) && is_array( $data['data'] ) ) {
 				echo send_json_res('0', '注册成功', $data['data']);
@@ -147,7 +147,7 @@ class guestController extends appController
 		$params['gender'] = intval(v('gender'));
 		$params['code'] = t(v('code'));
 
-		if($content = send_request( 'add_user_code' ,  $params )) {
+		if($content = send_request( 'api', 'add_user_code' ,  $params )) {
 			$data = json_decode( $content , 1 );
 			if( ($data['code'] == 0) && is_array( $data['data'] ) ) {
 				echo send_json_res('0', '注册成功', $data['data']);

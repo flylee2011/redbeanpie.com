@@ -25,7 +25,7 @@ class profileController extends appController
 		
 		if($params['uid'] > 0) {
 
-			$resjson = send_request('get_profile_info_by_uid', $params);
+			$resjson = send_request('api', 'get_profile_info_by_uid', $params);
 			$res = json_decode( $resjson , 1 );
 
 			$data['user_info'] = $res['data']['user_info'];

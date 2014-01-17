@@ -56,17 +56,25 @@
 			die( json_encode( $obj ) );
 		}
 	}
-
-	// 请求api controller的方法
-	function send_request( $action , $param , $token = null )
+	
+	/**
+	 * 后端请求接口方法
+	 *
+	 * @param string controller 控制器，目前是api
+	 * @param string action 	方法
+	 * @param string params 	参数
+	 * @param string token  	token
+	 * @return action返回的内容
+	 */
+	function send_request($controller, $action , $param , $token = null )
 	{
-		require_once( AROOT . 'controller' . DS . 'api.class.php' );
-		require_once( AROOT . 'model' . DS . 'api.function.php' );
+		require_once( AROOT . 'controller' . DS . $controller . '.class.php' );
+		require_once( AROOT . 'model' . DS . $controller . '.function.php' );
 		$GLOBALS['API_EMBED_MODE'] = 1;
 
 		// local request
 		$bake_request = $_REQUEST;
-		$_REQUEST['c'] = 'api';
+		$_REQUEST['c'] = $controller;
 		// $GLOBALS['a'] = $_REQUEST['a'] = $action;
 		if( $token !== null )
 			$_REQUEST['token'] = $token;
@@ -178,7 +186,7 @@
 		$params['email'] = $email;
 		$params['password'] = $password;
 
-		if($content = send_request( 'get_user_token' ,  $params )) {
+		if($content = send_request( 'api',  'get_user_token' ,  $params )) {
 			$data = json_decode( $content , 1 );
 			if( ($data['code'] == 0) && is_array( $data['data'] ) ) {
 				return $data['data'];
