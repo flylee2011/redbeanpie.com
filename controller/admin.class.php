@@ -26,7 +26,7 @@ class adminController extends coreController
 		$email = z( t( v( 'email' ) ) );
 		$password = md5(z( t( v( 'password' ) ) ));
 
-		$sql = "SELECT * FROM `rbp_admin_userinfo` WHERE `password` = '". s($password) ."' AND `username` = '". s($email) ."'";
+		$sql = "SELECT * FROM `rbp_admin` WHERE `password` = '". s($password) ."' AND `username` = '". s($email) ."'";
 		$line = get_line($sql);
 
 		if(!$line) {
@@ -72,7 +72,7 @@ class adminController extends coreController
 	// 用户管理，预注册
 	function preuser() {
 		
-		$sql = 'SELECT `id`, `email`, `nickname`, `com_email_prefix`, `com_email_suffix`, `com_name`, `create_time` FROM `rbp_userinfo` WHERE `password` = ""';
+		$sql = 'SELECT `id`, `email`, `nickname`, `com_email_prefix`, `com_email_suffix`, `com_name`, `create_time` FROM `rbp_user` WHERE `password` = ""';
 		$data['title'] = 'RedBeanPie管理后台';
 		$data['userinfo_arr'] = get_data($sql);
 
@@ -86,7 +86,7 @@ class adminController extends coreController
 
 	// 公司管理，公司信息
 	function cominfo() {
-		$sql_com = 'SELECT `id`, `email_suffix`, `company_name`, `industry_id`, `is_active` FROM `rbp_comemail`';
+		$sql_com = 'SELECT `id`, `email_suffix`, `company_name`, `industry_id`, `is_active` FROM `rbp_company`';
 		
 		$data['cominfo_arr'] = get_data($sql_com);
 		$data['title'] = 'RedBeanPie管理后台';
@@ -94,7 +94,7 @@ class adminController extends coreController
 	}
 	// 公司管理，添加公司信息页面
 	function add_cominfo() {
-		$sql = 'SELECT `id`, `industry_name` FROM `rbp_industry_info`';
+		$sql = 'SELECT `id`, `industry_name` FROM `rbp_industry`';
 
 		$data['industryinfo_arr'] = get_data($sql);
 		$data['title'] = 'RedBeanPie管理后台';
@@ -111,7 +111,7 @@ class adminController extends coreController
 		$dsql[] = "'" . s( $params['com_email_suffix'] ) . "'";
 		$dsql[] = "'" . s( $params['industry_id'] ) . "'";
 
-		$sql = "INSERT INTO `rbp_comemail`(`company_name`, `email_suffix`, `industry_id`) VALUES(" . join( ' , ' , $dsql ) . ")";
+		$sql = "INSERT INTO `rbp_company`(`company_name`, `email_suffix`, `industry_id`) VALUES(" . join( ' , ' , $dsql ) . ")";
 		
 		$resobj = array();
 		$resobj['info'] = '添加成功';
@@ -130,8 +130,8 @@ class adminController extends coreController
 		$comid = intval(v('com_id'));
 		$industryid = intval(v('industry_id'));
 
-		$sql_com = 'SELECT `id`, `email_suffix`, `company_name`, `industry_id` FROM `rbp_comemail` WHERE `id`=' . $comid;
-		$sql_industry = 'SELECT `id`, `industry_name` FROM `rbp_industry_info`';
+		$sql_com = 'SELECT `id`, `email_suffix`, `company_name`, `industry_id` FROM `rbp_company` WHERE `id`=' . $comid;
+		$sql_industry = 'SELECT `id`, `industry_name` FROM `rbp_industry`';
 		
 		$cominfo = get_line($sql_com);
 		$industryinfo = get_data($sql_industry);
@@ -148,7 +148,7 @@ class adminController extends coreController
 		$params['comid'] = intval(v('comid'));
 		$params['industryid'] = intval(v('industryid'));
 
-		$sql = 'UPDATE `rbp_comemail` SET `email_suffix`="'. $params['com_email_suffix'] .'", `company_name`="'. $params['comname'] .'", `industry_id`=' . $params['industryid'] . ' WHERE `id`=' . $params['comid'];
+		$sql = 'UPDATE `rbp_company` SET `email_suffix`="'. $params['com_email_suffix'] .'", `company_name`="'. $params['comname'] .'", `industry_id`=' . $params['industryid'] . ' WHERE `id`=' . $params['comid'];
 		
 		$resobj = array();
 		$resobj['info'] = '修改成功';
@@ -172,7 +172,7 @@ class adminController extends coreController
 			$active = 1;
 		}
 
-		$sql = 'UPDATE `rbp_comemail` SET `is_active`='. $active .' WHERE `id`=' . $com_id;
+		$sql = 'UPDATE `rbp_company` SET `is_active`='. $active .' WHERE `id`=' . $com_id;
 
 		$resobj = array();
 		$resobj['info'] = '修改成功';
@@ -189,7 +189,7 @@ class adminController extends coreController
 	
 	// 公司管理，行业信息
 	function industryinfo() {
-		$sql = 'SELECT `id`, `industry_name` FROM `rbp_industry_info`';
+		$sql = 'SELECT `id`, `industry_name` FROM `rbp_industry`';
 
 		$data['industryinfo_arr'] = get_data($sql);
 		$data['title'] = 'RedBeanPie管理后台';
@@ -204,7 +204,7 @@ class adminController extends coreController
 	function check_industryinfo() {	
 		$params['industry_name'] = t(v('param'));
 
-		$sql = "SELECT COUNT(*) FROM `rbp_industry_info` WHERE `industry_name` = '". $params['industry_name'] ."'";
+		$sql = "SELECT COUNT(*) FROM `rbp_industry` WHERE `industry_name` = '". $params['industry_name'] ."'";
 
 		$resobj = array();
 		$resobj['info'] = '验证成功';
@@ -222,7 +222,7 @@ class adminController extends coreController
 	function add_industryinfo_api() {
 		$params['industry_name'] = t(v('industryname'));
 
-		$sql = "INSERT INTO `rbp_industry_info`(`industry_name`) VALUES ('". $params['industry_name'] ."')";
+		$sql = "INSERT INTO `rbp_industry`(`industry_name`) VALUES ('". $params['industry_name'] ."')";
 
 		$resobj = array();
 		$resobj['info'] = '添加成功';
@@ -240,7 +240,7 @@ class adminController extends coreController
 	// 公司管理，编辑行业信息页面
 	function edit_industryinfo() {
 		$id = intval(v('id'));
-		$sql = 'SELECT `industry_name` FROM `rbp_industry_info` WHERE `id` = ' . $id;
+		$sql = 'SELECT `industry_name` FROM `rbp_industry` WHERE `id` = ' . $id;
 		$industryName = get_var($sql);
 
 		$data['title'] = 'RedBeanPie管理后台';
@@ -253,7 +253,7 @@ class adminController extends coreController
 		$params['industry_name'] = t(v('industryname'));
 		$params['industry_id'] = intval(v('industryid'));
 
-		$sql = "UPDATE `rbp_industry_info` SET `industry_name`='". $params['industry_name'] ."' WHERE `id`=". $params['industry_id'];
+		$sql = "UPDATE `rbp_industry` SET `industry_name`='". $params['industry_name'] ."' WHERE `id`=". $params['industry_id'];
 
 		$resobj = array();
 		$resobj['info'] = '修改成功';

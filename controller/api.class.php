@@ -46,7 +46,7 @@ class apiController extends appController {
 		$dsql[] = "'" . s( $params['com_email_id'] ) . "'";
 		$dsql[] = "'" . s( $params['com_name'] ) . "'";
 
-		$sql = "INSERT INTO `rbp_userinfo` ( `username` , `nickname` , `gender`, `email` , `com_email_suffix` , `com_email_prefix`, `com_email_id`, `com_name` ) VALUES ( " . join( ' , ' , $dsql ) . " )";
+		$sql = "INSERT INTO `rbp_user` ( `username` , `nickname` , `gender`, `email` , `com_email_suffix` , `com_email_prefix`, `com_email_id`, `com_name` ) VALUES ( " . join( ' , ' , $dsql ) . " )";
 
 		run_sql($sql);
 		
@@ -77,16 +77,16 @@ class apiController extends appController {
 		
 		if($params['name'] === 'useremail') {
 			
-			$sql = "SELECT COUNT(*) FROM `rbp_userinfo` WHERE `email` = '" . $params['param'] . "'";
+			$sql = "SELECT COUNT(*) FROM `rbp_user` WHERE `email` = '" . $params['param'] . "'";
 
 		}else if($params['name'] === 'default-comemail') {
 			
-			$sql = "SELECT COUNT(*) FROM `rbp_userinfo` WHERE `com_email_suffix` = '" . $params['com_email_suffix'] . "' AND `com_email_prefix` = '" . $params['param'] . "'";
+			$sql = "SELECT COUNT(*) FROM `rbp_user` WHERE `com_email_suffix` = '" . $params['com_email_suffix'] . "' AND `com_email_prefix` = '" . $params['param'] . "'";
 
 		}else if($params['name'] === 'other-comemail') {
 			
 			$email_split = explode('@', $params['param']);
-			$sql = "SELECT COUNT(*) FROM `rbp_userinfo` WHERE `com_email_suffix` = '" . $email_split[1] . "' AND `com_email_prefix` = '" . $email_split[0] . "'";
+			$sql = "SELECT COUNT(*) FROM `rbp_user` WHERE `com_email_suffix` = '" . $email_split[1] . "' AND `com_email_prefix` = '" . $email_split[0] . "'";
 
 		}
 
@@ -102,7 +102,7 @@ class apiController extends appController {
 		$params = array();
 		$params['comid'] = intval(v('comid'));
 
-		$sql = 'SELECT `email_suffix` FROM `rbp_comemail` WHERE `id` = "'. $params['comid'] .'"';
+		$sql = 'SELECT `email_suffix` FROM `rbp_company` WHERE `id` = "'. $params['comid'] .'"';
 
 		$resobj = array();
 		$resobj['code'] = '0';
