@@ -582,10 +582,11 @@
 							<div class="form-group">
 								<label for="selectComVisible" class="col-sm-2 control-label">公司</label>
 								<div class="col-sm-3">
+									<input type="hidden" name="com_name" value="<?php echo $user_info['com_name']; ?>">
 									<?php if($user_info['com_email_id'] == 0): ?>
-									<input name="com_name" value="<?php echo $user_info['com_name']; ?>" class="form-control" datatype="*" errormsg="还没填呢" nullmsg="还没填呢">
+									<input value="<?php echo $user_info['com_name']; ?>" class="form-control" datatype="*" errormsg="还没填呢" nullmsg="还没填呢">
 									<?php else: ?>
-									<input name="com_name" disabled="disabled" value="<?php echo $user_info['com_name']; ?>" class="form-control">
+									<input disabled="disabled" value="<?php echo $user_info['com_name']; ?>" class="form-control">
 									<?php endif; ?>
 								</div>
 								<div class="col-sm-3">

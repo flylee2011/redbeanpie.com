@@ -337,23 +337,27 @@ var profile_pagedone = false;
 var profile_init = false;
 var profile_tpl = '<div class="col-md-3">' +
 						'<div class="thumbnail profile-list-box">' +
-						'<div class="avatar-box">' +
-							'<a class="avatar-link" href="/?c=profile&a=detail&uid={{id}}">' +
-								'<img src="{{avatar_url}}" alt="{{nickname}}">' +
-							'</a>' +
+							'<div class="avatar-box">' +
+								'<a class="avatar-link" href="/?c=profile&a=detail&uid={{id}}">' +
+									'<img src="{{avatar_url}}" alt="{{nickname}}">' +
+								'</a>' +
+							'</div>' +
+							'<div class="caption profile-info">' +
+								'<a class="nickname-link" href="/?c=profile&a=detail&uid={{id}}">' +
+									'{{{nickname}}}' +
+								'</a>' +
+								'<p class="text-muted">' +
+									'<span class="age">24岁</span><span>北京海淀</span>' +
+								'</p>' +
+								'<p class="text-muted">' +
+									'<span class="job">{{{job}}}</span> - <span class="company">{{{com_name}}}</span>' +
+								'</p>' +
+							'</div>' +
+							'<div class="aboutme">' +
+								'<p>{{{essay1}}}</p>' +
+							'</div>' +
 						'</div>' +
-						'<div class="caption profile-info">' +
-							'<a class="nickname-link" href="/?c=profile&a=detail&uid={{id}}">' +
-								'{{{nickname}}}' +
-							'</a>' +
-							'<p class="text-muted">北京海淀</p>' +
-							'<p class="text-muted">{{{job}}}-{{{com_name}}}-24岁</p>' +
-						'</div>' +
-						'<div class="aboutme">' +
-							'<p>{{{essay1}}}</p>' +
-						'</div>' +
-					'</div>' +
-				'</div>';
+					'</div>';
 var profile_html = [];
 // 加载用户列表
 function loadProfileList(page) {

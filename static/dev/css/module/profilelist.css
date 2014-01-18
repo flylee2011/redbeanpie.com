@@ -36,3 +36,8 @@
 .profile-list-box .profile-info .nickname-link:hover {
 	opacity: 0.7;
 }
+.profile-list-box .profile-info .age {
+	border-right: 1px solid #c6c9cd;
+	margin-right: 10px;
+	padding-right: 10px;
+}
