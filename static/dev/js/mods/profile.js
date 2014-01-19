@@ -79,7 +79,6 @@ if(elSubmitAlbumBtn.length) {
 			data : reqdata,
 			success : function(res) {
 				var code = res.code;
-				self.attr('disabled', false).html('确定');
 				switch(code) {
 					case 'S00001' :
 						alert('上传成功');
@@ -92,6 +91,9 @@ if(elSubmitAlbumBtn.length) {
 						alert('系统繁忙');
 						break;
 				}
+			},
+			complete : function(res) {
+				self.attr('disabled', false).html('确定');
 			},
 			error : function(res) {
 
@@ -196,7 +198,9 @@ if(elEditSideInfoLink.length) {
 						alert('系统繁忙');
 				}
 			},
-			error : function(res) {
+			error : function(res, obj) {
+				var btnNode = obj.find('.btn-submit');
+				btnNode.attr('disabled', false).html('更 新');
 				alert('系统繁忙');
 			}
 		}
@@ -229,6 +233,7 @@ if(elAboutmeModal.length) {
 				objtip_form.text(msg);
 			}else{
 				var objtip_btn = o.obj.find(".btn-submit");
+				objtip_btn.attr('disabled', true);
 				objtip_btn.text('更新中...');
 			}
 		},
@@ -254,6 +259,7 @@ if(elAboutmeModal.length) {
 				var code = res.code;
 				var msg = res.msg;
 				btnNode.attr('disabled', false).html('更 新');
+
 				switch(code) {
 					case 'S00001' :
 						alert('修改成功');
@@ -266,7 +272,9 @@ if(elAboutmeModal.length) {
 						alert('系统繁忙');
 				}
 			},
-			error : function(res) {
+			error : function(res, obj) {
+				var btnNode = obj.find('.btn-submit');
+				btnNode.attr('disabled', false).html('更 新');
 				alert('系统繁忙');
 			}
 		}

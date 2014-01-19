@@ -409,7 +409,7 @@
 							<div class="col-md-6">
 								<div class="img-preview-box">
 									<a href="javascript:void(0);" title="点击查看原图" target="_blank">
-										<img src="/static/dev/images/avatar_default.jpg" class="img-responsive" alt="图片预览">
+										<img src="/static/dev/images/avatar_demo.jpg" class="img-responsive" alt="图片预览">
 									</a>
 								</div>
 								<p>
@@ -790,7 +790,7 @@
 							<div class="col-md-3">
 								<div class="letter-img-box">
 									<img class="src-user" src="/static/dev/images/avatar_default.jpg">
-									<img class="to-user" src="<?php echo $user_info['avatar_url']; ?>">
+									<img class="to-user" src="<?php echo c('site_domain') . $user_info['avatar_url']; ?>">
 								</div>
 							</div>
 							<div class="col-md-9">
