@@ -14,6 +14,10 @@ class dashboardController extends appController
 	// 登录首页
 	function index()
 	{
+		// session_set_cookie_params( c('session_time') );
+		// @session_start();
+		// echo $_SESSION['nickname'];
+		
 		$data['title'] = '首页';
 		render($data, 'web', 'default');
 	}

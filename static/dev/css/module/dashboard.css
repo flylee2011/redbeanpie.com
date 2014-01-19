@@ -1,4 +1,7 @@
 /*** 动态 ***/
+.feed-btn-group {
+	margin-bottom: 20px;
+}
 .feed-item {
 	background-color: #ededed;
 	margin-bottom: 20px;
