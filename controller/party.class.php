@@ -23,5 +23,12 @@ class partyController extends appController
 		$data['title'] = '派对';
 		render($data, 'web', 'default');
 	}
+
+	// 发起派对
+	function launch()
+	{
+		$data['title'] = '发起派对';
+		render($data, 'web', 'default');
+	}
 	
 }

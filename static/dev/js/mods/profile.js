@@ -113,11 +113,11 @@ if(elAvatarLink.length) {
 	});
 
 	elAvatarLink.on('click', function(e){
-		var imgUrl = 'http://dev.redbeanpie.com/' + elAvatarImg.attr('src');
+		var imgUrl = elAvatarImg.attr('src');
 		// 第1个参数是加载编辑器div容器，第2个参数是编辑器类型，第3个参数是div容器宽，第4个参数是div容器高
-		xiuxiu.embedSWF("xiuxiuContent", 5, "100%", "100%");
+		xiuxiu.embedSWF('xiuxiuContent', 5, '100%', '100%');
 		
-		xiuxiu.setUploadURL("http://dev.redbeanpie.com/?c=api&a=upload_avatar");
+		xiuxiu.setUploadURL(siteDomain + '?c=api&a=upload_avatar');
 		// 初始化
 		xiuxiu.onInit = function () {
 			// 修改为要处理的图片url
@@ -320,19 +320,26 @@ if(elAboutmeModal.length) {
 }
 
 /*** 发私信 ***/
-var elMsgBtn = $('.baseinfo-box [data-role="letter-btn"]');
 var elLetterModal = $('#modal-letter');
-if(elMsgBtn.length) {
-	elMsgBtn.on('click', function(){
+var elLetterBtn = $('.baseinfo-box [data-role="letter-btn"]');
+var elLetterSubmit = elLetterModal.find('[data-role="submit-letter"]');
+var elLetterText = elLetterModal.find('');
+if(elLetterModal.length) {
+	// 发消息浮层按钮
+	elLetterBtn.on('click', function(){
 		elLetterModal.modal();
+	});
+	// 提交私信按钮
+	elLetterSubmit.on('click', function(){
+		console.log('letter');
 	});
 }
 
 /*** 收藏 ***/
-var elFavBtn = $('.baseinfo-box [data-role="letter-btn"]');
+var elFavBtn = $('.baseinfo-box [data-role="fav-btn"]');
 if(elFavBtn.length) {
 	elFavBtn.on('click', function(){
-
+		console.log('fav');
 	});
 }
 
@@ -347,7 +354,7 @@ var profile_tpl = '<div class="col-md-3">' +
 						'<div class="thumbnail profile-list-box">' +
 							'<div class="avatar-box">' +
 								'<a class="avatar-link" href="/?c=profile&a=detail&uid={{id}}">' +
-									'<img src="{{avatar_url}}" alt="{{nickname}}">' +
+									'<img src="' + siteDomain + '{{avatar_url}}" alt="{{nickname}}">' +
 								'</a>' +
 							'</div>' +
 							'<div class="caption profile-info">' +

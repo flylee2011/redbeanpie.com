@@ -23,5 +23,11 @@ class datingController extends appController
 		$data['title'] = '约会';
 		render($data, 'web', 'default');
 	}
+	// 发起约会
+	function launch()
+	{
+		$data['title'] = '发起约会';
+		render($data, 'web', 'default');
+	}
 	
 }
