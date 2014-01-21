@@ -30,9 +30,31 @@ html, body {
 	padding-top: 20px;
 	text-align: center;
 }
-
+/*boot弹出浮层*/
 .popover {
 	z-index: 9999;
+	border: 1px solid #fe5055;
+}
+/*导航发起浮层*/
+.popover-content {
+	padding: 0;
+}
+.popover.bottom .arrow {
+	border-bottom-color: #fe5055;
+}
+.list-group-launch {
+	border: none;
+	margin-bottom: 0;
+}
+.list-group-launch .list-group-item {
+	border: none;
+	padding: 10px;
+	color: #fe5055;
+}
+.list-group-launch .list-group-item .list-group-icon {
+	/*margin-right: 5px;*/
+	display: inline-block;
+	width: 35px;
 }
 
 /*** 全局通用 ***/

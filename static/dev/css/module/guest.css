@@ -138,3 +138,25 @@
 .navbar-default .navbar-text {
 	color: #fff;
 }
+
+/*导航发起按钮*/
+.dropdown-launch .btn-launch {
+	background-color: #fe5055;
+	border-color: #fe5055;
+	padding-left: 24px;
+	padding-right: 24px;
+}
+.dropdown-launch .btn-launch img {
+	vertical-align: text-top;
+}
+.dropdown-launch .dropdown-menu {
+	left: 0;
+	/*top: 40px;*/
+	/*border-top: none;*/
+	border-color: #fb444a;
+	min-width: 78px;
+}
+.dropdown-launch .dropdown-menu li a {
+	color: #fb444a;
+}
+
