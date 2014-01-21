@@ -2,7 +2,118 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			<h2>发起派对</h2>
+			<div class="page-header">
+				<h3>发起主题派对</h3>
+			</div>
 		</div>
+	</div>
+	<div class="row">
+		<form id="add-party-form" class="form-horizontal" role="form">
+			
+			<div class="form-group">
+				<label class="col-sm-2 control-label">活动封面</label>
+				
+			</div>
+
+			<div class="form-group">
+				<label for="selectCate" class="col-sm-2 control-label">活动分类</label>
+				<div class="col-sm-6">
+					<select id="selectCate" name="cate" class="form-control" datatype="*" errormsg="还没填呢" nullmsg="还没填呢">
+						<option value="">请选择分类</option>
+						<option value="1">分类1</option>
+						<option value="2">分类2</option>
+					</select>
+				</div>
+				<div class="col-sm-4 col-validtip">
+					<p class="Validform_checktip"></p>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="inputPartySubject" class="col-sm-2 control-label">活动主题</label>
+				<div class="col-sm-6">
+					<input id="inputPartySubject" name="subject" type="text" class="form-control" placeholder="活动主题" datatype="s2-10" errormsg="2-10位" nullmsg="还没填呢">
+				</div>
+				<div class="col-sm-4 col-validtip">
+					<p class="Validform_checktip"></p>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-sm-2 control-label">活动时间</label>
+				<div class="col-sm-6">
+					<input type="text" name="" class="form-control">
+					<select class="form-control">
+						<option value=""></option>
+					</select>
+					<span>至</span>
+					<input type="text" name="" class="form-control">
+					<select class="form-control">
+						<option value=""></option>
+					</select>
+				</div>
+				<div class="col-sm-4 col-validtip">
+					<p class="Validform_checktip"></p>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-2 control-label">报名截止</label>
+				<div class="col-sm-6">
+					<input type="text" name="" class="form-control">
+					<select class="form-control">
+						<option value=""></option>
+					</select>
+				</div>
+				<div class="col-sm-4 col-validtip">
+					<p class="Validform_checktip"></p>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-2 control-label">活动地点</label>
+				<div class="col-sm-6">
+					<select class="form-control">
+						<option value=""></option>
+					</select>
+					<select class="form-control">
+						<option value=""></option>
+					</select>
+					<input type="text" name="" class="form-control">
+				</div>
+				<div class="col-sm-4 col-validtip">
+					<p class="Validform_checktip"></p>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="selectCount" class="col-sm-2 control-label">人数上限</label>
+				<div class="col-sm-6">
+					<select id="selectCount" name="count" class="form-control" datatype="*" errormsg="还没填呢" nullmsg="还没填呢">
+						<option value="0">不限</option>
+						<option value="1">0-20</option>
+						<option value="2">20-50</option>
+					</select>
+				</div>
+				<div class="col-sm-4 col-validtip">
+					<p class="Validform_checktip"></p>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-2 control-label">详细信息</label>
+				<div class="col-sm-6">
+					<textarea class="form-control"></textarea>
+				</div>
+				<div class="col-sm-4 col-validtip">
+					<p class="Validform_checktip"></p>
+				</div>
+			</div>
+
+			<div class="form-group text-center">
+				<button type="submit" class="btn btn-primary btn-submit btn-party-submit">我要发布</button>
+			</div>
+
+		</form>
 	</div>
 </div>
