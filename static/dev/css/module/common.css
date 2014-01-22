@@ -39,8 +39,13 @@ html, body {
 .popover-content {
 	padding: 0;
 }
+.popover.bottom {
+	margin: 0;
+	border-radius: 0;
+}
 .popover.bottom .arrow {
 	border-bottom-color: #fe5055;
+	display: none;
 }
 .list-group-launch {
 	border: none;
@@ -48,11 +53,10 @@ html, body {
 }
 .list-group-launch .list-group-item {
 	border: none;
-	padding: 10px;
+	padding: 10px 15px;
 	color: #fe5055;
 }
 .list-group-launch .list-group-item .list-group-icon {
-	/*margin-right: 5px;*/
 	display: inline-block;
 	width: 35px;
 }

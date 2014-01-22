@@ -26,5 +26,9 @@
 @import url('./module/message.css');
 /*** 动态页 ***/
 @import url('./module/dashboard.css');
+/*** 派对 ***/
+@import url('./module/party.css');
+/*** 约会 ***/
+@import url('./module/dating.css');
 
 

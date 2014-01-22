@@ -1,0 +1,15 @@
+/*** 派对 ***/
+
+.party-header {
+	border-bottom: 5px solid #1fbba6;
+	margin: 0 0 40px 0;
+}
+.party-header .title {
+	margin: 0;
+	color: #1fbba6;
+}
+
+.party-form {
+	border-bottom: 1px solid #ddd;
+	padding-bottom: 20px;
+}

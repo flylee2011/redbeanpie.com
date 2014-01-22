@@ -2,7 +2,59 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			<h2>发起约会</h2>
+			<div class="page-header party-header">
+				<h3 class="title">发起主题约会</h3>
+			</div>
 		</div>
 	</div>
+
+	<div class="row">
+		<form id="add-dating-form" class="form-horizontal dating-form" role="form">
+			<div class="form-group">
+				<label class="col-sm-2 control-label">主题</label>
+				<div class="col-sm-6">
+					<textarea class="form-control" rows="6"></textarea>
+				</div>
+				<div class="col-sm-4 col-validtip">
+					<p class="Validform_checktip"></p>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="selectCate" class="col-sm-2 control-label">分类</label>
+				<div class="col-sm-6">
+					<select id="selectCate" name="cate" class="form-control" datatype="*" errormsg="还没填呢" nullmsg="还没填呢">
+						<option value="">请选择分类</option>
+						<option value="1">分类1</option>
+						<option value="2">分类2</option>
+					</select>
+				</div>
+				<div class="col-sm-4 col-validtip">
+					<p class="Validform_checktip"></p>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-2 control-label">截止时间</label>
+				<div class="col-sm-3">
+					<input type="text" name="" class="form-control">
+				</div>
+				<div class="col-sm-3">
+					<select class="form-control">
+						<option value=""></option>
+					</select>
+				</div>
+				<div class="col-sm-4 col-validtip">
+					<p class="Validform_checktip"></p>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-sm-2 col-sm-offset-2">
+					<button type="submit" class="btn btn-primary btn-submit btn-party-submit">发布</button>
+				</div>
+			</div>
+		</form>
+	</div>
+
 </div>

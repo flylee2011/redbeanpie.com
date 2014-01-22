@@ -2,17 +2,25 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			<div class="page-header">
-				<h3>发起主题派对</h3>
+			<div class="page-header party-header">
+				<h3 class="title">发起主题派对</h3>
 			</div>
 		</div>
 	</div>
 	<div class="row">
-		<form id="add-party-form" class="form-horizontal" role="form">
+		<form id="add-party-form" class="form-horizontal party-form" role="form">
 			
 			<div class="form-group">
 				<label class="col-sm-2 control-label">活动封面</label>
-				
+				<div class="col-sm-6">
+					<input type="hidden" name="img_url" value="">
+					<div class="party-cover">
+						<img src="/static/dev/images/avatar_demo.jpg">
+					</div>
+				</div>
+				<div class="col-sm-4 col-validtip">
+					<p class="Validform_checktip"></p>
+				</div>
 			</div>
 
 			<div class="form-group">
@@ -42,13 +50,13 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">活动时间</label>
 				<div class="col-sm-6">
-					<input type="text" name="" class="form-control">
-					<select class="form-control">
+					<input type="text" name="start_date" class="form-control pull-left" style="width:22%;">
+					<select name="start_time" class="form-control pull-left" style="width:22%;margin-left:1%;">
 						<option value=""></option>
 					</select>
-					<span>至</span>
-					<input type="text" name="" class="form-control">
-					<select class="form-control">
+					<span class="pull-left text-center" style="width:10%;">至</span>
+					<input type="text" name="" class="form-control pull-left" style="width:22%;">
+					<select class="form-control pull-left" style="width:22%;margin-left:1%;">
 						<option value=""></option>
 					</select>
 				</div>
@@ -59,8 +67,10 @@
 
 			<div class="form-group">
 				<label class="col-sm-2 control-label">报名截止</label>
-				<div class="col-sm-6">
+				<div class="col-sm-3">
 					<input type="text" name="" class="form-control">
+				</div>
+				<div class="col-sm-3">
 					<select class="form-control">
 						<option value=""></option>
 					</select>
@@ -72,13 +82,17 @@
 
 			<div class="form-group">
 				<label class="col-sm-2 control-label">活动地点</label>
-				<div class="col-sm-6">
+				<div class="col-sm-2">
 					<select class="form-control">
 						<option value=""></option>
 					</select>
+				</div>
+				<div class="col-sm-2">
 					<select class="form-control">
 						<option value=""></option>
 					</select>
+				</div>
+				<div class="col-sm-2">
 					<input type="text" name="" class="form-control">
 				</div>
 				<div class="col-sm-4 col-validtip">
@@ -110,10 +124,13 @@
 				</div>
 			</div>
 
-			<div class="form-group text-center">
-				<button type="submit" class="btn btn-primary btn-submit btn-party-submit">我要发布</button>
+			<div class="form-group">
+				<div class="col-sm-2 col-sm-offset-2">
+					<button type="submit" class="btn btn-primary btn-submit btn-party-submit">我要发布</button>
+				</div>
 			</div>
 
 		</form>
 	</div>
+
 </div>
