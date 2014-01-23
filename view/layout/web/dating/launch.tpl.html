@@ -11,9 +11,9 @@
 	<div class="row">
 		<form id="add-dating-form" class="form-horizontal dating-form" role="form">
 			<div class="form-group">
-				<label class="col-sm-2 control-label">主题</label>
+				<label for="textSubject" class="col-sm-2 control-label">主题</label>
 				<div class="col-sm-6">
-					<textarea class="form-control" rows="6"></textarea>
+					<textarea id="textSubject" name="subject" class="form-control" rows="6"></textarea>
 				</div>
 				<div class="col-sm-4 col-validtip">
 					<p class="Validform_checktip"></p>
@@ -37,11 +37,20 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">截止时间</label>
 				<div class="col-sm-3">
-					<input type="text" name="" class="form-control">
+					<input type="text" name="end-date" class="form-control">
 				</div>
 				<div class="col-sm-3">
-					<select class="form-control">
-						<option value=""></option>
+					<select name="end-time" class="form-control">
+						<option value="">请选择时间</option>
+						<?php
+							for($i=0; $i<24 ;$i++) {
+								if($i < 10) {
+									echo '<option value="'. $i .'">0'. $i .':00</option>';
+								}else {
+									echo '<option value="'. $i .'">'. $i .':00</option>';
+								}
+							}
+						?>
 					</select>
 				</div>
 				<div class="col-sm-4 col-validtip">

@@ -9,7 +9,22 @@
 	color: #1fbba6;
 }
 
+/*表单*/
 .party-form {
 	border-bottom: 1px solid #ddd;
 	padding-bottom: 20px;
+	margin-bottom: 20px;
+}
+
+/*评论*/
+.party-comment-box .title {
+	margin: 0 0 20px 0;
+}
+.party-comment-box .item {
+	border-bottom: 1px dotted #ccc;
+	padding: 10px 0;
+}
+.party-comment-box .item .media-object {
+	width: 42px;
+	height: 42px;
 }
