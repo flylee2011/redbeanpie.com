@@ -123,9 +123,26 @@
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
 	color: #fff;
 	background-color: #149987;
+	line-height: 30px;
+	padding: 10px 20px;
 }
 .navbar-default .navbar-nav>li>a {
 	color: #fff;
+	line-height: 30px;
+	padding: 10px 20px;
+}
+.navbar-default .navbar-right>.active>a, .navbar-default .navbar-right>.active>a:hover, .navbar-default .navbar-right>.active>a:focus {
+	padding: 10px;
+}
+.navbar-default .navbar-right>li>a {
+	padding: 10px;
+}
+.navbar-default .navbar-right .dropdown-userinfo .avatar {
+	width: 42px;
+	height: 42px;
+}
+.navbar-default .navbar-right .dropdown-userinfo .dropdown-toggle {
+	padding: 4px 10px;
 }
 .navbar-default .navbar-nav>.dropdown>a .caret {
 	border-top-color: #fff;
@@ -140,6 +157,9 @@
 }
 
 /*导航发起按钮*/
+.dropdown-launch {
+	margin-right: 20px;
+}
 .dropdown-launch .btn-launch {
 	background-color: #fe5055;
 	border-color: #fe5055;

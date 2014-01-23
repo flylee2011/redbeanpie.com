@@ -164,6 +164,7 @@ class apiController extends appController {
             $_SESSION[ 'username' ] = $user['username'];
             $_SESSION[ 'email' ] = $user[ 'email' ];
             $_SESSION[ 'nickname' ] = $user[ 'nickname' ];
+            $_SESSION[ 'user_avatar' ] = $user[ 'avatar_url' ];
             $_SESSION[ 'email_active' ] = intval($user[ 'email_active' ]);
             $_SESSION[ 'info_complete' ] = intval($user[ 'info_complete' ]);
 			$_SESSION[ 'level' ] = intval($user['level']);

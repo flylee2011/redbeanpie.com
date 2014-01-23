@@ -11,13 +11,13 @@ class messageController extends appController
 	}
 	
 	// 信息-收到的
-	function index()
+	function message_in()
 	{
 		$data['title'] = '收到的信息';
 		render($data, 'web', 'default');
 	}
 	// 信息-发出的
-	function index_send()
+	function message_send()
 	{
 		$data['title'] = '发出的信息';
 		render($data, 'web', 'default');

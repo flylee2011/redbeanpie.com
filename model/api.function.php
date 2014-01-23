@@ -6,7 +6,7 @@
  * @return 数据集或false
  */
 
-define( 'USER_INFO' , "`id` ,  `id` as  `uid` , `username` , `password` , `email`, `com_email_prefix`, `com_email_suffix`, `com_email_id`, `invitation_code`, `nickname` , `gender` , `email_active` , `info_complete`, `level` " );
+define( 'USER_INFO' , "`id` ,  `id` as  `uid` , `username` , `password`, `avatar_url` , `email`, `com_email_prefix`, `com_email_suffix`, `com_email_id`, `invitation_code`, `nickname` , `gender` , `email_active` , `info_complete`, `level` " );
 
 // 数据表命名定义
 // 用户表
