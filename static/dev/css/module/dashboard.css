@@ -21,12 +21,15 @@
 
 .progress-dashboard {
 	background-color: #e0e0e0;
-	height: 40px;
+	height: 30px;
+	border-radius: 8px;
+	box-shadow: inset 1px 1px 3px #bbb;
 }
 .progress-bar-dashboard {
 	background-color: #fd4d52;
-	line-height: 40px;
+	line-height: 30px;
 	font-size: 16px;
+	border-radius: 0 8px 8px 0;
 }
 
 .btn-dashboard {
@@ -39,10 +42,14 @@
 	opacity: 0.8;
 }
 
-.send-box, .info-box {
+/*动态，派对，约会页面，右侧栏模块*/
+.send-box, .info-box, .recommend-box {
 	margin-bottom: 20px;
-	background-color: #ededed;
-	padding: 10px;
+	background-color: #fff;
+	padding: 20px;
+	/*border: 1px solid #e2e2e2;*/
+	box-shadow: 2px 2px 2px #ddd;
+	/*border-radius: 12px;*/
 }
 .send-box .avatar-box {
 	width: 100px;

@@ -1,8 +1,49 @@
 <!-- party列表主页 -->	
 <div class="container">
 	<div class="row">
-		<div class="col-md-12">
-			<h2>派对列表页</h2>
+		
+		<div class="col-md-8">
+			<div class="party-list-main">
+				<h2>派对列表页</h2>
+			</div>
 		</div>
+
+		<div class="col-md-4">
+			<div class="dashboard-side">
+				<div class="send-box">
+					<div class="clearfix">
+						<div class="avatar-box pull-left">
+							<img class="img-responsive img-rounded" src="static/dev/images/avatar_default0.png">
+						</div>
+						<div class="user-info pull-left">
+							<h4 class="nickname">王纯子纯子</h4>
+						</div>
+					</div>
+					<div class="send-area">
+						<textarea class="form-control" placeholder="说点儿什么吧..."></textarea>
+						<div class="clearfix">
+							<button class="pull-right btn btn-default btn-sm">发 布</button>
+						</div>
+					</div>
+				</div>
+				<div class="info-box">
+					<div class="rbp-callout">
+						<h4 class="title">完善个人信息</h4>
+					</div>
+					<div class="progress progress-dashboard">
+						<div class="progress-bar progress-bar-danger progress-bar-dashboard" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+						40%
+						</div>
+					</div>
+					<a href="?c=profile&a=detail&uid=<?php echo $_SESSION['uid'] ?>" class="btn btn-primary btn-dashboard" role="button">填写个人信息</a>
+				</div>
+				<div class="recommend-box">
+					<div class="rbp-callout">
+						<h4 class="title">用户推荐</h4>
+					</div>
+				</div>
+			</div>
+		</div>
+		
 	</div>
 </div>
