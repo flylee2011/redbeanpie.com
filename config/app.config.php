@@ -2,8 +2,8 @@
 $GLOBALS['config']['site_name'] = 'Redbeanpie.com';
 $GLOBALS['config']['site_domain'] = 'http://dev.redbeanpie.com/';
 $GLOBALS['config']['static_domain'] = 'http://static.redbeanpie.com/';
-$GLOBALS['config']['avatar_default0'] = 'http://dev.redbeanpie.com/static/dev/images/avatar_default0.png';
-$GLOBALS['config']['avatar_default1'] = 'http://dev.redbeanpie.com/static/dev/images/avatar_default1.png';
+$GLOBALS['config']['avatar_default0'] = c('static_domain') . 'images/avatar_default0.png';
+$GLOBALS['config']['avatar_default1'] = c('static_domain') . 'images/avatar_default1.png';
 
 $GLOBALS['config']['default_controller'] = 'guest';
 $GLOBALS['config']['default_action'] = 'index';

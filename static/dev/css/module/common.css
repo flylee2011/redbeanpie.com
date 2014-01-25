@@ -109,6 +109,10 @@ a:hover {
 }
 .rbp-callout .title {
 	margin: 0;
+	font-size: 14px;
+}
+.rbp-callout .change {
+	font-size: 12px;
 }
 
 /*上传图片按钮和进度样式*/

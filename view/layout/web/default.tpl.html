@@ -7,8 +7,8 @@
 <meta name="description" content="红豆派,redbeanpie,RedBeanPie">
 <meta name="keywords" content="红豆派,redbeanpie,RedBeanPie,申请,预注册,预定资格">
 <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, width=device-width">
-<link rel="shortcut icon" href="/static/dev/images/favicon.jpg">
-<link rel="stylesheet" type="text/css" href="/static/dev/css/page.css">
+<link rel="shortcut icon" href="<?php echo c('static_domain'); ?>images/favicon.jpg">
+<link rel="stylesheet" type="text/css" href="<?php echo c('static_domain'); ?>css/page.css">
 </head>
 
 <body>
@@ -27,15 +27,15 @@
 
 	<?php @include_once( dirname(__FILE__) ) . DS . 'footer.tpl.html'; ?>
 
-	<script type="text/javascript" src="/static/dev/js/lib/jquery-2.0.3.min.js"></script>
-	<script type="text/javascript" src="/static/dev/js/lib/bootstrap.min.js"></script>
-	<script type="text/javascript" src="/static/dev/js/lib/validform.min.js"></script>
-	<script type="text/javascript" src="/static/dev/js/lib/jquery.jcarousel.min.js"></script>
-	<script type="text/javascript" src="/static/dev/js/lib/mustache.js"></script>
-	<script type="text/javascript" src="/static/dev/js/mods/common.js"></script>
+	<script type="text/javascript" src="<?php echo c('static_domain') ?>js/lib/jquery-2.0.3.min.js"></script>
+	<script type="text/javascript" src="<?php echo c('static_domain') ?>js/lib/bootstrap.min.js"></script>
+	<script type="text/javascript" src="<?php echo c('static_domain') ?>js/lib/validform.min.js"></script>
+	<script type="text/javascript" src="<?php echo c('static_domain') ?>js/lib/jquery.jcarousel.min.js"></script>
+	<script type="text/javascript" src="<?php echo c('static_domain') ?>js/lib/mustache.js"></script>
+	<script type="text/javascript" src="<?php echo c('static_domain') ?>js/lib/xiuxiu.js"></script>
+	<script type="text/javascript" src="<?php echo c('static_domain') ?>js/lib/jquery.uploadify.min.js"></script>
 
-	<script type="text/javascript" src="http://open.web.meitu.com/sources/xiuxiu.js"></script>
-	<script type="text/javascript" src="/static/dev/js/lib/jquery.uploadify.min.js"></script>
-	<script type="text/javascript" src="/static/dev/js/mods/<?php echo g('c'); ?>.js"></script>
+	<script type="text/javascript" src="<?php echo c('static_domain') ?>js/mods/common.js"></script>
+	<script type="text/javascript" src="<?php echo c('static_domain') ?>js/mods/<?php echo g('c'); ?>.js"></script>
 </body>
 </html>

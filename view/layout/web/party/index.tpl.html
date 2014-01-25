@@ -9,7 +9,9 @@
 		</div>
 
 		<div class="col-md-4">
+			<!-- 通用右侧边栏 -->
 			<div class="dashboard-side">
+				<!-- 发动态模块 -->
 				<div class="send-box">
 					<div class="clearfix">
 						<div class="avatar-box pull-left">
@@ -26,6 +28,7 @@
 						</div>
 					</div>
 				</div>
+				<!-- 个人信息模块 -->
 				<div class="info-box">
 					<div class="rbp-callout">
 						<h4 class="title">完善个人信息</h4>
@@ -37,9 +40,14 @@
 					</div>
 					<a href="?c=profile&a=detail&uid=<?php echo $_SESSION['uid'] ?>" class="btn btn-primary btn-dashboard" role="button">填写个人信息</a>
 				</div>
+				<!-- 推荐模块 -->
 				<div class="recommend-box">
-					<div class="rbp-callout">
-						<h4 class="title">用户推荐</h4>
+					<div class="rbp-callout clearfix">
+						<h4 class="title pull-left">用户推荐</h4>
+						<a href="javascript:;" class="change pull-right">
+							<span></span>
+							<span>换一换</span>
+						</a>
 					</div>
 				</div>
 			</div>
